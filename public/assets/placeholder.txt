@@ -1,0 +1,2 @@
+Placeholder para imágenes. 
+Reemplaza hero.png con tu imagen de mockup de la app.

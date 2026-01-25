@@ -44,7 +44,7 @@ export default function Hero() {
           </div>
 
           {/* Contadores */}
-          <div className="mt-12 flex flex-row flex-wrap gap-8 justify-center md:justify-start">
+          <div className="mt-12 flex flex-row flex-wrap gap-6 justify-center md:justify-start">
             {/* Contador 1 */}
             <div className="flex-1 min-w-[120px] flex items-center gap-3 justify-center md:justify-start">
               <div className="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
@@ -58,7 +58,7 @@ export default function Hero() {
 
             {/* Contador 2 */}
             <div className="flex-1 min-w-[120px] flex items-center gap-3 justify-center md:justify-start">
-              <div className="w-12 h-12 bg-accent bg-opacity-10 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
                 <span className="text-accent text-xl font-bold">✓</span>
               </div>
               <div className="text-center md:text-left">

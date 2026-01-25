@@ -1,19 +1,33 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import Workflow from './components/Workflow';
-import Pricing from './components/Pricing';
-import Footer from './components/Footer';
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Product from "./components/Product";
+import Features from "./components/Features";
+import Workflow from "./components/Workflow";
+import Pricing from "./components/Pricing";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+    });
+  }, []);
+
   return (
-    <div className="App bg-bgLight">
+    <div className="App bg-bgLight overflow-x-hidden">
       <Navbar />
       <Hero />
+      <Product />
       <Features />
       <Workflow />
       <Pricing />
+      <Contact />
       <Footer />
     </div>
   );

@@ -48,22 +48,22 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">Empresa</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Sobre Nosotros
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Carrera
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Prensa
                 </a>
               </li>
@@ -75,22 +75,22 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">Legal</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Privacidad
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Términos
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Cookies
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition">
+                <a href="#!" className="hover:text-primary transition">
                   Seguridad
                 </a>
               </li>
@@ -108,25 +108,25 @@ export default function Footer() {
             {/* Redes sociales */}
             <div className="flex gap-6 mt-6 md:mt-0">
               <a
-                href="#"
+                href="#!"
                 className="text-gray-400 hover:text-primary transition duration-300 text-xl"
               >
                 <FaFacebook />
               </a>
               <a
-                href="#"
+                href="#!"
                 className="text-gray-400 hover:text-primary transition duration-300 text-xl"
               >
                 <FaTwitter />
               </a>
               <a
-                href="#"
+                href="#!"
                 className="text-gray-400 hover:text-primary transition duration-300 text-xl"
               >
                 <FaLinkedin />
               </a>
               <a
-                href="#"
+                href="#!"
                 className="text-gray-400 hover:text-primary transition duration-300 text-xl"
               >
                 <FaInstagram />

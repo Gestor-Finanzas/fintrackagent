@@ -2,19 +2,15 @@
 
 Landing page oficial de **FinTrackAgent**, un gestor financiero personal que permite registrar gastos e ingresos a través de WhatsApp usando lenguaje natural, y visualizar posteriormente la información en un dashboard web.
 
-Este repositorio contiene únicamente la landing pública del producto.
-
 ---
 
 ## Stack tecnológico
 
-- React 19
-- Create React App
-- Tailwind CSS 3
-- AOS (Animate On Scroll)
-- React Icons
-- PostCSS + Autoprefixer
-- Prettier
+- **Frontend:** React 19, Create React App
+- **Estilos:** Tailwind CSS 3, PostCSS + Autoprefixer
+- **Animaciones:** AOS (Animate On Scroll)
+- **Iconos:** React Icons
+- **Formateo de código:** Prettier
 
 ---
 
@@ -29,23 +25,21 @@ Este repositorio contiene únicamente la landing pública del producto.
 
 Clonar repositorio:
 
-git clone https://github.com/tu-usuario/fintrackagent.git
-cd fintrackagent
+- git clone https://github.com/tu-usuario/fintrackagent.git
 
 ## Instalar dependencias:
 
-npm install
+- npm install
 
 ## Arrancar entorno desarrollo
 
-npm start
+- npm start
 
-Abrir:
-http://localhost:3000
+Abrir: http://localhost:3000
 
-## Build producción
+## Generar build de producción
 
-npm run build
+- npm run build
 
 ## Los archivos se generan en:
 

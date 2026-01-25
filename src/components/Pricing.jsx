@@ -38,7 +38,7 @@ export default function Pricing() {
           </p>
           <div className="inline-block bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 border-2 border-primary/40 rounded-xl p-0.5 mb-8 hover:border-primary/60 transition-all duration-300 shadow-lg hover:shadow-xl">
             <div className="bg-gradient-to-r from-primary/5 to-accent/5 px-8 py-4 rounded-lg flex items-center gap-3 justify-center">
-              <FaGift className="text-primary text-2xl animate-pulse-soft" />
+              <FaGift className="text-primary text-2xl animate-pulse-soft mr-1" />
               <p className="text-dark font-bold text-lg">
                 Acceso Total Gratuito: Primeros 14 días
               </p>

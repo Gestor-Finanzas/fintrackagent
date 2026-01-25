@@ -6,7 +6,6 @@ import {
   FaBrain,
   FaChartBar,
   FaFileCsv,
-  FaComments,
 } from "react-icons/fa";
 
 export default function Workflow() {
@@ -113,13 +112,29 @@ export default function Workflow() {
               <stop offset="100%" stopColor="#10B981" stopOpacity="0.7" />
             </linearGradient>
           </defs>
-          
+
           {/* Línea 1 a 2 */}
-          <line x1="33%" y1="50%" x2="50%" y2="50%" stroke="url(#lineGradient)" strokeWidth="4" strokeLinecap="round" />
-          
+          <line
+            x1="33%"
+            y1="50%"
+            x2="50%"
+            y2="50%"
+            stroke="url(#lineGradient)"
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+
           {/* Línea 2 a 3 */}
-          <line x1="66%" y1="50%" x2="83%" y2="50%" stroke="url(#lineGradient)" strokeWidth="4" strokeLinecap="round" />
-          
+          <line
+            x1="66%"
+            y1="50%"
+            x2="83%"
+            y2="50%"
+            stroke="url(#lineGradient)"
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+
           {/* Línea de conexión 3 a 4 en forma de S */}
           <path
             d="M 83% 50% Q 90% 50% 90% 65% Q 90% 80% 33% 80% L 33% 80%"
@@ -129,12 +144,28 @@ export default function Workflow() {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          
+
           {/* Línea 4 a 5 */}
-          <line x1="50%" y1="80%" x2="66%" y2="80%" stroke="url(#lineGradient)" strokeWidth="4" strokeLinecap="round" />
-          
+          <line
+            x1="50%"
+            y1="80%"
+            x2="66%"
+            y2="80%"
+            stroke="url(#lineGradient)"
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+
           {/* Línea 5 a 6 */}
-          <line x1="83%" y1="80%" x2="100%" y2="80%" stroke="url(#lineGradient)" strokeWidth="4" strokeLinecap="round" />
+          <line
+            x1="83%"
+            y1="80%"
+            x2="100%"
+            y2="80%"
+            stroke="url(#lineGradient)"
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
         </svg>
       </div>
     </section>

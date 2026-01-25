@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-export default function Navbar() {
+export default function Navbar({ onAuthClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -54,10 +54,10 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#signup"
+            onClick={onAuthClick}
             className="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-lg font-semibold transition duration-300 transform hover:scale-110 hover:shadow-xl-glow hover:brightness-110"
           >
-            Suscribirse
+            Iniciar Sesión
           </a>
         </li>
       </ul>
@@ -99,10 +99,10 @@ export default function Navbar() {
           </li>
           <li>
             <a
-              href="#signup"
+              onClick={onAuthClick}
               className="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-lg block text-center font-semibold transition duration-300 transform hover:scale-105 hover:shadow-xl-glow hover:brightness-110"
             >
-              Suscribirse
+              Iniciar Sesión
             </a>
           </li>
         </ul>

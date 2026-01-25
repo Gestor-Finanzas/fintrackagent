@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "./components/Navbar";
@@ -9,8 +9,11 @@ import Workflow from "./components/Workflow";
 import Pricing from "./components/Pricing";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Auth from "./components/Auth";
 
 function App() {
+  const [showAuth, setShowAuth] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -20,8 +23,8 @@ function App() {
   }, []);
 
   return (
-    <div className="App bg-bgLight overflow-x-hidden">
-      <Navbar />
+    <div className="App bg-bgLight overflow-x-hidden relative">
+      <Navbar onAuthClick={() => setShowAuth(true)} />
       <Hero />
       <Product />
       <Features />
@@ -29,6 +32,8 @@ function App() {
       <Pricing />
       <Contact />
       <Footer />
+
+      {showAuth && <Auth onBack={() => setShowAuth(false)} />}
     </div>
   );
 }

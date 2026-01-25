@@ -14,7 +14,7 @@ export default function Product() {
   return (
     <section
       id="product"
-      className="bg-gradient-to-br from-bgLight to-white py-24 relative overflow-hidden"
+      className="bg-gradient-to-br from-bgLight to-white py-20 relative overflow-hidden"
     >
       {/* Decoración de fondo */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary opacity-5 rounded-full blur-3xl"></div>
@@ -126,12 +126,12 @@ export default function Product() {
                 activeFeature === "ia"
                   ? featureImages.ia
                   : activeFeature === "whatsapp"
-                  ? featureImages.whatsapp
-                  : activeFeature === "seguro"
-                  ? featureImages.seguro
-                  : activeFeature === "recomendaciones"
-                  ? featureImages.recomendaciones
-                  : "/assets/dashboard.png"
+                    ? featureImages.whatsapp
+                    : activeFeature === "seguro"
+                      ? featureImages.seguro
+                      : activeFeature === "recomendaciones"
+                        ? featureImages.recomendaciones
+                        : "/assets/dashboard.png"
               }
               alt="Dashboard de FinTrack en tiempo real"
               className="relative w-full h-auto rounded-2xl shadow-2xl border border-primary border-opacity-20 hover:shadow-xl-glow transition duration-300 object-cover"

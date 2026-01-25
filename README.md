@@ -30,7 +30,6 @@ Este repositorio contiene únicamente la landing pública del producto.
 Clonar repositorio:
 
 git clone https://github.com/tu-usuario/fintrackagent.git
-cd fintrackagent
 
 ## Instalar dependencias:
 
@@ -40,8 +39,7 @@ npm install
 
 npm start
 
-Abrir:
-http://localhost:3000
+Abrir: http://localhost:3000
 
 ## Build producción
 

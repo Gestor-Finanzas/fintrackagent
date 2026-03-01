@@ -71,17 +71,17 @@ export default function Hero() {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-20 rounded-2xl blur-2xl"></div>
             <svg
-              viewBox="0 0 560 400"
+              viewBox="0 0 560 440"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className="relative w-full h-auto md:w-[100%] ml-auto rounded-2xl"
             >
               {/* Background */}
-              <rect width="560" height="400" rx="16" fill="#F4F7FE" />
+              <rect width="560" height="410" rx="16" fill="#F4F7FE" />
 
               {/* === SIDEBAR === */}
-              <rect x="0" y="0" width="130" height="400" rx="16" fill="white" />
-              <line x1="130" y1="12" x2="130" y2="388" stroke="#E2E8F0" strokeWidth="0.8" />
+              <rect x="0" y="0" width="130" height="410" rx="16" fill="white" />
+              <line x1="130" y1="12" x2="130" y2="398" stroke="#E2E8F0" strokeWidth="0.8" />
               <text x="22" y="30" fill="#4318FF" fontSize="11" fontWeight="700" fontFamily="system-ui" dominantBaseline="central">FinTrack</text>
               {/* Active nav item */}
               <rect x="10" y="54" width="110" height="26" rx="8" fill="#4318FF" opacity="0.08" />
@@ -93,11 +93,11 @@ export default function Hero() {
               <text x="24" y="137" fill="#8F9BBA" fontSize="8.5" fontFamily="system-ui" dominantBaseline="central">Balance</text>
               <text x="24" y="157" fill="#8F9BBA" fontSize="8.5" fontFamily="system-ui" dominantBaseline="central">Categorías</text>
               {/* User avatar */}
-              <circle cx="30" cy="374" r="12" fill="#F4F7FE" />
-              <text x="30" y="374" fill="#4318FF" fontSize="9" fontWeight="600" fontFamily="system-ui" textAnchor="middle" dominantBaseline="central">I</text>
+              <circle cx="30" cy="387" r="12" fill="#F4F7FE" />
+              <text x="30" y="387" fill="#4318FF" fontSize="9" fontWeight="600" fontFamily="system-ui" textAnchor="middle" dominantBaseline="central">J</text>
 
               {/* === HEADER === */}
-              <text x="148" y="30" fill="#1B2559" fontSize="11" fontWeight="700" fontFamily="system-ui" dominantBaseline="central">Buenos días, Iván</text>
+              <text x="148" y="30" fill="#1B2559" fontSize="11" fontWeight="700" fontFamily="system-ui" dominantBaseline="central">Buenos días, Juan</text>
               <text x="148" y="44" fill="#8F9BBA" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">1 de marzo de 2026</text>
               {/* Period filter pills */}
               <rect x="430" y="22" width="36" height="18" rx="6" fill="#4318FF" />

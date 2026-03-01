@@ -143,8 +143,8 @@ export default function Product() {
 
                 {/* === STATUS BAR (y=6 h=24 center=18) === */}
                 <rect x="6" y="6" width="308" height="24" fill="#075E54" />
-                <text x="20" y="18" fill="white" fontSize="10" fontFamily="system-ui" fontWeight="500" dominantBaseline="central">9:41</text>
-                <g transform="translate(260, 11)">
+                <text x="30" y="18" fill="white" fontSize="10" fontFamily="system-ui" fontWeight="500" dominantBaseline="central">9:41</text>
+                <g transform="translate(256, 14)">
                   <rect x="0" y="4" width="2.5" height="5" rx="0.5" fill="white" opacity="0.4" />
                   <rect x="3.5" y="2.5" width="2.5" height="6.5" rx="0.5" fill="white" opacity="0.6" />
                   <rect x="7" y="1" width="2.5" height="8" rx="0.5" fill="white" opacity="0.8" />
@@ -156,45 +156,45 @@ export default function Product() {
 
                 {/* === HEADER (y=30 h=44 center=52) === */}
                 <rect x="6" y="30" width="308" height="44" fill="url(#whatsappHeader)" />
-                <path d="M18 52l-5-5 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M18 57l-5-5 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 <circle cx="40" cy="52" r="14" fill="#25D366" />
                 <text x="40" y="52" fill="white" fontSize="14" fontWeight="bold" fontFamily="system-ui" textAnchor="middle" dominantBaseline="central">F</text>
                 <text x="60" y="46" fill="white" fontSize="13" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Fin</text>
                 <text x="60" y="59" fill="white" fontSize="9" opacity="0.75" fontFamily="system-ui" dominantBaseline="central">en línea</text>
-                <circle cx="268" cy="47" r="1.3" fill="white" />
-                <circle cx="268" cy="52" r="1.3" fill="white" />
-                <circle cx="268" cy="57" r="1.3" fill="white" />
+                <circle cx="300" cy="47" r="1.3" fill="white" />
+                <circle cx="300" cy="52" r="1.3" fill="white" />
+                <circle cx="300" cy="57" r="1.3" fill="white" />
 
                 {/* === DATE CHIP (y=82 h=20 center=92) === */}
                 <rect x="122" y="82" width="76" height="20" rx="7" fill="#D1E7DD" opacity="0.85" />
                 <text x="160" y="92" fill="#5B7065" fontSize="9" fontFamily="system-ui" fontWeight="500" textAnchor="middle" dominantBaseline="central">HOY</text>
 
                 {/* === MSG 1: USER (y=110 h=34) === */}
-                <rect x="116" y="110" width="188" height="34" rx="8" fill="#DCF8C6" />
-                <path d="M304 112l6 4-6 2z" fill="#DCF8C6" />
+                <rect x="116" y="110" width="188" height="32" rx="8" fill="#DCF8C6" />
+                <path d="M304 120l6 4-6 2z" fill="#DCF8C6" />
                 <text x="128" y="123" fill="#303030" fontSize="11.5" fontFamily="system-ui" dominantBaseline="central">Hoy gasté 45€ en el súper</text>
-                <text x="266" y="138" fill="#6B8F71" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:23</text>
-                <g transform="translate(289, 135)">
+                <text x="260" y="134" fill="#6B8F71" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:23</text>
+                <g transform="translate(289, 133)">
                   <path d="M0 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
                   <path d="M3.5 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
                 </g>
 
                 {/* === MSG 2: BOT (y=152 h=62) === */}
                 <rect x="14" y="152" width="212" height="62" rx="8" fill="white" />
-                <path d="M14 154l-6 4 6 2z" fill="white" />
+                <path d="M14 162l-6 4 6 2z" fill="white" />
                 <circle cx="32" cy="167" r="8" fill="#25D366" opacity="0.15" />
                 <path d="M29 167l2.5 2.5 4-5" stroke="#25D366" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                 <text x="46" y="167" fill="#303030" fontSize="11" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Gasto registrado</text>
                 <text x="28" y="184" fill="#EE5D50" fontSize="12" fontWeight="700" fontFamily="system-ui" dominantBaseline="central">-45,00 €</text>
                 <text x="95" y="184" fill="#888" fontSize="9.5" fontFamily="system-ui" dominantBaseline="central">Supermercado</text>
                 <text x="28" y="199" fill="#999" fontSize="8" fontFamily="system-ui" dominantBaseline="central">1 mar · Detectado por IA</text>
-                <text x="190" y="208" fill="#999" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:23</text>
+                <text x="190" y="207" fill="#999" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:23</text>
 
                 {/* === MSG 3: USER (y=222 h=34) === */}
-                <rect x="100" y="222" width="204" height="34" rx="8" fill="#DCF8C6" />
-                <path d="M304 224l6 4-6 2z" fill="#DCF8C6" />
+                <rect x="100" y="222" width="204" height="32" rx="8" fill="#DCF8C6" />
+                <path d="M304 232l6 4-6 2z" fill="#DCF8C6" />
                 <text x="112" y="235" fill="#303030" fontSize="11.5" fontFamily="system-ui" dominantBaseline="central">Me pagaron 2.500€ de nómina</text>
-                <text x="266" y="250" fill="#6B8F71" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:25</text>
+                <text x="260" y="248" fill="#6B8F71" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:25</text>
                 <g transform="translate(289, 247)">
                   <path d="M0 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
                   <path d="M3.5 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
@@ -202,20 +202,20 @@ export default function Product() {
 
                 {/* === MSG 4: BOT (y=264 h=62) === */}
                 <rect x="14" y="264" width="218" height="62" rx="8" fill="white" />
-                <path d="M14 266l-6 4 6 2z" fill="white" />
+                <path d="M14 274l-6 4 6 2z" fill="white" />
                 <circle cx="32" cy="279" r="8" fill="#25D366" opacity="0.15" />
                 <path d="M29 279l2.5 2.5 4-5" stroke="#25D366" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                 <text x="46" y="279" fill="#303030" fontSize="11" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Ingreso registrado</text>
                 <text x="28" y="296" fill="#10B981" fontSize="12" fontWeight="700" fontFamily="system-ui" dominantBaseline="central">+2.500,00 €</text>
                 <text x="115" y="296" fill="#888" fontSize="9.5" fontFamily="system-ui" dominantBaseline="central">Salario</text>
                 <text x="28" y="311" fill="#999" fontSize="8" fontFamily="system-ui" dominantBaseline="central">1 mar · Detectado por IA</text>
-                <text x="196" y="320" fill="#999" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:25</text>
+                <text x="196" y="319" fill="#999" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:25</text>
 
                 {/* === MSG 5: USER (y=334 h=34) === */}
-                <rect x="104" y="334" width="200" height="34" rx="8" fill="#DCF8C6" />
-                <path d="M304 336l6 4-6 2z" fill="#DCF8C6" />
+                <rect x="104" y="334" width="200" height="32" rx="8" fill="#DCF8C6" />
+                <path d="M304 344l6 4-6 2z" fill="#DCF8C6" />
                 <text x="116" y="347" fill="#303030" fontSize="11.5" fontFamily="system-ui" dominantBaseline="central">¿Cuánto llevo gastado hoy?</text>
-                <text x="266" y="362" fill="#6B8F71" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:26</text>
+                <text x="260" y="360" fill="#6B8F71" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:26</text>
                 <g transform="translate(289, 359)">
                   <path d="M0 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
                   <path d="M3.5 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
@@ -223,7 +223,7 @@ export default function Product() {
 
                 {/* === MSG 6: BOT SUMMARY (y=376 h=72) === */}
                 <rect x="14" y="376" width="232" height="72" rx="8" fill="white" />
-                <path d="M14 378l-6 4 6 2z" fill="white" />
+                <path d="M14 386l-6 4 6 2z" fill="white" />
                 <circle cx="32" cy="391" r="8" fill="#4318FF" opacity="0.12" />
                 <path d="M28 395l2.5-3.5 2.5 1.5 3.5-4.5" stroke="#4318FF" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                 <text x="46" y="391" fill="#303030" fontSize="11" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Resumen de hoy</text>
@@ -234,30 +234,40 @@ export default function Product() {
                 <rect x="28" y="420" width="192" height="3.5" rx="1.75" fill="#E8E8E8" />
                 <rect x="28" y="420" width="175" height="3.5" rx="1.75" fill="#10B981" />
                 <text x="28" y="435" fill="#10B981" fontSize="10" fontWeight="700" fontFamily="system-ui" dominantBaseline="central">Balance: +2.455,00 €</text>
-                <text x="210" y="442" fill="#999" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:26</text>
+                <text x="210" y="441" fill="#999" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:26</text>
 
-                {/* === INPUT BAR (y=460) === */}
-                <rect x="6" y="460" width="308" height="94" fill="#F0F0F0" />
-                <rect x="16" y="470" width="244" height="36" rx="18" fill="white" />
-                {/* Emoji centered at (36, 488) */}
-                <circle cx="36" cy="488" r="9" stroke="#9CA3AF" strokeWidth="1.2" fill="none" />
-                <circle cx="33" cy="486" r="1" fill="#9CA3AF" />
-                <circle cx="39" cy="486" r="1" fill="#9CA3AF" />
-                <path d="M33 491a4.5 4.5 0 006 0" stroke="#9CA3AF" strokeWidth="1" fill="none" strokeLinecap="round" />
+                {/* === MSG 7: USER (y=456 h=32) === */}
+                <rect x="130" y="456" width="174" height="32" rx="8" fill="#DCF8C6" />
+                <path d="M304 466l6 4-6 2z" fill="#DCF8C6" />
+                <text x="142" y="468" fill="#303030" fontSize="11.5" fontFamily="system-ui" dominantBaseline="central">Perfecto, muchas gracias Fin!</text>
+                <text x="260" y="482" fill="#6B8F71" fontSize="7.5" fontFamily="system-ui" dominantBaseline="central">10:27</text>
+                <g transform="translate(289, 481)">
+                  <path d="M0 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+                  <path d="M3.5 0l-3 3-1.5-1.5" stroke="#53BDEB" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+                </g>
+
+                {/* === INPUT BAR (y=495 h=64, field center=520) === */}
+                <rect x="6" y="494" width="308" height="64" fill="#F0F0F0" />
+                <rect x="16" y="502" width="240" height="36" rx="18" fill="white" />
+                {/* Emoji centered at (36, 520) */}
+                <circle cx="36" cy="520" r="9" stroke="#9CA3AF" strokeWidth="1.2" fill="none" />
+                <circle cx="33" cy="517.5" r="1.1" fill="#9CA3AF" />
+                <circle cx="39" cy="517.5" r="1.1" fill="#9CA3AF" />
+                <path d="M32.5 522.5a4.5 4.5 0 007 0" stroke="#9CA3AF" strokeWidth="1" fill="none" strokeLinecap="round" />
                 {/* Placeholder text */}
-                <text x="54" y="488" fill="#9CA3AF" fontSize="11" fontFamily="system-ui" dominantBaseline="central">Mensaje</text>
-                {/* Clip icon */}
-                <g transform="translate(244, 488) rotate(-45)">
+                <text x="54" y="520" fill="#9CA3AF" fontSize="11" fontFamily="system-ui" dominantBaseline="central">Mensaje</text>
+                {/* Clip icon centered at (235, 523) */}
+                <g transform="translate(235, 523) rotate(-45)">
                   <path d="M0-7l0 10a3 3 0 006 0l0-12a5 5 0 00-10 0l0 14" stroke="#9CA3AF" strokeWidth="1.2" fill="none" strokeLinecap="round" />
                 </g>
-                {/* Mic button centered at (282, 488) */}
-                <circle cx="282" cy="488" r="18" fill="#25D366" />
-                <rect x="278.5" y="479" width="7" height="10" rx="3.5" stroke="white" strokeWidth="1.5" fill="none" />
-                <path d="M276 489a6.5 6.5 0 0013 0" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                <line x1="282" y1="496" x2="282" y2="499" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                {/* Mic button centered at (282, 520) */}
+                <circle cx="282" cy="520" r="18" fill="#25D366" />
+                <rect x="278.5" y="512" width="7" height="11" rx="3.5" stroke="white" strokeWidth="1.5" fill="none" />
+                <path d="M276 521a6 6 0 0012 0" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <line x1="282" y1="527" x2="282" y2="530" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
 
                 {/* Home indicator */}
-                <rect x="126" y="530" width="68" height="4" rx="2" fill="#C8C8C8" />
+                <rect x="126" y="545" width="68" height="4" rx="2" fill="#C8C8C8" />
               </g>
 
               {/* Dynamic island */}
@@ -290,6 +300,6 @@ export default function Product() {
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 }

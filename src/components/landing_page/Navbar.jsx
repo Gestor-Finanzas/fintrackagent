@@ -32,7 +32,7 @@ export default function Navbar({ onAuthClick }) {
       </h1>
 
       {/* Menú desktop */}
-      <ul className="hidden md:flex gap-8 text-secondary font-medium">
+      <ul className="hidden lg:flex gap-8 text-secondary font-medium">
         <li>
           <a href="#hero" className="hover:text-primary transition duration-300" onClick={handleNav("#hero")}>Inicio</a>
         </li>
@@ -61,14 +61,14 @@ export default function Navbar({ onAuthClick }) {
 
       {/* Menú móvil */}
       <button
-        className="md:hidden text-secondary text-2xl"
+        className="lg:hidden text-secondary text-2xl"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
       {isOpen && (
-        <ul className="absolute top-16 left-0 right-0 bg-white shadow-lg flex flex-col gap-4 p-6 md:hidden">
+        <ul className="absolute top-16 left-0 right-0 bg-white shadow-lg flex flex-col gap-4 p-6 lg:hidden">
           <li>
             <a href="#hero" className="hover:text-primary transition" onClick={handleNav("#hero")}>Inicio</a>
           </li>

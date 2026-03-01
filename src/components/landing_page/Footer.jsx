@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <footer className="bg-dark text-white py-8">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
           {/* Columna 1: Logo y descripción */}
-          <div>
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-2 mb-3">
               <img src="/assets/logo.png" alt="Logo" className="w-6 h-6 md:w-7 md:h-7 object-contain mr-1" />
               <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

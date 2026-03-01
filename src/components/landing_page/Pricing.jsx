@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { FaCheck, FaGift } from "react-icons/fa";
 
-export default function Pricing() {
+export default function Pricing({ onAuthClick }) {
   const [billingPeriod, setBillingPeriod] = useState("monthly");
 
   const monthlyPrice = "2,99€";
-  const annualPrice = "36€";
+  const annualPrice = "30€";
 
   const features = [
     "Transacciones ilimitadas",
@@ -122,7 +122,7 @@ export default function Pricing() {
                   </div>
                 ))}
               </div>
-              <button className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg-glow transition duration-300 transform hover:scale-105 mb-4 mt-10 text-lg">
+              <button onClick={onAuthClick} className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg-glow transition duration-300 transform hover:scale-105 mb-4 mt-10 text-lg">
                 Comenzar Ahora
               </button>
             </div>
@@ -131,7 +131,7 @@ export default function Pricing() {
 
         <p className="text-center text-secondary mt-12" data-aos="fade-up">
           Todos los planes incluyen acceso completo a Fin, tu agente financiero
-          en WhatsApp
+          en WhatsApp.
         </p>
         <p className="text-center text-secondary" data-aos="fade-up">
           Cancela cuando quieras, sin compromisos.

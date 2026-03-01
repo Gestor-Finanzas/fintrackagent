@@ -31,7 +31,7 @@ export default function Product() {
           <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-6"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <div data-aos="fade-right">
             <div className="space-y-6">
               <div
@@ -279,7 +279,7 @@ export default function Product() {
         </div>
 
         {/* Estadísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { number: "+3.000", label: "Usuarios activos" },
             { number: "+70K", label: "Transacciones procesadas" },

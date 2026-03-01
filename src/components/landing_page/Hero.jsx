@@ -5,25 +5,25 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="bg-gradient-to-br from-bgLight via-white to-bgLight min-h-screen flex items-center pb-10 relative overflow-hidden"
+      className="bg-gradient-to-br from-bgLight via-white to-bgLight md:min-h-0 lg:min-h-[95vh] flex items-center pt-10 pb-16 lg:pb-10 lg:pt-0 relative overflow-hidden"
     >
       {/* Elementos decorativos de fondo */}
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-16 px-6 relative z-10">
+      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 px-6 relative z-10">
         {/* Texto */}
-        <div className="flex-1 animate-fade-in hero-text md:ml-20">
-          <h1 className="text-5xl md:text-6xl font-bold text-dark mb-6 leading-tight text-center md:text-left">
+        <div className="flex-1 animate-fade-in hero-text lg:ml-20">
+          <h1 className="text-4xl md:text-6xl font-bold text-dark mb-6 leading-tight text-center lg:text-left">
             Controla tus finanzas desde{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               WhatsApp
             </span>{" "}
             con <span className="text-primary">Fin</span>
           </h1>
-          <p className="text-lg text-secondary mb-8 leading-relaxed text-center md:text-left">
+          <p className="text-lg text-secondary mb-8 leading-relaxed text-center lg:text-left">
             Envía tus gastos e ingresos con un mensaje. Nuestra IA detecta
             automáticamente categorías, importes y fechas. Visualiza todo en un
             dashboard profesional y seguro.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <a
               href="#signup"
               className="group bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-lg hover:shadow-xl-glow transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2 font-semibold"
@@ -40,23 +40,23 @@ export default function Hero() {
           </div>
 
           {/* Contadores */}
-          <div className="mt-12 flex flex-row flex-wrap gap-6 justify-center md:justify-start">
-            <div className="flex-1 min-w-[120px] flex items-center gap-3 justify-center md:justify-start">
-              <div className="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+          <div className="mt-12 flex flex-row flex-wrap gap-6 justify-center lg:justify-start">
+            <div className="flex-1 min-w-[120px] flex items-center gap-3 justify-center lg:justify-start">
+              <div className="w-12 h-12 flex-shrink-0 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
                 <FaChartLine className="text-primary text-xl" />
               </div>
-              <div className="text-center md:text-left">
+              <div className="text-center lg:text-left">
                 <p className="font-bold text-dark">+2.000</p>
                 <p className="text-sm text-secondary">Usuarios activos</p>
               </div>
             </div>
 
-            <div className="flex-1 min-w-[120px] flex items-center gap-3 justify-center md:justify-start">
-              <div className="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
+            <div className="flex-1 min-w-[120px] flex items-center gap-3 justify-center lg:justify-start">
+              <div className="w-12 h-12 flex-shrink-0 bg-primary bg-opacity-10 rounded-full flex items-center justify-center">
                 <span className="text-accent text-xl font-bold">&#10003;</span>
               </div>
-              <div className="text-center md:text-left">
-                <p className="font-bold text-dark">Gratis 14 días</p>
+              <div className="text-center lg:text-left">
+                <p className="font-bold text-dark"><span className="md:hidden">Gratis<br />14 días</span><span className="hidden md:inline">Gratis 14 días</span></p>
                 <p className="text-sm text-secondary">Sin tarjeta de crédito</p>
               </div>
             </div>
@@ -65,7 +65,7 @@ export default function Hero() {
 
         {/* SVG Dashboard Illustration */}
         <div
-          className="flex-1 animate-fade-in mt-10 md:mt-0"
+          className="flex-1 w-full animate-fade-in mt-10 md:mt-6 lg:mt-0 lg:max-w-none"
           style={{ animationDelay: "0.2s" }}
         >
           <div className="relative">
@@ -74,7 +74,7 @@ export default function Hero() {
               viewBox="0 0 560 440"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="relative w-full h-auto md:w-[100%] ml-auto rounded-2xl"
+              className="relative w-full h-auto lg:w-[90%] mx-auto lg:mr-11 lg:mt-10 rounded-2xl"
             >
               {/* Background */}
               <rect width="560" height="410" rx="16" fill="#F4F7FE" />

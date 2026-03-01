@@ -48,7 +48,7 @@ function Landing({ setShowAuth, showAuth }) {
       <Product />
       <Features />
       <Workflow />
-      <Pricing />
+      <Pricing onAuthClick={() => setShowAuth(true)} />
       <Contact />
       <Footer />
       <ScrollToTopButton />

@@ -71,20 +71,20 @@ code {
 
 /* Scrollbar personalizada */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #10b981;
-  border-radius: 4px;
+  background: #94a3b8;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4;
+  background: #64748b;
 }
 
 /* Estilos para botones */

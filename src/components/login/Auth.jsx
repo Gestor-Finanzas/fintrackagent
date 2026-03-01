@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
+
 
 export default function Auth({ onBack }) {
   const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
 
   const handleNumberInput = (e) => {
     e.target.value = e.target.value.replace(/\D/g, "");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulación de autenticación: guardar token en localStorage
+    localStorage.setItem("fintrack_token", "demo-token-123");
+    navigate("/dashboard");
   };
 
   return (
@@ -24,7 +34,7 @@ export default function Auth({ onBack }) {
           {isLogin ? "Iniciar Sesión" : "Registrarse"}
         </h2>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           {/* Registro: correo y teléfono */}
           {!isLogin && (
             <>
@@ -79,7 +89,7 @@ export default function Auth({ onBack }) {
             type="submit"
             className="bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 rounded-lg mt-2 hover:scale-105 hover:shadow-xl-glow transition duration-300"
           >
-            {isLogin ? "Iniciar Sesión" : "Registrarse"}
+            {isLogin ? "Entrar" : "Registrarse"}
           </button>
         </form>
 

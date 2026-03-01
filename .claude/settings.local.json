@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(wc -l src/**/*.jsx src/**/*.js src/**/*.json src/*.css)",
+      "Bash(npx react-scripts build)",
+      "Bash(ls /c/Users/Public/Proyectos/FinTrackAgent/fintrackagent/*.config* /c/Users/Public/Proyectos/FinTrackAgent/fintrackagent/.*)"
+    ]
+  }
+}

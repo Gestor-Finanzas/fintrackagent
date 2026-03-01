@@ -1,0 +1,770 @@
+{
+  "usuario": {
+    "nombre": "Iván García",
+    "email": "ivangarcia@email.com"
+  },
+  "resumen": {},
+  "datos": {
+    "semana": {
+      "ingresos": [
+        {
+          "fecha": "02-02-2026",
+          "monto": "1200",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "150",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "80",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "200",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "50",
+          "categoria": "Regalo"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "02-02-2026",
+          "monto": "40",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "25",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "60",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "100",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "30",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "15",
+          "categoria": "Café"
+        }
+      ],
+      "movimientos": [
+        {
+          "fecha": "02-02-2026",
+          "monto": "1200.50",
+          "tipo": "ingreso",
+          "categoria": "Salario",
+          "nombre": "Nómina febrero"
+        },
+        {
+          "fecha": "02-02-2026",
+          "monto": "40.25",
+          "tipo": "gasto",
+          "categoria": "Supermercado",
+          "nombre": "Compra semanal"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "150.99",
+          "tipo": "ingreso",
+          "categoria": "Venta",
+          "nombre": "Venta bicicleta"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "25.10",
+          "tipo": "gasto",
+          "categoria": "Transporte",
+          "nombre": "Metro"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "80.75",
+          "tipo": "ingreso",
+          "categoria": "Intereses",
+          "nombre": "Intereses cuenta ahorro"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "60.00",
+          "tipo": "gasto",
+          "categoria": "Restaurantes",
+          "nombre": "Cena viernes"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "200.00",
+          "tipo": "ingreso",
+          "categoria": "Freelance",
+          "nombre": "Proyecto web"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "100.50",
+          "tipo": "gasto",
+          "categoria": "Ocio",
+          "nombre": "Cine y palomitas"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "50.00",
+          "tipo": "ingreso",
+          "categoria": "Regalo",
+          "nombre": "Cumpleaños Ana"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "30.00",
+          "tipo": "gasto",
+          "categoria": "Suscripciones",
+          "nombre": "Netflix"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "15.99",
+          "tipo": "gasto",
+          "categoria": "Café",
+          "nombre": "Starbucks"
+        }
+      ]
+    },
+    "mes": {
+      "ingresos": [
+        {
+          "fecha": "01-02-2026",
+          "monto": "1200",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "150",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "80",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "200",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "50",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "08-02-2026",
+          "monto": "300",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "10-02-2026",
+          "monto": "100",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "12-02-2026",
+          "monto": "60",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "15-02-2026",
+          "monto": "400",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "18-02-2026",
+          "monto": "90",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "20-02-2026",
+          "monto": "250",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "22-02-2026",
+          "monto": "120",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "25-02-2026",
+          "monto": "70",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "27-02-2026",
+          "monto": "350",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "28-02-2026",
+          "monto": "60",
+          "categoria": "Regalo"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "01-02-2026",
+          "monto": "40",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "02-02-2026",
+          "monto": "25",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "60",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "100",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "30",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "15",
+          "categoria": "Café"
+        },
+        {
+          "fecha": "08-02-2026",
+          "monto": "80",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "10-02-2026",
+          "monto": "35",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "12-02-2026",
+          "monto": "90",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "15-02-2026",
+          "monto": "120",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "18-02-2026",
+          "monto": "50",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "20-02-2026",
+          "monto": "20",
+          "categoria": "Café"
+        },
+        {
+          "fecha": "22-02-2026",
+          "monto": "60",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "25-02-2026",
+          "monto": "45",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "27-02-2026",
+          "monto": "110",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "28-02-2026",
+          "monto": "130",
+          "categoria": "Ocio"
+        }
+      ],
+      "movimientos": [
+        {
+          "fecha": "01-02-2026",
+          "monto": "1200.50",
+          "tipo": "ingreso",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "01-02-2026",
+          "monto": "40.25",
+          "tipo": "gasto",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "02-02-2026",
+          "monto": "25.10",
+          "tipo": "gasto",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "150.99",
+          "tipo": "ingreso",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "03-02-2026",
+          "monto": "60.00",
+          "tipo": "gasto",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "80.75",
+          "tipo": "ingreso",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "04-02-2026",
+          "monto": "100.00",
+          "tipo": "gasto",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "200.00",
+          "tipo": "ingreso",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "05-02-2026",
+          "monto": "30.00",
+          "tipo": "gasto",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "50.00",
+          "tipo": "ingreso",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "06-02-2026",
+          "monto": "15.99",
+          "tipo": "gasto",
+          "categoria": "Café"
+        },
+        {
+          "fecha": "08-02-2026",
+          "monto": "300.00",
+          "tipo": "ingreso",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "08-02-2026",
+          "monto": "80.00",
+          "tipo": "gasto",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "10-02-2026",
+          "monto": "100.00",
+          "tipo": "ingreso",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "10-02-2026",
+          "monto": "35.00",
+          "tipo": "gasto",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "12-02-2026",
+          "monto": "60.00",
+          "tipo": "ingreso",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "12-02-2026",
+          "monto": "90.00",
+          "tipo": "gasto",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "15-02-2026",
+          "monto": "400.00",
+          "tipo": "ingreso",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "15-02-2026",
+          "monto": "120.00",
+          "tipo": "gasto",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "18-02-2026",
+          "monto": "90.00",
+          "tipo": "ingreso",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "18-02-2026",
+          "monto": "50.00",
+          "tipo": "gasto",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "20-02-2026",
+          "monto": "250.00",
+          "tipo": "ingreso",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "20-02-2026",
+          "monto": "20.00",
+          "tipo": "gasto",
+          "categoria": "Café"
+        },
+        {
+          "fecha": "22-02-2026",
+          "monto": "120.00",
+          "tipo": "ingreso",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "22-02-2026",
+          "monto": "60.00",
+          "tipo": "gasto",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "25-02-2026",
+          "monto": "70.00",
+          "tipo": "ingreso",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "25-02-2026",
+          "monto": "45.00",
+          "tipo": "gasto",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "27-02-2026",
+          "monto": "350.00",
+          "tipo": "ingreso",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "27-02-2026",
+          "monto": "110.00",
+          "tipo": "gasto",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "28-02-2026",
+          "monto": "60.00",
+          "tipo": "ingreso",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "28-02-2026",
+          "monto": "130.00",
+          "tipo": "gasto",
+          "categoria": "Ocio"
+        }
+      ]
+    },
+    "año": {
+      "ingresos": [
+        {
+          "fecha": "10-01-2026",
+          "monto": "1200.50",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "15-02-2026",
+          "monto": "150.99",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "20-03-2026",
+          "monto": "80.75",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "05-04-2026",
+          "monto": "200.00",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "12-05-2026",
+          "monto": "50.00",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "18-06-2026",
+          "monto": "300.00",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "22-07-2026",
+          "monto": "100.00",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "09-08-2026",
+          "monto": "60.00",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "14-09-2026",
+          "monto": "400.00",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "03-10-2026",
+          "monto": "90.00",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "27-11-2026",
+          "monto": "250.00",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "30-12-2026",
+          "monto": "120.00",
+          "categoria": "Venta"
+        }
+      ],
+      "gastos": [
+        {
+          "fecha": "12-01-2026",
+          "monto": "40.25",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "18-02-2026",
+          "monto": "25.10",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "22-03-2026",
+          "monto": "60.00",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "28-04-2026",
+          "monto": "100.00",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "30-05-2026",
+          "monto": "30.00",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "15-06-2026",
+          "monto": "15.99",
+          "categoria": "Café"
+        },
+        {
+          "fecha": "19-07-2026",
+          "monto": "80.00",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "23-08-2026",
+          "monto": "35.00",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "29-09-2026",
+          "monto": "90.00",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "11-10-2026",
+          "monto": "120.00",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "05-11-2026",
+          "monto": "50.00",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "17-12-2026",
+          "monto": "20.00",
+          "categoria": "Café"
+        }
+      ],
+      "movimientos": [
+        {
+          "fecha": "10-01-2026",
+          "monto": "1200.50",
+          "tipo": "ingreso",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "12-01-2026",
+          "monto": "40.25",
+          "tipo": "gasto",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "15-02-2026",
+          "monto": "150.99",
+          "tipo": "ingreso",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "18-02-2026",
+          "monto": "25.10",
+          "tipo": "gasto",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "20-03-2026",
+          "monto": "80.75",
+          "tipo": "ingreso",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "22-03-2026",
+          "monto": "60.00",
+          "tipo": "gasto",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "05-04-2026",
+          "monto": "200.00",
+          "tipo": "ingreso",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "28-04-2026",
+          "monto": "100.00",
+          "tipo": "gasto",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "12-05-2026",
+          "monto": "50.00",
+          "tipo": "ingreso",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "30-05-2026",
+          "monto": "30.00",
+          "tipo": "gasto",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "15-06-2026",
+          "monto": "15.99",
+          "tipo": "gasto",
+          "categoria": "Café"
+        },
+        {
+          "fecha": "18-06-2026",
+          "monto": "300.00",
+          "tipo": "ingreso",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "19-07-2026",
+          "monto": "80.00",
+          "tipo": "gasto",
+          "categoria": "Supermercado"
+        },
+        {
+          "fecha": "22-07-2026",
+          "monto": "100.00",
+          "tipo": "ingreso",
+          "categoria": "Venta"
+        },
+        {
+          "fecha": "09-08-2026",
+          "monto": "60.00",
+          "tipo": "ingreso",
+          "categoria": "Intereses"
+        },
+        {
+          "fecha": "23-08-2026",
+          "monto": "35.00",
+          "tipo": "gasto",
+          "categoria": "Transporte"
+        },
+        {
+          "fecha": "14-09-2026",
+          "monto": "400.00",
+          "tipo": "ingreso",
+          "categoria": "Freelance"
+        },
+        {
+          "fecha": "29-09-2026",
+          "monto": "90.00",
+          "tipo": "gasto",
+          "categoria": "Restaurantes"
+        },
+        {
+          "fecha": "03-10-2026",
+          "monto": "90.00",
+          "tipo": "ingreso",
+          "categoria": "Regalo"
+        },
+        {
+          "fecha": "11-10-2026",
+          "monto": "120.00",
+          "tipo": "gasto",
+          "categoria": "Ocio"
+        },
+        {
+          "fecha": "05-11-2026",
+          "monto": "50.00",
+          "tipo": "gasto",
+          "categoria": "Suscripciones"
+        },
+        {
+          "fecha": "27-11-2026",
+          "monto": "250.00",
+          "tipo": "ingreso",
+          "categoria": "Salario"
+        },
+        {
+          "fecha": "17-12-2026",
+          "monto": "20.00",
+          "tipo": "gasto",
+          "categoria": "Café"
+        },
+        {
+          "fecha": "30-12-2026",
+          "monto": "120.00",
+          "tipo": "ingreso",
+          "categoria": "Venta"
+        }
+      ]
+    }
+  }
+}

@@ -1,12 +1,4 @@
-import React from "react";
-import {
-  FaWhatsapp,
-  FaChartPie,
-  FaLock,
-  FaBell,
-  FaFileCsv,
-  FaMobileAlt,
-} from "react-icons/fa";
+import { FaWhatsapp, FaChartPie, FaLock, FaBell, FaFileCsv, FaMobileAlt } from "react-icons/fa";
 
 export default function Features() {
   const features = [

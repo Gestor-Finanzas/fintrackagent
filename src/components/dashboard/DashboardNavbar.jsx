@@ -50,17 +50,9 @@ export default function DashboardNavbar() {
           {/* Logo */}
           <button
             onClick={() => navigate("/dashboard")}
-            className="flex items-center gap-2 shrink-0"
+            className="flex items-center gap-3 shrink-0"
           >
-            <div className="w-8 h-8 bg-dash-primary rounded-lg flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                <line x1="8" y1="14" x2="8" y2="11" />
-                <line x1="12" y1="14" x2="12" y2="8" />
-                <line x1="16" y1="14" x2="16" y2="5.5" />
-                <polyline points="14 6 16 5.5 18 7" />
-              </svg>
-            </div>
+            <img src="/assets/logo.png" alt="FinTrack" className="w-7 h-7" />
             <span className="text-lg font-bold text-dash-text hidden sm:block">FinTrack</span>
           </button>
 
@@ -70,11 +62,10 @@ export default function DashboardNavbar() {
               <button
                 key={tab.path}
                 onClick={() => navigate(tab.path)}
-                className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg whitespace-nowrap transition-colors duration-150 ${
-                  isActive(tab.path)
-                    ? "bg-dash-accent/10 text-dash-accent"
-                    : "text-dash-text-secondary hover:text-dash-text hover:bg-gray-50"
-                }`}
+                className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg whitespace-nowrap transition-colors duration-150 ${isActive(tab.path)
+                  ? "bg-dash-accent/10 text-dash-accent"
+                  : "text-dash-text-secondary hover:text-dash-text hover:bg-gray-50"
+                  }`}
               >
                 {tab.label}
               </button>

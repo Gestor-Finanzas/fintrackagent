@@ -26,8 +26,8 @@ export default function Navbar({ onAuthClick }) {
 
   return (
     <nav className="bg-white shadow-lg py-4 px-6 md:px-12 flex justify-between items-center sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
-      <h1 className="flex items-center gap-2 text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-        <img src="/assets/logo2.png" alt="Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain" style={{ marginRight: 4 }} />
+      <h1 className="flex items-center gap-3 text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <img src="/assets/logo2.png" alt="Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain" style={{ marginRight: 4 }} />
         FinTrack
       </h1>
 

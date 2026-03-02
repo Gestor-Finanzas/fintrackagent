@@ -1,5 +1,5 @@
 import PageLayout from "./PageLayout";
-import { FaBuilding, FaLightbulb, FaMapMarkerAlt, FaEnvelope, FaShieldAlt, FaUsers, FaRocket, FaEye } from "react-icons/fa";
+import { FaLightbulb, FaMapMarkerAlt, FaEnvelope, FaShieldAlt, FaUsers, FaRocket, FaEye } from "react-icons/fa";
 
 const valores = [
   {

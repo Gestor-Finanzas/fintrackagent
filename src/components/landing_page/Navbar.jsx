@@ -32,7 +32,7 @@ export default function Navbar({ onAuthClick }) {
       </h1>
 
       {/* Menú desktop */}
-      <ul className="hidden lg:flex gap-8 text-secondary font-medium">
+      <ul className="hidden lg:flex items-center gap-8 text-secondary font-medium">
         <li>
           <a href="#hero" className="hover:text-primary transition duration-300" onClick={handleNav("#hero")}>Inicio</a>
         </li>
@@ -49,13 +49,12 @@ export default function Navbar({ onAuthClick }) {
           <a href="#contact" className="hover:text-primary transition duration-300" onClick={handleNav("#contact")}>Contacto</a>
         </li>
         <li>
-          <a
+          <button
             onClick={onAuthClick}
             className="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-lg font-semibold transition duration-300 transform hover:scale-110 hover:shadow-xl-glow hover:brightness-110 cursor-pointer"
-            style={{ cursor: 'pointer' }}
           >
             Iniciar Sesión
-          </a>
+          </button>
         </li>
       </ul>
 
@@ -85,12 +84,12 @@ export default function Navbar({ onAuthClick }) {
             <a href="#contact" className="hover:text-primary transition" onClick={handleNav("#contact")}>Contacto</a>
           </li>
           <li>
-            <a
+            <button
               onClick={onAuthClick}
-              className="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-lg block text-center font-semibold transition duration-300 transform hover:scale-105 hover:shadow-xl-glow hover:brightness-110 cursor-pointer"
+              className="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-lg block text-center font-semibold transition duration-300 transform hover:scale-105 hover:shadow-xl-glow hover:brightness-110 cursor-pointer w-full"
             >
               Iniciar Sesión
-            </a>
+            </button>
           </li>
         </ul>
       )}

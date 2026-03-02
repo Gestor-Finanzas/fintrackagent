@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { FaRobot, FaWhatsapp, FaShieldAlt, FaLightbulb } from "react-icons/fa";
 
 export default function Product() {
-  const [activeFeature, setActiveFeature] = useState(null);
 
   return (
     <section
@@ -36,8 +34,6 @@ export default function Product() {
             <div className="space-y-6">
               <div
                 className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-                onMouseEnter={() => setActiveFeature("ia")}
-                onMouseLeave={() => setActiveFeature(null)}
               >
                 <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-lg text-white h-fit">
                   <FaRobot size={24} />
@@ -55,8 +51,6 @@ export default function Product() {
 
               <div
                 className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-                onMouseEnter={() => setActiveFeature("whatsapp")}
-                onMouseLeave={() => setActiveFeature(null)}
               >
                 <div className="p-3 bg-gradient-to-br from-accent to-primary rounded-lg text-white h-fit">
                   <FaWhatsapp size={24} />
@@ -74,8 +68,6 @@ export default function Product() {
 
               <div
                 className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-                onMouseEnter={() => setActiveFeature("seguro")}
-                onMouseLeave={() => setActiveFeature(null)}
               >
                 <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-lg text-white h-fit">
                   <FaShieldAlt size={24} />
@@ -93,8 +85,6 @@ export default function Product() {
 
               <div
                 className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-                onMouseEnter={() => setActiveFeature("recomendaciones")}
-                onMouseLeave={() => setActiveFeature(null)}
               >
                 <div className="p-3 bg-gradient-to-br from-accent to-primary rounded-lg text-white h-fit">
                   <FaLightbulb size={24} />

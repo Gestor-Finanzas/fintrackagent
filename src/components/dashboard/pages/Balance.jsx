@@ -6,6 +6,7 @@ import SummaryCard from "../components/SummaryCard";
 import ChartCard from "../components/ChartCard";
 import TransactionsTable from "../components/TransactionsTable";
 import { formatEuro, parseMonto } from "../../../utils/globalUtils";
+import { FaEuroSign } from "react-icons/fa";
 
 export default function Balance() {
   const {
@@ -80,7 +81,7 @@ export default function Balance() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <svg className="w-5 h-5 text-dash-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <svg className="w-6 h-6 text-dash-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
             <h1 className="text-2xl font-bold text-dash-text">Balance</h1>
@@ -127,11 +128,7 @@ export default function Balance() {
           value={formatEuro(balance)}
           color={balance >= 0 ? "text-dash-accent" : "text-dash-danger"}
           iconBg="bg-indigo-50"
-          icon={
-            <svg className="w-5 h-5 text-dash-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          }
+          icon={<FaEuroSign className="w-4 h-4 text-dash-accent" />}
         />
       </div>
 
@@ -204,9 +201,7 @@ export default function Balance() {
         {totalIngresos > 0 && (
           <div className="mt-5 flex items-center justify-between p-3 rounded-xl bg-indigo-50/50 border border-dash-accent/10">
             <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-dash-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <FaEuroSign className="w-3 h-3 text-dash-accent" />
               <span className="text-xs font-medium text-dash-text">Tasa de ahorro</span>
             </div>
             <span className={`text-sm font-bold ${balance >= 0 ? "text-dash-accent" : "text-dash-danger"}`}>

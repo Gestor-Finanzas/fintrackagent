@@ -105,7 +105,7 @@ export default function Gastos() {
         <div className="flex items-center gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg className="w-6 h-6 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
               </svg>
               <h1 className="text-2xl font-bold text-dash-text">Gastos</h1>

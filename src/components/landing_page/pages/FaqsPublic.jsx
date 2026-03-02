@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PageLayout from "./PageLayout";
-import { FaQuestionCircle, FaEnvelope } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 
 const faqs = [
   {

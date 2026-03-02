@@ -1,7 +1,7 @@
 export default function SummaryCard({ label, value, icon, iconBg, color }) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm">
-      <div className="flex items-center justify-between mb-3">
+    <div className="bg-white rounded-2xl p-5 shadow-sm">
+      <div className="flex items-center justify-between">
         <span className="text-xs font-medium text-dash-text-secondary uppercase tracking-wider">
           {label}
         </span>

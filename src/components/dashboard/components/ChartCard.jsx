@@ -1,6 +1,6 @@
 export default function ChartCard({ title, children, className }) {
   return (
-    <div className={`bg-white rounded-2xl p-6 shadow-sm flex flex-col ${className || ""}`}>
+    <div className={`bg-white rounded-2xl p-4 shadow-sm flex flex-col ${className || ""}`}>
       {title && (
         <h3 className="text-sm font-semibold text-dash-text">{title}</h3>
       )}

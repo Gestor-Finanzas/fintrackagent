@@ -122,7 +122,7 @@ export default function Pricing({ onAuthClick }) {
                   </div>
                 ))}
               </div>
-              <button onClick={onAuthClick} className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg-glow transition duration-300 transform hover:scale-105 mb-4 mt-10 text-lg">
+              <button onClick={onAuthClick} className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg-glow transition duration-300 transform hover:scale-105 mb-1 mt-10 text-lg">
                 Comenzar Ahora
               </button>
             </div>

@@ -53,20 +53,24 @@ export default function DashboardNavbar() {
             className="flex items-center gap-2 shrink-0"
           >
             <div className="w-8 h-8 bg-dash-primary rounded-lg flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                <line x1="8" y1="14" x2="8" y2="11" />
+                <line x1="12" y1="14" x2="12" y2="8" />
+                <line x1="16" y1="14" x2="16" y2="5.5" />
+                <polyline points="14 6 16 5.5 18 7" />
               </svg>
             </div>
             <span className="text-lg font-bold text-dash-text hidden sm:block">FinTrack</span>
           </button>
 
           {/* Tabs */}
-          <div className="flex items-center gap-1 overflow-x-auto">
+          <div className="flex items-center gap-0.5 sm:gap-1 overflow-x-auto scrollbar-hide">
             {tabs.map((tab) => (
               <button
                 key={tab.path}
                 onClick={() => navigate(tab.path)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-colors duration-150 ${
+                className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-lg whitespace-nowrap transition-colors duration-150 ${
                   isActive(tab.path)
                     ? "bg-dash-accent/10 text-dash-accent"
                     : "text-dash-text-secondary hover:text-dash-text hover:bg-gray-50"
@@ -81,9 +85,9 @@ export default function DashboardNavbar() {
           <div className="relative shrink-0" ref={dropdownRef}>
             <button
               onClick={() => setOpen(!open)}
-              className="flex items-center gap-3 px-2 py-1.5 rounded-xl hover:bg-gray-50 transition-colors duration-150"
+              className="flex items-center gap-2 sm:gap-3 px-1 sm:px-2 py-1.5 rounded-xl hover:bg-gray-50 transition-colors duration-150"
             >
-              <div className="w-9 h-9 rounded-full bg-dash-primary text-white flex items-center justify-center text-sm font-semibold">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-dash-primary text-white flex items-center justify-center text-xs sm:text-sm font-semibold">
                 {initials}
               </div>
               <span className="text-sm font-medium text-dash-text hidden md:block">

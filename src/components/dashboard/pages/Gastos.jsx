@@ -41,8 +41,8 @@ export default function Gastos() {
         {
           label: "Gastos",
           data: sorted.map(([, v]) => v),
-          borderColor: "#EE5D50",
-          backgroundColor: "rgba(238,93,80,0.1)",
+          borderColor: "#F87171",
+          backgroundColor: "rgba(248,113,113,0.1)",
           fill: true,
           tension: 0.4,
           borderWidth: 2,
@@ -144,7 +144,7 @@ export default function Gastos() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <ChartCard title="Evolución de gastos" className="lg:col-span-2">
-          <div className="h-80">
+          <div className="h-80 lg:h-full min-h-[280px]">
             <Line data={lineData} options={chartOptions} />
           </div>
         </ChartCard>

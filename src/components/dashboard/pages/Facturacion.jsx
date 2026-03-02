@@ -120,24 +120,24 @@ export default function Facturacion() {
           <table className="w-full text-left">
             <thead>
               <tr className="border-y border-dash-border">
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Nº Factura</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Fecha</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Concepto</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider text-right">Importe</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Estado</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider text-center">Descargar</th>
+                <th className="py-3 px-3 sm:px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider hidden md:table-cell">Nº Factura</th>
+                <th className="py-3 px-3 sm:px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Fecha</th>
+                <th className="py-3 px-3 sm:px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider hidden md:table-cell">Concepto</th>
+                <th className="py-3 px-3 sm:px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider text-right">Importe</th>
+                <th className="py-3 px-3 sm:px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Estado</th>
+                <th className="py-3 px-3 sm:px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider text-center hidden md:table-cell">Descargar</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-dash-border">
               {facturas.map((f) => (
                 <tr key={f.id} className="hover:bg-gray-50 transition-colors duration-150">
-                  <td className="py-3 px-6">
+                  <td className="py-3 px-3 sm:px-6 hidden md:table-cell">
                     <span className="text-sm font-medium text-dash-text">{f.numero}</span>
                   </td>
-                  <td className="py-3 px-6 text-sm text-dash-text">{formatearFecha(f.fecha)}</td>
-                  <td className="py-3 px-6 text-sm text-dash-text-secondary">{f.concepto}</td>
-                  <td className="py-3 px-6 text-sm font-semibold text-dash-text text-right">{formatEuro(f.importe)}</td>
-                  <td className="py-3 px-6">
+                  <td className="py-3 px-3 sm:px-6 text-sm text-dash-text">{formatearFecha(f.fecha)}</td>
+                  <td className="py-3 px-3 sm:px-6 text-sm text-dash-text-secondary hidden md:table-cell">{f.concepto}</td>
+                  <td className="py-3 px-3 sm:px-6 text-sm font-semibold text-dash-text text-right">{formatEuro(f.importe)}</td>
+                  <td className="py-3 px-3 sm:px-6">
                     <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${
                       f.estado === "Pagada"
                         ? "bg-emerald-50 text-dash-success"
@@ -155,7 +155,7 @@ export default function Facturacion() {
                       {f.estado}
                     </span>
                   </td>
-                  <td className="py-3 px-6 text-center">
+                  <td className="py-3 px-3 sm:px-6 text-center hidden md:table-cell">
                     <button className="p-2 rounded-lg text-dash-text-secondary hover:text-dash-accent hover:bg-dash-accent/5 transition-colors duration-150">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

@@ -9,59 +9,59 @@
       "ingresos": [
         {
           "fecha": "02-02-2026",
-          "monto": "1200",
+          "monto": "1200.50",
           "categoria": "Salario"
         },
         {
           "fecha": "03-02-2026",
-          "monto": "150",
+          "monto": "150.75",
           "categoria": "Venta"
         },
         {
           "fecha": "04-02-2026",
-          "monto": "80",
+          "monto": "80.30",
           "categoria": "Intereses"
         },
         {
           "fecha": "05-02-2026",
-          "monto": "200",
+          "monto": "200.00",
           "categoria": "Freelance"
         },
         {
           "fecha": "06-02-2026",
-          "monto": "50",
+          "monto": "50.00",
           "categoria": "Regalo"
         }
       ],
       "gastos": [
         {
           "fecha": "02-02-2026",
-          "monto": "40",
+          "monto": "40.25",
           "categoria": "Supermercado"
         },
         {
           "fecha": "03-02-2026",
-          "monto": "25",
+          "monto": "25.10",
           "categoria": "Transporte"
         },
         {
           "fecha": "04-02-2026",
-          "monto": "60",
+          "monto": "60.50",
           "categoria": "Restaurantes"
         },
         {
           "fecha": "05-02-2026",
-          "monto": "100",
+          "monto": "100.75",
           "categoria": "Ocio"
         },
         {
           "fecha": "06-02-2026",
-          "monto": "30",
+          "monto": "30.00",
           "categoria": "Suscripciones"
         },
         {
           "fecha": "06-02-2026",
-          "monto": "15",
+          "monto": "15.99",
           "categoria": "Café"
         }
       ],
@@ -149,159 +149,159 @@
       "ingresos": [
         {
           "fecha": "01-02-2026",
-          "monto": "1200",
+          "monto": "1200.50",
           "categoria": "Salario"
         },
         {
           "fecha": "03-02-2026",
-          "monto": "150",
+          "monto": "150.99",
           "categoria": "Venta"
         },
         {
           "fecha": "04-02-2026",
-          "monto": "80",
+          "monto": "80.75",
           "categoria": "Intereses"
         },
         {
           "fecha": "05-02-2026",
-          "monto": "200",
+          "monto": "200.00",
           "categoria": "Freelance"
         },
         {
           "fecha": "06-02-2026",
-          "monto": "50",
+          "monto": "50.00",
           "categoria": "Regalo"
         },
         {
           "fecha": "08-02-2026",
-          "monto": "300",
+          "monto": "300.25",
           "categoria": "Salario"
         },
         {
           "fecha": "10-02-2026",
-          "monto": "100",
+          "monto": "100.50",
           "categoria": "Venta"
         },
         {
           "fecha": "12-02-2026",
-          "monto": "60",
+          "monto": "60.30",
           "categoria": "Intereses"
         },
         {
           "fecha": "15-02-2026",
-          "monto": "400",
+          "monto": "400.00",
           "categoria": "Freelance"
         },
         {
           "fecha": "18-02-2026",
-          "monto": "90",
+          "monto": "90.00",
           "categoria": "Regalo"
         },
         {
           "fecha": "20-02-2026",
-          "monto": "250",
+          "monto": "250.75",
           "categoria": "Salario"
         },
         {
           "fecha": "22-02-2026",
-          "monto": "120",
+          "monto": "120.40",
           "categoria": "Venta"
         },
         {
           "fecha": "25-02-2026",
-          "monto": "70",
+          "monto": "70.15",
           "categoria": "Intereses"
         },
         {
           "fecha": "27-02-2026",
-          "monto": "350",
+          "monto": "350.00",
           "categoria": "Freelance"
         },
         {
           "fecha": "28-02-2026",
-          "monto": "60",
+          "monto": "60.00",
           "categoria": "Regalo"
         }
       ],
       "gastos": [
         {
           "fecha": "01-02-2026",
-          "monto": "40",
+          "monto": "40.25",
           "categoria": "Supermercado"
         },
         {
           "fecha": "02-02-2026",
-          "monto": "25",
+          "monto": "25.10",
           "categoria": "Transporte"
         },
         {
           "fecha": "03-02-2026",
-          "monto": "60",
+          "monto": "60.50",
           "categoria": "Restaurantes"
         },
         {
           "fecha": "04-02-2026",
-          "monto": "100",
+          "monto": "100.75",
           "categoria": "Ocio"
         },
         {
           "fecha": "05-02-2026",
-          "monto": "30",
+          "monto": "30.00",
           "categoria": "Suscripciones"
         },
         {
           "fecha": "06-02-2026",
-          "monto": "15",
+          "monto": "15.99",
           "categoria": "Café"
         },
         {
           "fecha": "08-02-2026",
-          "monto": "80",
+          "monto": "80.30",
           "categoria": "Supermercado"
         },
         {
           "fecha": "10-02-2026",
-          "monto": "35",
+          "monto": "35.50",
           "categoria": "Transporte"
         },
         {
           "fecha": "12-02-2026",
-          "monto": "90",
+          "monto": "90.00",
           "categoria": "Restaurantes"
         },
         {
           "fecha": "15-02-2026",
-          "monto": "120",
+          "monto": "120.25",
           "categoria": "Ocio"
         },
         {
           "fecha": "18-02-2026",
-          "monto": "50",
+          "monto": "50.00",
           "categoria": "Suscripciones"
         },
         {
           "fecha": "20-02-2026",
-          "monto": "20",
+          "monto": "20.50",
           "categoria": "Café"
         },
         {
           "fecha": "22-02-2026",
-          "monto": "60",
+          "monto": "60.75",
           "categoria": "Supermercado"
         },
         {
           "fecha": "25-02-2026",
-          "monto": "45",
+          "monto": "45.20",
           "categoria": "Transporte"
         },
         {
           "fecha": "27-02-2026",
-          "monto": "110",
+          "monto": "110.90",
           "categoria": "Restaurantes"
         },
         {
           "fecha": "28-02-2026",
-          "monto": "130",
+          "monto": "130.00",
           "categoria": "Ocio"
         }
       ],

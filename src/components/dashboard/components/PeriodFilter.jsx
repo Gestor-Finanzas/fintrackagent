@@ -49,30 +49,27 @@ export default function PeriodFilter({
 
   return (
     <div className="flex items-center gap-3 flex-wrap">
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {periods.map((p) => (
           <button
             key={p.value}
             onClick={() => setPeriodo(p.value)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-150 ${
-              periodo === p.value && !isCustomActive
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-150 h-[38px] ${periodo === p.value && !isCustomActive
                 ? "bg-dash-primary text-white"
                 : "bg-white text-dash-text-secondary border border-dash-border hover:border-dash-primary hover:text-dash-primary"
-            }`}
+              }`}
           >
             {p.label}
           </button>
         ))}
-
         {/* Custom date range button */}
         <div className="relative" ref={pickerRef}>
           <button
             onClick={() => setShowPicker(!showPicker)}
-            className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-150 flex items-center gap-1.5 ${
-              isCustomActive
+            className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-150 flex items-center justify-center gap-1.5 h-[38px] ${isCustomActive
                 ? "bg-dash-primary text-white"
                 : "bg-white text-dash-text-secondary border border-dash-border hover:border-dash-primary hover:text-dash-primary"
-            }`}
+              }`}
             title="Rango personalizado"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

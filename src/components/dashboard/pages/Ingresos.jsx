@@ -43,8 +43,8 @@ export default function Ingresos() {
         {
           label: "Ingresos",
           data: sorted.map(([, v]) => v),
-          borderColor: "#05CD99",
-          backgroundColor: "rgba(5,205,153,0.1)",
+          borderColor: "#34D399",
+          backgroundColor: "rgba(52,211,153,0.1)",
           fill: true,
           tension: 0.4,
           borderWidth: 2,
@@ -148,7 +148,7 @@ export default function Ingresos() {
       {/* Charts + Category Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <ChartCard title="Evolución de ingresos" className="lg:col-span-2">
-          <div className="h-80">
+          <div className="h-80 lg:h-full min-h-[280px]">
             <Line data={lineData} options={chartOptions} />
           </div>
         </ChartCard>

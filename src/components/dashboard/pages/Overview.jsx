@@ -39,8 +39,8 @@ export default function Overview() {
         {
           label: "Ingresos",
           data: sorted.map(([, v]) => v.ing),
-          borderColor: "#05CD99",
-          backgroundColor: "rgba(5,205,153,0.08)",
+          borderColor: "#34D399",
+          backgroundColor: "rgba(52,211,153,0.08)",
           fill: true,
           tension: 0.4,
           borderWidth: 2,
@@ -50,8 +50,8 @@ export default function Overview() {
         {
           label: "Gastos",
           data: sorted.map(([, v]) => v.gas),
-          borderColor: "#EE5D50",
-          backgroundColor: "rgba(238,93,80,0.08)",
+          borderColor: "#F87171",
+          backgroundColor: "rgba(248,113,113,0.08)",
           fill: true,
           tension: 0.4,
           borderWidth: 2,
@@ -93,7 +93,7 @@ export default function Overview() {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: true, position: "top", labels: { boxWidth: 12, font: { size: 12 }, color: "#8F9BBA" } },
+      legend: { display: true, position: "top", align: "center", onHover: (e) => { e.native.target.style.cursor = "pointer"; }, onLeave: (e) => { e.native.target.style.cursor = "default"; }, labels: { boxWidth: 14, boxHeight: 14, useBorderRadius: true, borderRadius: 3, font: { size: 12 }, color: "#8F9BBA", padding: 24 } },
       tooltip: {
         backgroundColor: "#fff",
         titleColor: "#1B2559",
@@ -203,70 +203,69 @@ export default function Overview() {
         />
       </div>
 
-      {/* Charts */}
+      {/* Ingresos vs Gastos — full width */}
+      <ChartCard title="Ingresos vs Gastos">
+        <div className="h-72 lg:h-80 min-h-[250px]">
+          <Line data={lineData} options={chartOptions} />
+        </div>
+      </ChartCard>
+
+      {/* Recent Transactions + Donut */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <ChartCard title="Ingresos vs Gastos" className="lg:col-span-2">
-          <div className="h-72">
-            <Line data={lineData} options={chartOptions} />
+        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-dash-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="text-sm font-semibold text-dash-text">Últimos movimientos</h3>
+            </div>
+            <button
+              onClick={() => navigate("/dashboard/ingresos")}
+              className="text-xs font-medium text-dash-accent hover:underline"
+            >
+              Ver todos
+            </button>
           </div>
-        </ChartCard>
+          <div className="flex flex-col divide-y divide-dash-border">
+            {recent.length === 0 ? (
+              <p className="text-sm text-dash-text-secondary py-8 text-center">
+                No hay movimientos para este período
+              </p>
+            ) : (
+              recent.map((m, i) => {
+                const catColor = m.tipo === "ingreso" ? "#34D399" : "#F87171";
+                return (
+                  <div key={i} className="flex items-center gap-3 py-3">
+                    <div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: catColor + "14", color: catColor }}
+                    >
+                      {getCategoryIcon(m.categoria, 16)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-dash-text truncate">
+                        {m.nombre || m.categoria}
+                      </p>
+                      <p className="text-xs text-dash-text-secondary">{m.categoria} &middot; {m.fecha}</p>
+                    </div>
+                    <span
+                      className={`text-sm font-semibold shrink-0 ${m.tipo === "ingreso" ? "text-dash-success" : "text-dash-danger"
+                        }`}
+                    >
+                      {m.tipo === "ingreso" ? "+" : "-"}{formatEuro(parseMonto(m.monto))}
+                    </span>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
         <ChartCard title="Gastos por categoría">
-          <div className="h-72">
+          <div className="h-72 lg:h-full min-h-[250px]">
             <Doughnut data={donutData} options={donutOptions} />
           </div>
         </ChartCard>
-      </div>
-
-      {/* Recent Transactions */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-dash-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h3 className="text-sm font-semibold text-dash-text">Últimos movimientos</h3>
-          </div>
-          <button
-            onClick={() => navigate("/dashboard/ingresos")}
-            className="text-xs font-medium text-dash-accent hover:underline"
-          >
-            Ver todos
-          </button>
-        </div>
-        <div className="flex flex-col divide-y divide-dash-border">
-          {recent.length === 0 ? (
-            <p className="text-sm text-dash-text-secondary py-8 text-center">
-              No hay movimientos para este período
-            </p>
-          ) : (
-            recent.map((m, i) => {
-              const catColor = m.tipo === "ingreso" ? "#05CD99" : "#EE5D50";
-              return (
-                <div key={i} className="flex items-center gap-3 py-3">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: catColor + "14", color: catColor }}
-                  >
-                    {getCategoryIcon(m.categoria, 16)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-dash-text truncate">
-                      {m.nombre || m.categoria}
-                    </p>
-                    <p className="text-xs text-dash-text-secondary">{m.categoria} &middot; {m.fecha}</p>
-                  </div>
-                  <span
-                    className={`text-sm font-semibold shrink-0 ${
-                      m.tipo === "ingreso" ? "text-dash-success" : "text-dash-danger"
-                    }`}
-                  >
-                    {m.tipo === "ingreso" ? "+" : "-"}{formatEuro(parseMonto(m.monto))}
-                  </span>
-                </div>
-              );
-            })
-          )}
-        </div>
       </div>
     </div>
   );

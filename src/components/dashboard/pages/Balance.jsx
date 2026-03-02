@@ -4,7 +4,8 @@ import useDashboardData, { parseFechaMock } from "../hooks/useDashboardData";
 import PeriodFilter from "../components/PeriodFilter";
 import SummaryCard from "../components/SummaryCard";
 import ChartCard from "../components/ChartCard";
-import { formatEuro, parseMonto, exportToCSV } from "../../../utils/globalUtils";
+import TransactionsTable from "../components/TransactionsTable";
+import { formatEuro, parseMonto } from "../../../utils/globalUtils";
 
 export default function Balance() {
   const {
@@ -42,8 +43,8 @@ export default function Balance() {
       {
         label: "Balance",
         data: balanceEvolution.map((d) => d.value),
-        borderColor: "#4318FF",
-        backgroundColor: "rgba(67,24,255,0.08)",
+        borderColor: "#818CF8",
+        backgroundColor: "rgba(129,140,248,0.08)",
         fill: true,
         tension: 0.4,
         borderWidth: 2,
@@ -71,8 +72,7 @@ export default function Balance() {
     animation: { duration: 500 },
   };
 
-  // Max for comparison bars
-  const maxAmount = Math.max(totalIngresos, totalGastos, 1);
+  const total = totalIngresos + totalGastos;
 
   return (
     <div className="flex flex-col gap-6">
@@ -89,24 +89,13 @@ export default function Balance() {
             Tu situación financiera global
           </p>
         </div>
-        <div className="flex items-center gap-3 flex-wrap">
-          <PeriodFilter
-            periodo={periodo}
-            setPeriodo={setPeriodo}
-            dateRangeLabel={dateRangeLabel}
-            customRange={customRange}
-            setCustomRange={setCustomRange}
-          />
-          <button
-            onClick={() => exportToCSV(movimientos)}
-            className="px-4 py-2 rounded-xl text-sm font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150 flex items-center gap-2"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Exportar
-          </button>
-        </div>
+        <PeriodFilter
+          periodo={periodo}
+          setPeriodo={setPeriodo}
+          dateRangeLabel={dateRangeLabel}
+          customRange={customRange}
+          setCustomRange={setCustomRange}
+        />
       </div>
 
       {/* Summary Cards */}
@@ -148,93 +137,90 @@ export default function Balance() {
 
       {/* Balance Evolution Chart */}
       <ChartCard title="Evolución del balance">
-        <div className="h-80">
+        <div className="h-80 lg:h-full min-h-[280px]">
           <Line data={lineData} options={chartOptions} />
         </div>
       </ChartCard>
 
       {/* Income vs Expenses Comparison */}
       <div className="bg-white rounded-2xl p-6 shadow-sm">
-        <div className="flex items-center gap-2 mb-6">
+        <div className="flex items-center gap-2 mb-5">
           <svg className="w-4 h-4 text-dash-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
           </svg>
           <h3 className="text-sm font-semibold text-dash-text">Ingresos vs Gastos</h3>
         </div>
-        <div className="flex flex-col gap-5">
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-dash-text">Ingresos</span>
-              <span className="text-sm font-semibold text-dash-success">{formatEuro(totalIngresos)}</span>
+
+        {/* Proportion bar */}
+        <div className="flex h-2.5 rounded-full overflow-hidden mb-6">
+          <div
+            className="bg-dash-success transition-all duration-500 rounded-l-full"
+            style={{ width: total > 0 ? `${(totalIngresos / total) * 100}%` : "50%" }}
+          />
+          <div
+            className="bg-dash-danger transition-all duration-500 rounded-r-full"
+            style={{ width: total > 0 ? `${(totalGastos / total) * 100}%` : "50%" }}
+          />
+        </div>
+
+        {/* Two columns */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* Ingresos */}
+          <div className="flex flex-col items-center gap-1 p-4 rounded-xl bg-emerald-50/60">
+            <div className="w-9 h-9 rounded-full bg-dash-success/10 flex items-center justify-center mb-1">
+              <svg className="w-4 h-4 text-dash-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+              </svg>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-3">
-              <div
-                className="h-3 rounded-full bg-dash-success transition-all duration-500"
-                style={{ width: `${(totalIngresos / maxAmount) * 100}%` }}
-              />
-            </div>
+            <span className="text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Ingresos</span>
+            <span className="text-lg font-bold text-dash-success">{formatEuro(totalIngresos)}</span>
+            <span className="text-xs text-dash-text-secondary">
+              {ingresos.length} movimiento{ingresos.length !== 1 ? "s" : ""}
+            </span>
+            <span className="text-[11px] font-medium text-dash-success/70 mt-0.5">
+              {total > 0 ? Math.round((totalIngresos / total) * 100) : 0}% del total
+            </span>
           </div>
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-dash-text">Gastos</span>
-              <span className="text-sm font-semibold text-dash-danger">{formatEuro(totalGastos)}</span>
+
+          {/* Gastos */}
+          <div className="flex flex-col items-center gap-1 p-4 rounded-xl bg-red-50/60">
+            <div className="w-9 h-9 rounded-full bg-dash-danger/10 flex items-center justify-center mb-1">
+              <svg className="w-4 h-4 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
+              </svg>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-3">
-              <div
-                className="h-3 rounded-full bg-dash-danger transition-all duration-500"
-                style={{ width: `${(totalGastos / maxAmount) * 100}%` }}
-              />
-            </div>
+            <span className="text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Gastos</span>
+            <span className="text-lg font-bold text-dash-danger">{formatEuro(totalGastos)}</span>
+            <span className="text-xs text-dash-text-secondary">
+              {gastos.length} movimiento{gastos.length !== 1 ? "s" : ""}
+            </span>
+            <span className="text-[11px] font-medium text-dash-danger/70 mt-0.5">
+              {total > 0 ? Math.round((totalGastos / total) * 100) : 0}% del total
+            </span>
           </div>
         </div>
+
+        {/* Savings rate */}
+        {totalIngresos > 0 && (
+          <div className="mt-5 flex items-center justify-between p-3 rounded-xl bg-indigo-50/50 border border-dash-accent/10">
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-dash-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-xs font-medium text-dash-text">Tasa de ahorro</span>
+            </div>
+            <span className={`text-sm font-bold ${balance >= 0 ? "text-dash-accent" : "text-dash-danger"}`}>
+              {Math.round((balance / totalIngresos) * 100)}%
+            </span>
+          </div>
+        )}
       </div>
 
       {/* All Transactions */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <div className="p-6 pb-3">
-          <div className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-dash-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-            <h3 className="text-sm font-semibold text-dash-text">Todos los movimientos</h3>
-          </div>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="border-b border-dash-border">
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Fecha</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Tipo</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Categoría</th>
-                <th className="py-3 px-6 text-xs font-medium text-dash-text-secondary uppercase tracking-wider text-right">Cantidad</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-dash-border">
-              {movimientos
-                .slice()
-                .sort((a, b) => parseFechaMock(b.fecha).getTime() - parseFechaMock(a.fecha).getTime())
-                .map((m, i) => (
-                  <tr key={i} className="hover:bg-gray-50 transition-colors duration-150">
-                    <td className="py-3 px-6 text-sm text-dash-text">{m.fecha}</td>
-                    <td className="py-3 px-6">
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                        m.tipo === "ingreso" ? "bg-emerald-50 text-dash-success" : "bg-red-50 text-dash-danger"
-                      }`}>
-                        {m.tipo === "ingreso" ? "Ingreso" : "Gasto"}
-                      </span>
-                    </td>
-                    <td className="py-3 px-6 text-sm text-dash-text-secondary">{m.categoria}</td>
-                    <td className={`py-3 px-6 text-sm font-semibold text-right ${
-                      m.tipo === "ingreso" ? "text-dash-success" : "text-dash-danger"
-                    }`}>
-                      {m.tipo === "ingreso" ? "+" : "-"}{formatEuro(parseMonto(m.monto))}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <TransactionsTable
+        movimientos={movimientos}
+        showTypeColumn={true}
+      />
     </div>
   );
 }

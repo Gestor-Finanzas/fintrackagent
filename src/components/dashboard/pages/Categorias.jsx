@@ -185,7 +185,7 @@ export default function Categorias() {
 
               <div>
                 <label className="text-xs font-medium text-dash-text-secondary uppercase tracking-wider mb-2 block">Icono</label>
-                <div className="grid grid-cols-6 gap-2">
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
                   {availableIcons.map((iconName) => (
                     <button
                       key={iconName}

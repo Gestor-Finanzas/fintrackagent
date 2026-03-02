@@ -1,19 +1,13 @@
-// Paleta de colores profesional para categorias (16 colores - Tailwind 500 level)
+// Paleta de colores pastel para categorias (10 colores - Tailwind 300-400 level)
 export const coloresCategorias = [
-  "#3B82F6", // blue
-  "#22C55E", // green
-  "#F59E0B", // amber
-  "#EF4444", // red
-  "#8B5CF6", // violet
-  "#14B8A6", // teal
-  "#EC4899", // pink
-  "#6366F1", // indigo
-  "#F97316", // orange
-  "#06B6D4", // cyan
-  "#84CC16", // lime
-  "#A855F7", // purple
-  "#0EA5E9", // sky
-  "#D946EF", // fuchsia
-  "#10B981", // emerald
-  "#78716C", // stone
+  "#93C5FD", // blue-300
+  "#6EE7B7", // emerald-300
+  "#FCD34D", // amber-300
+  "#FCA5A5", // red-300
+  "#C4B5FD", // violet-300
+  "#5EEAD4", // teal-300
+  "#F9A8D4", // pink-300
+  "#A5B4FC", // indigo-300
+  "#FDBA74", // orange-300
+  "#67E8F9", // cyan-300
 ];

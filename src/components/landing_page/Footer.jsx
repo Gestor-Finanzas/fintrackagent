@@ -70,11 +70,6 @@ export default function Footer() {
                   Sobre Nosotros
                 </a>
               </li>
-              <li>
-                <a href="/blog" className="hover:text-primary transition">
-                  Blog
-                </a>
-              </li>
             </ul>
           </div>
 

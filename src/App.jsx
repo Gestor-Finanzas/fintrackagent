@@ -19,7 +19,6 @@ import SobreNosotros from "./components/landing_page/SobreNosotros";
 import Empresa from "./components/landing_page/pages/Empresa";
 import FaqsPublic from "./components/landing_page/pages/FaqsPublic";
 import ContactoPage from "./components/landing_page/pages/ContactoPage";
-import Blog from "./components/landing_page/pages/Blog";
 import LegalPrivacidad from "./components/landing_page/pages/LegalPrivacidad";
 import LegalTerminos from "./components/landing_page/pages/LegalTerminos";
 import LegalCookies from "./components/landing_page/pages/LegalCookies";
@@ -78,7 +77,6 @@ function App() {
         <Route path="/empresa" element={<Empresa />} />
         <Route path="/faqs" element={<FaqsPublic />} />
         <Route path="/contacto" element={<ContactoPage />} />
-        <Route path="/blog" element={<Blog />} />
         <Route path="/privacidad" element={<LegalPrivacidad />} />
         <Route path="/terminos" element={<LegalTerminos />} />
         <Route path="/cookies" element={<LegalCookies />} />

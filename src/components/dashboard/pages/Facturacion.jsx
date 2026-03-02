@@ -23,7 +23,7 @@ export default function Facturacion() {
     setModalGestion(false);
   };
 
-  const planPrice = datos.tarifa === "Mensual" ? "9,99" : "99,99";
+  const planPrice = datos.tarifa === "Mensual" ? "2,99" : "30,00";
   const planCycle = datos.tarifa === "Mensual" ? "mes" : "año";
 
   return (
@@ -46,9 +46,8 @@ export default function Facturacion() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-xs font-medium uppercase tracking-wider opacity-80">Plan actual</span>
-                <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                  datos.estadoCuenta === "Activa" ? "bg-white/20 text-white" : "bg-red-400/30 text-white"
-                }`}>
+                <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${datos.estadoCuenta === "Activa" ? "bg-white/20 text-white" : "bg-red-400/30 text-white"
+                  }`}>
                   {datos.estadoCuenta}
                 </span>
               </div>
@@ -138,11 +137,10 @@ export default function Facturacion() {
                   <td className="py-3 px-3 sm:px-6 text-sm text-dash-text-secondary hidden md:table-cell">{f.concepto}</td>
                   <td className="py-3 px-3 sm:px-6 text-sm font-semibold text-dash-text text-right">{formatEuro(f.importe)}</td>
                   <td className="py-3 px-3 sm:px-6">
-                    <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                      f.estado === "Pagada"
-                        ? "bg-emerald-50 text-dash-success"
-                        : "bg-amber-50 text-dash-warning"
-                    }`}>
+                    <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${f.estado === "Pagada"
+                      ? "bg-emerald-50 text-dash-success"
+                      : "bg-amber-50 text-dash-warning"
+                      }`}>
                       {f.estado === "Pagada" ? (
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -184,14 +182,13 @@ export default function Facturacion() {
             <div className="p-6 flex flex-col gap-4">
               <p className="text-sm text-dash-text-secondary">Selecciona el plan que mejor se adapte a ti:</p>
               {[
-                { plan: "Mensual", price: "9,99 €/mes", desc: "Flexibilidad total, cancela cuando quieras" },
-                { plan: "Anual", price: "99,99 €/año", desc: "Ahorra un 17% respecto al plan mensual" },
+                { plan: "Mensual", price: "2,99 €/mes", desc: "Flexibilidad total, cancela cuando quieras" },
+                { plan: "Anual", price: "30 €/año", desc: "Ahorra un 17% respecto al plan mensual" },
               ].map(({ plan, price, desc }) => (
                 <label
                   key={plan}
-                  className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-colors duration-150 ${
-                    nuevaTarifa === plan ? "border-dash-accent bg-dash-accent/5" : "border-dash-border hover:bg-gray-50"
-                  }`}
+                  className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-colors duration-150 ${nuevaTarifa === plan ? "border-dash-accent bg-dash-accent/5" : "border-dash-border hover:bg-gray-50"
+                    }`}
                 >
                   <input
                     type="radio"

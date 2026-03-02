@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "fecha": "2026-02-01",
+    "numero": "F-2026-001",
+    "cliente": "Empresa ABC S.L.",
+    "concepto": "Servicios de consultoría",
+    "importe": 1200.50,
+    "estado": "Pagada"
+  },
+  {
+    "id": 2,
+    "fecha": "2026-02-10",
+    "numero": "F-2026-002",
+    "cliente": "Juan López",
+    "concepto": "Desarrollo web",
+    "importe": 850.00,
+    "estado": "Pendiente"
+  },
+  {
+    "id": 3,
+    "fecha": "2026-02-15",
+    "numero": "F-2026-003",
+    "cliente": "Inmobiliaria Sol S.A.",
+    "concepto": "Mantenimiento mensual",
+    "importe": 300.00,
+    "estado": "Pagada"
+  },
+  {
+    "id": 4,
+    "fecha": "2026-02-20",
+    "numero": "F-2026-004",
+    "cliente": "María Pérez",
+    "concepto": "Diseño gráfico",
+    "importe": 450.75,
+    "estado": "Pendiente"
+  }
+]

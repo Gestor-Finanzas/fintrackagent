@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaCheck, FaGift } from "react-icons/fa";
 
-export default function Pricing() {
+export default function Pricing({ onAuthClick }) {
   const [billingPeriod, setBillingPeriod] = useState("monthly");
 
-  const monthlyPrice = "3,99€";
-  const annualPrice = "36€";
+  const monthlyPrice = "2,99€";
+  const annualPrice = "30€";
 
   const features = [
     "Transacciones ilimitadas",
@@ -45,26 +45,36 @@ export default function Pricing() {
             </div>
           </div>
 
-          {/* Toggle Mensual/Anual */}
-          <div className="flex justify-center mb-0 mt-5">
-            <div className="inline-flex bg-gray-200 rounded-full p-1">
+          {/* Toggle Mensual / Anual */}
+          <div className="flex justify-center mt-5">
+            <div className="relative bg-gray-200 rounded-full p-1 flex">
+              {/* Fondo animado */}
+              <div
+                className="absolute top-1 bottom-1 left-1 w-32 bg-gradient-to-r from-primary to-accent rounded-full shadow-lg-glow transition-transform duration-500 ease-in-out"
+                style={{
+                  transform:
+                    billingPeriod === "monthly"
+                      ? "translateX(0)"
+                      : "translateX(100%)",
+                }}
+              />
+              {/* Mensual */}
               <button
                 onClick={() => setBillingPeriod("monthly")}
-                className={`px-8 py-2 rounded-full font-semibold transition duration-300 ${
-                  billingPeriod === "monthly"
-                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg-glow"
-                    : "text-secondary hover:text-dark"
-                }`}
+                className={`relative z-10 w-32 py-2 text-center font-semibold rounded-full transition-colors duration-300 ${billingPeriod === "monthly"
+                  ? "text-white"
+                  : "text-secondary hover:text-dark"
+                  }`}
               >
                 Mensual
               </button>
+              {/* Anual */}
               <button
                 onClick={() => setBillingPeriod("annual")}
-                className={`px-8 py-2 rounded-full font-semibold transition duration-300 ${
-                  billingPeriod === "annual"
-                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg-glow"
-                    : "text-secondary hover:text-dark"
-                }`}
+                className={`relative z-10 w-32 py-2 text-center font-semibold rounded-full transition-colors duration-300 ${billingPeriod === "annual"
+                  ? "text-white"
+                  : "text-secondary hover:text-dark"
+                  }`}
               >
                 Anual
               </button>
@@ -91,16 +101,16 @@ export default function Pricing() {
                   : "El mejor valor - Acceso durante un año"}
               </p>
 
-              <div className="mb-6">
-                <span className="text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <div className="mb-5">
+                <span className="text-6xl font-bold text-primary from-primary to-accent bg-clip-text">
                   {billingPeriod === "monthly" ? monthlyPrice : annualPrice}
                 </span>
                 <span className="text-gray-600 ml-2">
                   {billingPeriod === "monthly" ? "/mes" : "/año"}
                 </span>
                 {billingPeriod === "annual" && (
-                  <p className="text-primary text-sm mt-2 font-semibold">
-                    Equivalente a 3€ /mes
+                  <p className="text-gray-600 text-sm mt-2 font-semibold">
+                    Equivalente a 2,5€ /mes
                   </p>
                 )}
               </div>
@@ -112,7 +122,7 @@ export default function Pricing() {
                   </div>
                 ))}
               </div>
-              <button className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg-glow transition duration-300 transform hover:scale-105 mb-4 mt-10 text-lg">
+              <button onClick={onAuthClick} className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg-glow transition duration-300 transform hover:scale-105 mb-1 mt-10 text-lg">
                 Comenzar Ahora
               </button>
             </div>
@@ -121,7 +131,7 @@ export default function Pricing() {
 
         <p className="text-center text-secondary mt-12" data-aos="fade-up">
           Todos los planes incluyen acceso completo a Fin, tu agente financiero
-          en WhatsApp
+          en WhatsApp.
         </p>
         <p className="text-center text-secondary" data-aos="fade-up">
           Cancela cuando quieras, sin compromisos.

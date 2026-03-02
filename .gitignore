@@ -27,6 +27,7 @@ Thumbs.db
 
 # Editor
 .vscode/
+.vscode
 .idea/
 *.suo
 *.ntvs*
@@ -42,3 +43,7 @@ coverage/
 
 # Prettier / ESLint
 .eslintcache
+
+# Claude
+.claude/
+.claude

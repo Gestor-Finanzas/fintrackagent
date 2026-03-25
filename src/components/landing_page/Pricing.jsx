@@ -40,7 +40,7 @@ export default function Pricing({ onAuthClick }) {
             <div className="bg-gradient-to-r from-primary/5 to-accent/5 px-8 py-4 rounded-lg flex items-center gap-3 justify-center">
               <FaGift className="text-primary text-2xl animate-pulse-soft mr-1" />
               <p className="text-dark font-bold text-lg">
-                Acceso Total Gratuito: Primeros 14 días
+                Acceso Total Gratis: Primeros 14 días
               </p>
             </div>
           </div>

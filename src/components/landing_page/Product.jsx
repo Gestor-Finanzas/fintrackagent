@@ -147,10 +147,12 @@ export default function Product() {
                 {/* === HEADER (y=30 h=44 center=52) === */}
                 <rect x="6" y="30" width="308" height="44" fill="url(#whatsappHeader)" />
                 <path d="M18 57l-5-5 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="40" cy="52" r="14" fill="#25D366" />
-                <text x="40" y="52" fill="white" fontSize="14" fontWeight="bold" fontFamily="system-ui" textAnchor="middle" dominantBaseline="central">F</text>
-                <text x="60" y="46" fill="white" fontSize="13" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Fin</text>
-                <text x="60" y="59" fill="white" fontSize="9" opacity="0.75" fontFamily="system-ui" dominantBaseline="central">en línea</text>
+                <clipPath id="avatarClip">
+                  <circle cx="40" cy="52" r="17" />
+                </clipPath>
+                <image href="/assets/logo.png" x="27" y="40" width="24" height="24" clipPath="url(#avatarClip)" />
+                <text x="61" y="46" fill="white" fontSize="13" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Fin</text>
+                <text x="61" y="59" fill="white" fontSize="9" opacity="0.75" fontFamily="system-ui" dominantBaseline="central">en línea</text>
                 <circle cx="300" cy="47" r="1.3" fill="white" />
                 <circle cx="300" cy="52" r="1.3" fill="white" />
                 <circle cx="300" cy="57" r="1.3" fill="white" />

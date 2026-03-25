@@ -32,7 +32,9 @@ import Gastos from "./components/dashboard/pages/Gastos";
 import Balance from "./components/dashboard/pages/Balance";
 import Perfil from "./components/dashboard/pages/Perfil";
 import Facturacion from "./components/dashboard/pages/Facturacion";
+import Planes from "./components/dashboard/pages/Planes";
 import Categorias from "./components/dashboard/pages/Categorias";
+import Sugerencias from "./components/dashboard/pages/Sugerencias";
 import Faqs from "./components/dashboard/pages/legal/Faqs";
 import Privacidad from "./components/dashboard/pages/legal/Privacidad";
 import Terminos from "./components/dashboard/pages/legal/Terminos";
@@ -90,7 +92,9 @@ function App() {
           <Route path="balance" element={<Balance />} />
           <Route path="perfil" element={<Perfil />} />
           <Route path="facturacion" element={<Facturacion />} />
+          <Route path="planes" element={<Planes />} />
           <Route path="categorias" element={<Categorias />} />
+          <Route path="sugerencias" element={<Sugerencias />} />
           <Route path="faqs" element={<Faqs />} />
           <Route path="privacidad" element={<Privacidad />} />
           <Route path="terminos" element={<Terminos />} />

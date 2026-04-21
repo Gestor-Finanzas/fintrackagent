@@ -78,7 +78,7 @@ export default function Perfil() {
   };
 
   const inputClass =
-    "w-full px-4 py-2.5 rounded-xl border border-dash-border bg-white text-sm text-dash-text placeholder:text-dash-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-dash-accent/20 focus:border-dash-accent transition-colors duration-150";
+    "w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-white text-sm text-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-150";
 
   const infoFields = [
     { icon: FaUser, label: "Nombre completo", value: user.nombre },
@@ -88,20 +88,25 @@ export default function Perfil() {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-6">
-      {/* Page header */}
+    <div className="max-w-3xl mx-auto flex flex-col gap-8">
+      {/* Editorial header */}
       <div>
-        <h1 className="text-2xl font-bold text-dash-text">Mi perfil</h1>
-        <p className="text-sm text-dash-text-secondary mt-1">
-          Gestiona tu información personal y preferencias de cuenta
+        <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
+          Configuración
+        </span>
+        <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
+          Mi perfil
+        </h1>
+        <p className="text-sm text-gray-500 mt-2">
+          Gestiona tu información personal y preferencias de cuenta.
         </p>
       </div>
 
       {/* Feedback toast */}
       {feedback.msg && (
         <div className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium border animate-fade-in ${feedback.type === "success"
-          ? "bg-emerald-50 text-dash-success border-emerald-200"
-          : "bg-red-50 text-dash-danger border-red-200"
+          ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+          : "bg-red-50 text-red-600 border-red-200"
           }`}>
           {feedback.type === "success"
             ? <FaCheck className="w-3.5 h-3.5 shrink-0" />
@@ -112,32 +117,16 @@ export default function Perfil() {
       )}
 
       {/* Profile card */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-        {/* Gradient banner with avatar + identity */}
-        <div className="bg-gradient-to-br from-dash-primary via-dash-primary to-dash-accent relative px-6 sm:px-8 pt-6 pb-6">
-          <div className="absolute inset-0 opacity-10 overflow-hidden">
-            <svg className="w-full h-full" viewBox="0 0 400 160" preserveAspectRatio="none">
-              <circle cx="370" cy="10" r="90" fill="white" />
-              <circle cx="30" cy="140" r="70" fill="white" />
-            </svg>
-          </div>
-          {/* Edit button - top right corner on mobile, inline on desktop */}
-          {!editando && (
-            <button
-              onClick={() => setEditando(true)}
-              className="sm:hidden absolute top-3 right-3 z-10 p-2 rounded-lg bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors duration-150"
-            >
-              <FaPen className="w-3.5 h-3.5" />
-            </button>
-          )}
-          <div className="relative flex items-center gap-4">
-            <div className="rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-2xl sm:text-3xl font-bold text-white border-2 border-white/30 shrink-0 w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20">
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="relative px-6 sm:px-8 pt-6 pb-6 border-b border-gray-100">
+          <div className="flex items-center gap-4">
+            <div className="rounded-2xl bg-dark flex items-center justify-center text-xl sm:text-2xl font-bold text-white shrink-0 w-16 h-16 sm:w-20 sm:h-20">
               {initials}
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-lg sm:text-xl font-bold text-white truncate">{user.nombre}</h2>
-              <p className="text-sm text-white/70 truncate">{user.email}</p>
-              <div className="flex items-center gap-1.5 mt-1.5 text-xs text-white/50">
+              <h2 className="text-base sm:text-lg font-bold text-dark truncate">{user.nombre}</h2>
+              <p className="text-sm text-gray-500 truncate">{user.email}</p>
+              <div className="flex items-center gap-1.5 mt-1.5 text-xs text-gray-400">
                 <FaCalendarAlt className="w-3 h-3 shrink-0" />
                 <span>Miembro desde {memberSince}</span>
               </div>
@@ -145,10 +134,10 @@ export default function Perfil() {
             {!editando && (
               <button
                 onClick={() => setEditando(true)}
-                className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-dash-primary bg-white hover:bg-white/90 transition-colors duration-150 shrink-0"
+                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-dark border border-gray-300 hover:border-dark hover:bg-gray-50 transition-colors shrink-0"
               >
                 <FaPen className="w-3 h-3" />
-                Editar
+                <span className="hidden sm:inline">Editar</span>
               </button>
             )}
           </div>
@@ -160,7 +149,7 @@ export default function Perfil() {
             <form onSubmit={handleGuardar} className="flex flex-col gap-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-dash-text-secondary mb-1.5 uppercase tracking-wider">
+                  <label className="block text-[10px] font-semibold text-gray-500 mb-1.5 uppercase tracking-[0.15em]">
                     Nombre
                   </label>
                   <input
@@ -173,7 +162,7 @@ export default function Perfil() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-dash-text-secondary mb-1.5 uppercase tracking-wider">
+                  <label className="block text-[10px] font-semibold text-gray-500 mb-1.5 uppercase tracking-[0.15em]">
                     Email
                   </label>
                   <input
@@ -186,7 +175,7 @@ export default function Perfil() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-dash-text-secondary mb-1.5 uppercase tracking-wider">
+                  <label className="block text-[10px] font-semibold text-gray-500 mb-1.5 uppercase tracking-[0.15em]">
                     Teléfono
                   </label>
                   <input
@@ -199,7 +188,7 @@ export default function Perfil() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-dash-text-secondary mb-1.5 uppercase tracking-wider">
+                  <label className="block text-[10px] font-semibold text-gray-500 mb-1.5 uppercase tracking-[0.15em]">
                     Ciudad
                   </label>
                   <input
@@ -216,33 +205,27 @@ export default function Perfil() {
                 <button
                   type="button"
                   onClick={handleCancelarEdit}
-                  className="px-5 py-2.5 rounded-xl text-sm font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150"
+                  className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-300 hover:bg-gray-50 transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl text-sm font-medium text-white bg-dash-primary hover:bg-dash-primary-hover transition-colors duration-150"
+                  className="px-5 py-2.5 rounded-xl text-sm font-medium text-white bg-dark hover:bg-primary transition-colors"
                 >
                   Guardar cambios
                 </button>
               </div>
             </form>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {infoFields.map(({ icon: Icon, label, value }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-3 p-4 rounded-xl border border-dash-border hover:border-dash-accent/30 transition-colors duration-150"
-                >
-                  <span className="w-10 h-10 flex items-center justify-center rounded-xl bg-dash-accent/10 text-dash-accent text-sm shrink-0">
-                    <Icon />
-                  </span>
-                  <div className="min-w-0">
-                    <div className="text-[11px] font-medium text-dash-text-secondary uppercase tracking-wider">
-                      {label}
-                    </div>
-                    <div className="text-sm font-semibold text-dash-text truncate">{value}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+              {infoFields.map(({ label, value }) => (
+                <div key={label} className="border-l-2 border-gray-100 pl-5 min-w-0">
+                  <div className="text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500">
+                    {label}
+                  </div>
+                  <div className="text-sm font-semibold text-dark truncate mt-1">
+                    {value}
                   </div>
                 </div>
               ))}
@@ -252,38 +235,40 @@ export default function Perfil() {
       </div>
 
       {/* Plan card */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-yellow-500 to-amber-500 px-6 sm:px-8 py-4 flex items-center gap-3">
-          <FaCrown className="w-5 h-5 text-white" />
-          <h3 className="text-base font-semibold text-white">Mi plan</h3>
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-2">
+          <FaCrown className="w-3.5 h-3.5 text-primary" />
+          <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
+            Mi plan
+          </h3>
         </div>
-        <div className="p-6 sm:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <p className="text-lg font-bold text-dash-text">
+        <div className="p-6 sm:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <p className="text-lg font-bold text-dark">
                 {mockDatos.tarifa === "Gratis" ? "Plan Gratis" : `Plan ${mockDatos.tarifa}`}
               </p>
               <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${mockDatos.estadoCuenta === "Activa"
-                ? "bg-emerald-50 text-dash-success"
-                : "bg-red-50 text-dash-danger"
+                ? "bg-emerald-50 text-emerald-700"
+                : "bg-red-50 text-red-600"
                 }`}>
                 {mockDatos.estadoCuenta}
               </span>
             </div>
-            <p className="text-sm text-dash-text-secondary mt-1">
+            <p className="text-sm text-gray-500 mt-1">
               {mockDatos.tarifa === "Gratis"
-                ? `Estás en el plan gratuito — te quedan ${daysLeft} días de prueba.`
+                ? `Te quedan ${daysLeft} días de prueba gratuita.`
                 : `Próximo cobro: ${new Date(mockDatos.proximaFechaCobro).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}`}
             </p>
             {mockDatos.tarifa === "Gratis" && (
-              <div className="mt-2.5">
-                <div className="flex items-center justify-between text-[11px] text-dash-text-secondary mb-1">
+              <div className="mt-3">
+                <div className="flex items-center justify-between text-[11px] text-gray-500 mb-1.5">
                   <span>{daysLeft} días restantes</span>
                   <span>{Math.round((1 - daysLeft / 14) * 100)}% consumido</span>
                 </div>
                 <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                   <div
-                    className={`h-full rounded-full transition-all duration-300 ${daysLeft <= 3 ? "bg-dash-danger" : daysLeft <= 7 ? "bg-dash-warning" : "bg-dash-success"}`}
+                    className={`h-full rounded-full transition-all duration-300 ${daysLeft <= 3 ? "bg-red-500" : daysLeft <= 7 ? "bg-amber-500" : "bg-primary"}`}
                     style={{ width: `${Math.max(2, (daysLeft / 14) * 100)}%` }}
                   />
                 </div>
@@ -292,7 +277,7 @@ export default function Perfil() {
           </div>
           <button
             onClick={() => navigate(mockDatos.tarifa === "Gratis" ? "/dashboard/planes" : "/dashboard/facturacion")}
-            className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-yellow-500 to-amber-500 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 w-full sm:w-auto shrink-0"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-dark hover:bg-primary transition-colors w-full sm:w-auto shrink-0"
           >
             {mockDatos.tarifa === "Gratis" ? "Escoger plan" : "Gestionar plan"}
           </button>
@@ -300,46 +285,42 @@ export default function Perfil() {
       </div>
 
       {/* Security section */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <div className="px-6 sm:px-8 py-4 border-b border-dash-border">
-          <div className="flex items-center gap-2">
-            <FaShieldAlt className="w-4 h-4 text-dash-text-secondary" />
-            <h3 className="text-sm font-semibold text-dash-text">Seguridad y cuenta</h3>
-          </div>
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center gap-2">
+          <FaShieldAlt className="w-3.5 h-3.5 text-primary" />
+          <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
+            Seguridad y cuenta
+          </h3>
         </div>
-        <div className="divide-y divide-dash-border">
+        <div className="divide-y divide-gray-100">
           {/* Password row */}
-          <div className="px-6 sm:px-8 py-4 flex items-center justify-between">
+          <div className="px-6 sm:px-8 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-dash-accent/10 flex items-center justify-center shrink-0">
-                <FaLock className="w-3.5 h-3.5 text-dash-accent" />
-              </div>
+              <FaLock className="w-4 h-4 text-primary shrink-0" />
               <div>
-                <p className="text-sm font-medium text-dash-text">Contraseña</p>
-                <p className="text-xs text-dash-text-secondary">Cambia tu contraseña de acceso</p>
+                <p className="text-sm font-semibold text-dark">Contraseña</p>
+                <p className="text-xs text-gray-500">Cambia tu contraseña de acceso</p>
               </div>
             </div>
             <button
               onClick={() => setCambiandoPass(true)}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150"
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-dark border border-gray-300 hover:border-dark hover:bg-gray-50 transition-colors self-start sm:self-auto"
             >
               Cambiar
             </button>
           </div>
           {/* Delete row */}
-          <div className="px-6 sm:px-8 py-4 flex items-center justify-between">
+          <div className="px-6 sm:px-8 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
-                <FaExclamationTriangle className="w-3.5 h-3.5 text-dash-danger" />
-              </div>
+              <FaExclamationTriangle className="w-4 h-4 text-red-500 shrink-0" />
               <div>
-                <p className="text-sm font-medium text-dash-danger">Eliminar cuenta</p>
-                <p className="text-xs text-dash-text-secondary">Acción permanente e irreversible</p>
+                <p className="text-sm font-semibold text-red-600">Eliminar cuenta</p>
+                <p className="text-xs text-gray-500">Acción permanente e irreversible</p>
               </div>
             </div>
             <button
               onClick={() => setModalEliminar(true)}
-              className="px-4 py-2 rounded-xl text-xs font-medium text-white bg-dash-danger hover:bg-red-500 transition-colors duration-150"
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-red-500 hover:bg-red-600 transition-colors self-start sm:self-auto"
             >
               Eliminar
             </button>
@@ -350,17 +331,17 @@ export default function Perfil() {
       {/* Change password modal */}
       {cambiandoPass && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 animate-fade-in">
+          <div className="bg-white rounded-2xl border border-gray-200 max-w-sm w-full p-6 animate-fade-in">
             <form onSubmit={handleGuardarPass} className="flex flex-col gap-4">
-              <div className="text-center mb-1">
-                <div className="w-12 h-12 rounded-full bg-dash-accent/10 flex items-center justify-center mx-auto mb-3">
-                  <FaLock className="w-5 h-5 text-dash-accent" />
-                </div>
-                <h3 className="text-lg font-bold text-dash-text">Cambiar contraseña</h3>
-                <p className="text-xs text-dash-text-secondary mt-1">Introduce tu nueva contraseña (mínimo 6 caracteres)</p>
+              <div className="mb-2">
+                <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
+                  Seguridad
+                </span>
+                <h3 className="text-xl font-bold text-dark">Cambiar contraseña</h3>
+                <p className="text-xs text-gray-500 mt-1">Introduce tu nueva contraseña (mínimo 6 caracteres).</p>
               </div>
               <div>
-                <label className="block text-xs font-medium text-dash-text-secondary mb-1.5 uppercase tracking-wider">
+                <label className="block text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500 mb-1.5">
                   Nueva contraseña
                 </label>
                 <div className="relative">
@@ -375,14 +356,14 @@ export default function Perfil() {
                   <button
                     type="button"
                     onClick={() => setShowPass(!showPass)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-dash-text-secondary hover:text-dash-text transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dark transition-colors"
                   >
                     {showPass ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-dash-text-secondary mb-1.5 uppercase tracking-wider">
+                <label className="block text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500 mb-1.5">
                   Repetir contraseña
                 </label>
                 <div className="relative">
@@ -397,13 +378,13 @@ export default function Perfil() {
                   <button
                     type="button"
                     onClick={() => setShowPass2(!showPass2)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-dash-text-secondary hover:text-dash-text transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dark transition-colors"
                   >
                     {showPass2 ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
                   </button>
                 </div>
                 {password2 && password !== password2 && (
-                  <p className="text-xs text-dash-danger mt-1.5">Las contraseñas no coinciden</p>
+                  <p className="text-xs text-red-500 mt-1.5">Las contraseñas no coinciden</p>
                 )}
               </div>
               <div className="flex gap-3 mt-1">
@@ -416,13 +397,13 @@ export default function Perfil() {
                     setShowPass(false);
                     setShowPass2(false);
                   }}
-                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150"
+                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-300 hover:bg-gray-50 transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-dash-primary hover:bg-dash-primary-hover transition-colors duration-150"
+                  className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-dark hover:bg-primary transition-colors"
                 >
                   Guardar
                 </button>
@@ -435,42 +416,42 @@ export default function Perfil() {
       {/* Delete confirmation modal */}
       {modalEliminar && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 animate-fade-in">
-            <div className="flex flex-col items-center text-center mb-5">
-              <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                <FaExclamationTriangle className="w-7 h-7 text-dash-danger" />
-              </div>
-              <h2 className="text-lg font-bold text-dash-text">Eliminar cuenta</h2>
-              <p className="text-sm text-dash-text-secondary mt-2">
-                Esta acción <span className="font-semibold text-dash-danger">no se puede deshacer</span>.
+          <div className="bg-white rounded-2xl border border-gray-200 max-w-md w-full p-6 animate-fade-in">
+            <div className="mb-5">
+              <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-red-500 mb-2">
+                Acción irreversible
+              </span>
+              <h2 className="text-xl font-bold text-dark">Eliminar cuenta</h2>
+              <p className="text-sm text-gray-500 mt-2">
+                Esta acción <span className="font-semibold text-red-500">no se puede deshacer</span>.
                 Se eliminarán permanentemente:
               </p>
             </div>
 
-            <ul className="text-sm text-dash-text-secondary space-y-2 mb-5">
+            <ul className="text-sm text-gray-600 space-y-2 mb-5">
               {[
                 "Todos tus datos personales",
                 "Historial de transacciones e ingresos",
                 "Categorías personalizadas",
                 "Suscripción y datos de facturación",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 pl-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-dash-danger mt-1.5 shrink-0" />
+                <li key={item} className="flex items-start gap-3">
+                  <span className="w-1 h-1 rounded-full bg-red-500 mt-2 shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
 
             <div className="mb-5">
-              <label className="block text-sm font-medium text-dash-text mb-1.5">
-                Escribe <span className="font-bold text-dash-danger">ELIMINAR</span> para confirmar
+              <label className="block text-xs font-medium text-dark mb-1.5">
+                Escribe <span className="font-bold text-red-500">ELIMINAR</span> para confirmar
               </label>
               <input
                 type="text"
                 value={confirmText}
                 onChange={(e) => setConfirmText(e.target.value)}
                 placeholder="ELIMINAR"
-                className="w-full px-4 py-2.5 rounded-xl border border-dash-border text-sm text-dash-text focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-dash-danger transition-colors duration-150"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-red-100 focus:border-red-400 transition-colors"
               />
             </div>
 
@@ -480,7 +461,7 @@ export default function Perfil() {
                   setModalEliminar(false);
                   setConfirmText("");
                 }}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150"
+                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-300 hover:bg-gray-50 transition-colors"
               >
                 Cancelar
               </button>
@@ -490,9 +471,9 @@ export default function Perfil() {
                   localStorage.removeItem("fintrack_token");
                   window.location.href = "/";
                 }}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-dash-danger hover:bg-red-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-150"
+                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-500 hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
-                Eliminar mi cuenta
+                Eliminar cuenta
               </button>
             </div>
           </div>

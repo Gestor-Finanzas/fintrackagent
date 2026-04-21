@@ -102,26 +102,21 @@ export default function Ingresos() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Header with integrated total */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <svg className="w-6 h-6 text-dash-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-              </svg>
-              <h1 className="text-2xl font-bold text-dash-text">Ingresos</h1>
-            </div>
-            <p className="text-sm text-dash-text-secondary mt-1">
-              Analiza tus fuentes de ingreso
-            </p>
-          </div>
-          <div className="hidden sm:block h-10 w-px bg-dash-border" />
-          <div className="hidden sm:block">
-            <p className="text-xs text-dash-text-secondary uppercase tracking-wider">Total</p>
-            <p className="text-xl font-bold text-dash-success">{formatEuro(totalIngresos)}</p>
-          </div>
+    <div className="flex flex-col gap-8">
+      {/* Header editorial */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
+            Análisis de ingresos
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
+            Ingresos
+          </h1>
+          <p className="text-base text-gray-500 mt-3">
+            <span className="text-xl font-bold text-emerald-600">
+              {formatEuro(totalIngresos)}
+            </span>
+          </p>
         </div>
         <PeriodFilter
           periodo={periodo}
@@ -130,19 +125,6 @@ export default function Ingresos() {
           customRange={customRange}
           setCustomRange={setCustomRange}
         />
-      </div>
-
-      {/* Mobile total card */}
-      <div className="sm:hidden bg-white rounded-2xl shadow-sm p-4 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
-          <svg className="w-5 h-5 text-dash-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-          </svg>
-        </div>
-        <div>
-          <p className="text-xs text-dash-text-secondary">Total ingresos</p>
-          <p className="text-lg font-bold text-dash-success">{formatEuro(totalIngresos)}</p>
-        </div>
       </div>
 
       {/* Charts + Category Breakdown */}
@@ -158,7 +140,7 @@ export default function Ingresos() {
               <Doughnut data={donutData} options={donutOptions} />
             </div>
           </ChartCard>
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
             <CategoryBreakdown items={byCategory} total={totalIngresos} />
           </div>
         </div>

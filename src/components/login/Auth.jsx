@@ -36,7 +36,7 @@ export default function Auth({ onBack }) {
   };
 
   const inputBase =
-    "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-200";
+    "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-200";
   const inputError =
     "w-full pl-11 pr-11 py-3 rounded-xl border border-red-300 bg-red-50/30 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300/30 focus:border-red-400 transition-all duration-200";
 
@@ -46,31 +46,35 @@ export default function Auth({ onBack }) {
       onClick={onBack}
     >
       <div
-        className="w-full max-w-[420px] bg-white rounded-2xl shadow-2xl relative animate-fade-in overflow-hidden"
+        className="w-full max-w-[420px] bg-white rounded-2xl border border-gray-200 relative animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header decorativo */}
-        <div className="bg-gradient-to-br from-primary to-accent px-8 pt-5 pb-5 text-center relative mb-4">
-          <button
-            onClick={onBack}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors duration-200"
-            aria-label="Cerrar"
-          >
-            <FaTimes className="w-3.5 h-3.5" />
-          </button>
-          <h2 className="text-xl font-bold text-white">
-            {isLogin ? "Bienvenido de nuevo" : "Crea tu cuenta"}
+        <button
+          onClick={onBack}
+          className="absolute top-4 right-4 w-8 h-8 rounded-full text-gray-400 hover:text-dark hover:bg-gray-100 flex items-center justify-center transition-colors"
+          aria-label="Cerrar"
+        >
+          <FaTimes className="w-3.5 h-3.5" />
+        </button>
+
+        {/* Header editorial */}
+        <div className="px-8 pt-8 pb-2">
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
+            {isLogin ? "Acceso" : "Registro"}
+          </span>
+          <h2 className="text-2xl font-bold text-dark leading-tight">
+            {isLogin ? "Bienvenido de nuevo." : "Crea tu cuenta."}
           </h2>
-          <p className="text-white/70 text-sm mt-1">
+          <p className="text-sm text-gray-500 mt-1.5">
             {isLogin
-              ? "Inicia sesión para acceder a tu panel"
-              : "Regístrate y empieza a gestionar tus finanzas"}
+              ? "Inicia sesión para acceder a tu panel."
+              : "Regístrate y empieza a gestionar tus finanzas."}
           </p>
         </div>
 
         {/* Formulario */}
-        <div className="px-8 pb-8 -mt-4">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <div className="px-8 pb-8 pt-6">
+          <div>
             <form className="flex flex-col gap-3.5" onSubmit={handleSubmit}>
               {/* Campos de registro */}
               {!isLogin && (
@@ -201,9 +205,9 @@ export default function Auth({ onBack }) {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 rounded-xl mt-1 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98] transition-all duration-200"
+                className="w-full bg-dark text-white font-semibold py-3 rounded-xl mt-2 hover:bg-primary transition-colors"
               >
-                {isLogin ? "Iniciar Sesión" : "Crear Cuenta"}
+                {isLogin ? "Iniciar sesión" : "Crear cuenta"}
               </button>
             </form>
 

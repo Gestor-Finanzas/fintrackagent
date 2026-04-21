@@ -146,16 +146,20 @@ export default function Overview() {
   const todayLabel = formatFechaLarga(new Date());
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="flex flex-col gap-8">
+      {/* Header editorial */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-dash-text">
-            {greeting()}, {usuario.nombre.split(" ")[0]}
-          </h1>
-          <p className="text-sm text-dash-text-secondary mt-1">
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
             {todayLabel}
-          </p>
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
+            {greeting()},{" "}
+            <span className="text-primary">
+              {usuario.nombre.split(" ")[0]}
+            </span>
+            .
+          </h1>
         </div>
         <PeriodFilter
           periodo={periodo}
@@ -171,35 +175,17 @@ export default function Overview() {
         <SummaryCard
           label="Ingresos"
           value={formatEuro(totalIngresos)}
-          color="text-dash-success"
-          iconBg="bg-emerald-50"
-          icon={
-            <svg className="w-5 h-5 text-dash-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-            </svg>
-          }
+          color="text-emerald-600"
         />
         <SummaryCard
           label="Gastos"
           value={formatEuro(totalGastos)}
-          color="text-dash-danger"
-          iconBg="bg-red-50"
-          icon={
-            <svg className="w-5 h-5 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-            </svg>
-          }
+          color="text-red-500"
         />
         <SummaryCard
           label="Balance"
           value={formatEuro(balance)}
-          color={balance >= 0 ? "text-dash-accent" : "text-dash-danger"}
-          iconBg="bg-indigo-50"
-          icon={
-            <svg className="w-5 h-5 text-dash-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M3 12h18m-7 6h7" />
-            </svg>
-          }
+          color={balance >= 0 ? "text-dark" : "text-red-500"}
         />
       </div>
 
@@ -212,48 +198,49 @@ export default function Overview() {
 
       {/* Recent Transactions + Donut */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-dash-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="text-sm font-semibold text-dash-text">Últimos movimientos</h3>
-            </div>
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
+              Últimos movimientos
+            </h3>
             <button
               onClick={() => navigate("/dashboard/ingresos")}
-              className="text-xs font-medium text-dash-accent hover:underline"
+              className="text-xs font-semibold text-dark hover:text-primary transition-colors"
             >
-              Ver todos
+              Ver todos →
             </button>
           </div>
-          <div className="flex flex-col divide-y divide-dash-border">
+          <div className="flex flex-col divide-y divide-gray-100">
             {recent.length === 0 ? (
-              <p className="text-sm text-dash-text-secondary py-8 text-center">
+              <p className="text-sm text-gray-500 py-8 text-center">
                 No hay movimientos para este período
               </p>
             ) : (
               recent.map((m, i) => {
-                const catColor = m.tipo === "ingreso" ? "#34D399" : "#F87171";
+                const catColor = m.tipo === "ingreso" ? "#10B981" : "#F87171";
                 return (
-                  <div key={i} className="flex items-center gap-3 py-3">
+                  <div key={i} className="flex items-center gap-4 py-3.5">
                     <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                       style={{ backgroundColor: catColor + "14", color: catColor }}
                     >
                       {getCategoryIcon(m.categoria, 16)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-dash-text truncate">
+                      <p className="text-sm font-semibold text-dark truncate">
                         {m.nombre || m.categoria}
                       </p>
-                      <p className="text-xs text-dash-text-secondary">{m.categoria} &middot; {m.fecha}</p>
+                      <p className="text-xs text-gray-500">
+                        {m.categoria} · {m.fecha}
+                      </p>
                     </div>
                     <span
-                      className={`text-sm font-semibold shrink-0 ${m.tipo === "ingreso" ? "text-dash-success" : "text-dash-danger"
-                        }`}
+                      className={`text-sm font-bold shrink-0 ${
+                        m.tipo === "ingreso" ? "text-emerald-600" : "text-red-500"
+                      }`}
                     >
-                      {m.tipo === "ingreso" ? "+" : "-"}{formatEuro(parseMonto(m.monto))}
+                      {m.tipo === "ingreso" ? "+" : "-"}
+                      {formatEuro(parseMonto(m.monto))}
                     </span>
                   </div>
                 );

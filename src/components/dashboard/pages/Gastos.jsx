@@ -99,26 +99,21 @@ export default function Gastos() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Header with integrated total */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <svg className="w-6 h-6 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-              </svg>
-              <h1 className="text-2xl font-bold text-dash-text">Gastos</h1>
-            </div>
-            <p className="text-sm text-dash-text-secondary mt-1">
-              Controla en qué gastas tu dinero
-            </p>
-          </div>
-          <div className="hidden sm:block h-10 w-px bg-dash-border" />
-          <div className="hidden sm:block">
-            <p className="text-xs text-dash-text-secondary uppercase tracking-wider">Total</p>
-            <p className="text-xl font-bold text-dash-danger">{formatEuro(totalGastos)}</p>
-          </div>
+    <div className="flex flex-col gap-8">
+      {/* Header editorial */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
+            Análisis de gastos
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
+            Gastos
+          </h1>
+          <p className="text-base text-gray-500 mt-3">
+            <span className="text-xl font-bold text-red-500">
+              {formatEuro(totalGastos)}
+            </span>
+          </p>
         </div>
         <PeriodFilter
           periodo={periodo}
@@ -127,19 +122,6 @@ export default function Gastos() {
           customRange={customRange}
           setCustomRange={setCustomRange}
         />
-      </div>
-
-      {/* Mobile total card */}
-      <div className="sm:hidden bg-white rounded-2xl shadow-sm p-4 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
-          <svg className="w-5 h-5 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-          </svg>
-        </div>
-        <div>
-          <p className="text-xs text-dash-text-secondary">Total gastos</p>
-          <p className="text-lg font-bold text-dash-danger">{formatEuro(totalGastos)}</p>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -154,7 +136,7 @@ export default function Gastos() {
               <Doughnut data={donutData} options={donutOptions} />
             </div>
           </ChartCard>
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
             <CategoryBreakdown items={byCategory} total={totalGastos} />
           </div>
         </div>

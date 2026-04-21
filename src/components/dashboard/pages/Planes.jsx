@@ -67,16 +67,17 @@ export default function Planes() {
 
   return (
     <div className="max-w-4xl mx-auto flex flex-col gap-8">
-      {/* Header */}
-      <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold text-dash-text mt-2">
-          Un solo plan, acceso completo
+      {/* Editorial header */}
+      <div>
+        <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
+          Suscripción
+        </span>
+        <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
+          Un plan, acceso <span className="text-primary">completo</span>.
         </h1>
-        <p className="text-sm text-dash-text-secondary mt-2 max-w-lg mx-auto">
-          Elige cómo prefieres pagar. Sin sorpresas, sin letras pequeñas.
-        </p>
-        <p className="text-sm text-dash-text-secondary max-w-lg mx-auto">
-          Cancela cuando quieras.
+        <p className="text-sm text-gray-500 mt-2 max-w-lg">
+          Elige cómo prefieres pagar. Sin sorpresas, sin letras pequeñas y
+          cancela cuando quieras.
         </p>
       </div>
 
@@ -88,12 +89,12 @@ export default function Planes() {
               <FaClock className="w-5 h-5 text-amber-600" />
             </div>
             <div className="flex-1">
-              <h3 className="text-sm font-bold text-dash-text">
+              <h3 className="text-sm font-bold text-dark">
                 {trialDays > 0
                   ? `Tu prueba gratuita termina en ${trialDays} día${trialDays !== 1 ? "s" : ""}`
                   : "Tu prueba gratuita ha expirado"}
               </h3>
-              <p className="text-xs text-dash-text-secondary mt-0.5">
+              <p className="text-xs text-gray-500 mt-0.5">
                 {trialDays > 0
                   ? "Cuando termine, se bloqueará el acceso al dashboard y al asistente IA hasta que elijas un plan."
                   : "El acceso al dashboard y al asistente IA está bloqueado. Elige un plan para continuar."}
@@ -107,7 +108,7 @@ export default function Planes() {
                     style={{ width: `${(trialDays / 14) * 100}%` }}
                   />
                 </div>
-                <span className="text-xs font-semibold text-dash-text">{trialDays}/14</span>
+                <span className="text-xs font-semibold text-dark">{trialDays}/14</span>
               </div>
             )}
           </div>
@@ -115,13 +116,13 @@ export default function Planes() {
       )}
 
       {/* What you get */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
-        <h2 className="text-base font-semibold text-dash-text mb-4">Todo lo que incluye</h2>
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h2 className="text-base font-semibold text-dark mb-4">Todo lo que incluye</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {PRO_FEATURES.map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-3 p-3 rounded-xl bg-dash-accent/5">
-              <Icon className="w-4 h-4 text-dash-accent shrink-0" />
-              <span className="text-sm font-medium text-dash-text">{text}</span>
+            <div key={text} className="flex items-center gap-3 p-3 rounded-xl bg-primary/5">
+              <Icon className="w-4 h-4 text-primary shrink-0" />
+              <span className="text-sm font-medium text-dark">{text}</span>
             </div>
           ))}
         </div>
@@ -129,8 +130,8 @@ export default function Planes() {
 
       {/* Billing options */}
       <div>
-        <h2 className="text-base font-semibold text-dash-text mb-1 text-center">Elige tu forma de pago</h2>
-        <p className="text-xs text-dash-text-secondary text-center mb-5">Mismo acceso, distinta frecuencia de cobro</p>
+        <h2 className="text-base font-semibold text-dark mb-1 text-center">Elige tu forma de pago</h2>
+        <p className="text-xs text-gray-500 text-center mb-5">Mismo acceso, distinta frecuencia de cobro</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 pt-3">
           {BILLING_OPTIONS.map((option) => {
@@ -141,7 +142,7 @@ export default function Planes() {
                 key={option.id}
                 className={`relative rounded-2xl shadow-sm border-2 transition-all duration-200 hover:shadow-md hover:scale-[1.03] ${hasSavings
                   ? "border-emerald-500 shadow-emerald-500/10 bg-gradient-to-br from-emerald-50/50 to-white"
-                  : "border-dash-border hover:border-gray-300 bg-white"
+                  : "border-gray-200 hover:border-gray-300 bg-white"
                   }`}
               >
                 {hasSavings && (
@@ -159,27 +160,27 @@ export default function Planes() {
                       }
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-dash-text">Plan {option.label}</h3>
-                      <p className="text-xs text-dash-text-secondary">{hasSavings ? "Un solo pago al año" : "Cobro cada mes"}</p>
+                      <h3 className="text-lg font-bold text-dark">Plan {option.label}</h3>
+                      <p className="text-xs text-gray-500">{hasSavings ? "Un solo pago al año" : "Cobro cada mes"}</p>
                     </div>
                   </div>
 
                   {/* Price */}
                   <div className="mt-5 flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold text-dash-text">{option.price}</span>
-                    <span className="text-base text-dash-text-secondary font-medium">€/{option.cycle}</span>
+                    <span className="text-4xl font-extrabold text-dark">{option.price}</span>
+                    <span className="text-base text-gray-500 font-medium">€/{option.cycle}</span>
                   </div>
-                  <p className="text-sm text-dash-text-secondary mt-1">{option.detail}</p>
+                  <p className="text-sm text-gray-500 mt-1">{option.detail}</p>
 
                   {/* CTA */}
                   <button
                     onClick={() => handleSelect(option.id)}
                     disabled={current}
                     className={`w-full mt-6 py-3 rounded-xl text-sm font-semibold transition-all duration-150 ${current
-                      ? "bg-gray-100 text-dash-text-secondary cursor-default"
+                      ? "bg-gray-100 text-gray-500 cursor-default"
                       : hasSavings
                         ? "bg-emerald-500 text-white hover:bg-emerald-600 hover:shadow-lg"
-                        : "bg-dash-primary text-white hover:bg-dash-primary-hover"
+                        : "bg-dark text-white hover:bg-primary"
                       }`}
                   >
                     {current ? "Plan actual" : option.cta}
@@ -192,22 +193,22 @@ export default function Planes() {
       </div>
 
       {/* Trust section */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {TRUST_ITEMS.map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-dash-accent/10 flex items-center justify-center shrink-0">
-                <Icon className="w-4 h-4 text-dash-accent" />
+              <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <Icon className="w-4 h-4 text-primary" />
               </div>
-              <p className="text-sm text-dash-text font-medium">{text}</p>
+              <p className="text-sm text-dark font-medium">{text}</p>
             </div>
           ))}
         </div>
-        <div className="border-t border-dash-border mt-5 pt-5 text-center">
-          <p className="text-xs text-dash-text-secondary">
-            Pagos procesados de forma segura por <span className="font-semibold text-dash-text">Stripe</span>
+        <div className="border-t border-gray-200 mt-5 pt-5 text-center">
+          <p className="text-xs text-gray-500">
+            Pagos procesados de forma segura por <span className="font-semibold text-dark">Stripe</span>
           </p>
-          <div className="flex items-center justify-center gap-3 mt-3 text-dash-text-secondary">
+          <div className="flex items-center justify-center gap-3 mt-3 text-gray-500">
             <svg className="h-5" viewBox="0 0 60 25" fill="currentColor"><rect width="60" height="25" rx="4" opacity="0.1" /><text x="30" y="17" textAnchor="middle" fontSize="10" fontWeight="600" fill="currentColor">VISA</text></svg>
             <svg className="h-5" viewBox="0 0 60 25" fill="currentColor"><rect width="60" height="25" rx="4" opacity="0.1" /><text x="30" y="17" textAnchor="middle" fontSize="10" fontWeight="600" fill="currentColor">MC</text></svg>
             <svg className="h-5" viewBox="0 0 60 25" fill="currentColor"><rect width="60" height="25" rx="4" opacity="0.1" /><text x="30" y="17" textAnchor="middle" fontSize="8" fontWeight="600" fill="currentColor">AMEX</text></svg>
@@ -216,8 +217,8 @@ export default function Planes() {
       </div>
 
       {/* FAQ section */}
-      <div className="bg-white rounded-2xl shadow-sm p-6">
-        <h2 className="text-base font-semibold text-dash-text mb-4">Preguntas frecuentes</h2>
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h2 className="text-base font-semibold text-dark mb-4">Preguntas frecuentes</h2>
         <div className="space-y-4">
           {[
             {
@@ -241,9 +242,9 @@ export default function Planes() {
               a: "Todos los pagos se procesan a través de Stripe, la plataforma de pagos líder mundial. Nunca almacenamos los datos de tu tarjeta.",
             },
           ].map(({ q, a }) => (
-            <div key={q} className="border-b border-dash-border pb-4 last:border-0 last:pb-0">
-              <h3 className="text-sm font-semibold text-dash-text">{q}</h3>
-              <p className="text-sm text-dash-text-secondary mt-1">{a}</p>
+            <div key={q} className="border-b border-gray-200 pb-4 last:border-0 last:pb-0">
+              <h3 className="text-sm font-semibold text-dark">{q}</h3>
+              <p className="text-sm text-gray-500 mt-1">{a}</p>
             </div>
           ))}
         </div>
@@ -253,7 +254,7 @@ export default function Planes() {
       <div className="text-center pb-2">
         <button
           onClick={() => navigate(-1)}
-          className="text-sm text-dash-text-secondary hover:text-dash-text transition-colors"
+          className="text-sm text-gray-500 hover:text-dark transition-colors"
         >
           &larr; Volver
         </button>
@@ -264,28 +265,28 @@ export default function Planes() {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm animate-fade-in">
             <div className="text-center mb-5">
-              <div className="w-12 h-12 rounded-full bg-dash-accent/10 flex items-center justify-center mx-auto mb-3">
-                <FaCrown className="w-5 h-5 text-dash-accent" />
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <FaCrown className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="text-lg font-bold text-dash-text">Confirmar suscripción</h3>
-              <p className="text-sm text-dash-text-secondary mt-2">
-                Vas a suscribirte al plan <span className="font-semibold text-dash-text">Pro {selected}</span>.
+              <h3 className="text-lg font-bold text-dark">Confirmar suscripción</h3>
+              <p className="text-sm text-gray-500 mt-2">
+                Vas a suscribirte al plan <span className="font-semibold text-dark">Pro {selected}</span>.
                 {selected === "Anual" ? " Se te cobrarán 29,99 €/año." : " Se te cobrarán 2,99 €/mes."}
               </p>
-              <p className="text-xs text-dash-text-secondary mt-2">
+              <p className="text-xs text-gray-500 mt-2">
                 Tendrás acceso completo a todas las funcionalidades de FinTrack.
               </p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setModalConfirm(false)}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors"
               >
                 Cancelar
               </button>
               <button
                 onClick={handleConfirm}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-dash-accent hover:bg-dash-accent/90 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors"
               >
                 Confirmar
               </button>

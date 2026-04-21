@@ -18,10 +18,10 @@ export default function CategoryBreakdown({ items, total }) {
             </span>
             <div className="flex-1 min-w-0">
               <div className="flex justify-between items-center mb-1">
-                <span className="text-sm font-medium text-dash-text truncate">
+                <span className="text-sm font-medium text-dark truncate">
                   {item.categoria}
                 </span>
-                <span className="text-sm font-semibold text-dash-text ml-2 shrink-0">
+                <span className="text-sm font-semibold text-dark ml-2 shrink-0">
                   {formatEuro(item.monto)}
                 </span>
               </div>

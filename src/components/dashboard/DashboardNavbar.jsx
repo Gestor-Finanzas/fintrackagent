@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import mockUser from "../../mocks/mockUser.json";
-import mockDatos from "../../mocks/mockDatosEconomicos.json";
-import { FaUser, FaCrown, FaSignOutAlt, FaTags, FaLightbulb } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaTags, FaLightbulb, FaCrown } from "react-icons/fa";
 import { HiOutlineHome, HiArrowTrendingUp, HiArrowTrendingDown, HiChartBar } from "react-icons/hi2";
 
 const tabs = [
@@ -48,28 +47,31 @@ export default function DashboardNavbar() {
   return (
     <>
       {/* Top navbar */}
-      <nav className="sticky top-0 z-50 bg-white border-b border-dash-border">
+      <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
             <button
               onClick={() => navigate("/dashboard")}
-              className="flex items-center gap-3 shrink-0"
+              className="flex items-center gap-2.5 shrink-0"
             >
-              <img src="/assets/logo.png" alt="FinTrack" className="w-7 h-7" />
-              <span className="text-lg font-bold text-dash-text">FinTrack</span>
+              <img src="/assets/logo2.png" alt="FinTrack" className="w-7 h-7" />
+              <span className="text-xl font-bold text-dark tracking-tight">
+                FinTrack
+              </span>
             </button>
 
-            {/* Tabs - solo desktop */}
-            <div className="hidden sm:flex items-center gap-1 overflow-x-auto scrollbar-hide">
+            {/* Tabs - desktop */}
+            <div className="hidden sm:flex items-center gap-1">
               {tabs.map((tab) => (
                 <button
                   key={tab.path}
                   onClick={() => navigate(tab.path)}
-                  className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-colors duration-150 ${isActive(tab.path)
-                    ? "bg-dash-accent/10 text-dash-accent"
-                    : "text-dash-text-secondary hover:text-dash-text hover:bg-gray-50"
-                    }`}
+                  className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150 ${
+                    isActive(tab.path)
+                      ? "bg-gray-100 text-dark"
+                      : "text-gray-500 hover:text-dark hover:bg-gray-50"
+                  }`}
                 >
                   <tab.icon className="w-4 h-4" />
                   {tab.label}
@@ -77,29 +79,33 @@ export default function DashboardNavbar() {
               ))}
             </div>
 
-            {/* Mi plan + User */}
+            {/* Plan + User */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <button
-                onClick={() => navigate(mockDatos.tarifa === "Gratis" ? "/dashboard/planes" : "/dashboard/facturacion")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200"
+                onClick={() => navigate("/dashboard/facturacion")}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-400 text-dark text-xs font-semibold hover:bg-gray-200 transition-colors"
               >
-                <FaCrown className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Mi plan</span>
+                <FaCrown className="w-3 h-3 text-primary" />
+                Mi plan
               </button>
 
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setOpen(!open)}
-                  className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-2 py-1.5 rounded-xl hover:bg-gray-100 active:bg-gray-200 transition-colors duration-150 ${open ? "bg-gray-100" : ""}`}
+                  className={`flex items-center gap-2 sm:gap-3 px-1.5 sm:px-2 py-1 rounded-xl hover:bg-gray-50 transition-colors ${
+                    open ? "bg-gray-50" : ""
+                  }`}
                 >
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-dash-primary text-white flex items-center justify-center text-xs sm:text-sm font-semibold">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-dark text-white flex items-center justify-center text-xs sm:text-sm font-semibold">
                     {initials}
                   </div>
-                  <span className="text-sm font-medium text-dash-text">
+                  <span className="hidden md:inline text-sm font-medium text-dark">
                     {mockUser.nombre}
                   </span>
                   <svg
-                    className={`w-4 h-4 text-dash-text-secondary transition-transform duration-150 hidden sm:block ${open ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 text-gray-400 transition-transform duration-150 hidden sm:block ${
+                      open ? "rotate-180" : ""
+                    }`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -110,35 +116,57 @@ export default function DashboardNavbar() {
                 </button>
 
                 {open && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-dash-border py-2 animate-fade-in">
-                    <div className="px-4 py-2 border-b border-dash-border mb-1">
-                      <p className="text-sm font-semibold text-dash-text">{mockUser.nombre}</p>
-                      <p className="text-xs text-dash-text-secondary">{mockUser.email}</p>
+                  <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl border border-gray-200 shadow-lg py-2 animate-fade-in">
+                    <div className="px-4 py-3 border-b border-gray-100 mb-1">
+                      <p className="text-sm font-semibold text-dark">
+                        {mockUser.nombre}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate">
+                        {mockUser.email}
+                      </p>
                     </div>
                     <button
-                      onClick={() => { navigate("/dashboard/perfil"); setOpen(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-dash-text hover:bg-gray-50 transition-colors duration-150"
+                      onClick={() => {
+                        navigate("/dashboard/perfil");
+                        setOpen(false);
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <FaUser className="text-dash-text-secondary" /> Mi perfil
+                      <FaUser className="text-gray-400 w-3.5 h-3.5" /> Mi perfil
                     </button>
                     <button
-                      onClick={() => { navigate("/dashboard/categorias"); setOpen(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-dash-text hover:bg-gray-50 transition-colors duration-150"
+                      onClick={() => {
+                        navigate("/dashboard/facturacion");
+                        setOpen(false);
+                      }}
+                      className="sm:hidden w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <FaTags className="text-dash-text-secondary" /> Categorías
+                      <FaCrown className="text-primary w-3.5 h-3.5" /> Mi plan
                     </button>
                     <button
-                      onClick={() => { navigate("/dashboard/sugerencias"); setOpen(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-dash-text hover:bg-gray-50 transition-colors duration-150"
+                      onClick={() => {
+                        navigate("/dashboard/categorias");
+                        setOpen(false);
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <FaLightbulb className="text-amber-500" /> Sugerencias
+                      <FaTags className="text-gray-400 w-3.5 h-3.5" /> Categorías
                     </button>
-                    <div className="border-t border-dash-border my-1" />
+                    <button
+                      onClick={() => {
+                        navigate("/dashboard/sugerencias");
+                        setOpen(false);
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      <FaLightbulb className="text-gray-400 w-3.5 h-3.5" /> Sugerencias
+                    </button>
+                    <div className="border-t border-gray-100 my-1" />
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-dash-danger hover:bg-red-50 transition-colors duration-150"
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
                     >
-                      <FaSignOutAlt /> Cerrar sesión
+                      <FaSignOutAlt className="w-3.5 h-3.5" /> Cerrar sesión
                     </button>
                   </div>
                 )}
@@ -148,17 +176,18 @@ export default function DashboardNavbar() {
         </div>
       </nav>
 
-      {/* Bottom tab bar - solo mobile */}
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-dash-border">
+      {/* Bottom tab bar - mobile */}
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100">
         <div className="flex items-center justify-around h-14">
           {tabs.map((tab) => (
             <button
               key={tab.path}
               onClick={() => navigate(tab.path)}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg transition-colors duration-150 ${isActive(tab.path)
-                ? "text-dash-accent"
-                : "text-dash-text-secondary"
-                }`}
+              className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg transition-colors ${
+                isActive(tab.path)
+                  ? "text-dark"
+                  : "text-gray-400"
+              }`}
             >
               <tab.icon className="w-5 h-5" />
               <span className="text-[10px] font-medium">{tab.label}</span>

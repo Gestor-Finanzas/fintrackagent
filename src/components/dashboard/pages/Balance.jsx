@@ -76,19 +76,16 @@ export default function Balance() {
   const total = totalIngresos + totalGastos;
 
   return (
-    <div className="flex flex-col gap-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="flex flex-col gap-8">
+      {/* Header editorial */}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <svg className="w-6 h-6 text-dash-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            <h1 className="text-2xl font-bold text-dash-text">Balance</h1>
-          </div>
-          <p className="text-sm text-dash-text-secondary mt-1">
-            Tu situación financiera global
-          </p>
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
+            Situación global
+          </span>
+          <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
+            Balance
+          </h1>
         </div>
         <PeriodFilter
           periodo={periodo}
@@ -104,31 +101,17 @@ export default function Balance() {
         <SummaryCard
           label="Ingresos"
           value={formatEuro(totalIngresos)}
-          color="text-dash-success"
-          iconBg="bg-emerald-50"
-          icon={
-            <svg className="w-5 h-5 text-dash-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-            </svg>
-          }
+          color="text-emerald-600"
         />
         <SummaryCard
           label="Gastos"
           value={formatEuro(totalGastos)}
-          color="text-dash-danger"
-          iconBg="bg-red-50"
-          icon={
-            <svg className="w-5 h-5 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-            </svg>
-          }
+          color="text-red-500"
         />
         <SummaryCard
           label="Balance neto"
           value={formatEuro(balance)}
-          color={balance >= 0 ? "text-dash-accent" : "text-dash-danger"}
-          iconBg="bg-indigo-50"
-          icon={<FaEuroSign className="w-4 h-4 text-dash-accent" />}
+          color={balance >= 0 ? "text-dark" : "text-red-500"}
         />
       </div>
 
@@ -140,71 +123,66 @@ export default function Balance() {
       </ChartCard>
 
       {/* Income vs Expenses Comparison */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
-        <div className="flex items-center gap-2 mb-5">
-          <svg className="w-4 h-4 text-dash-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-          </svg>
-          <h3 className="text-sm font-semibold text-dash-text">Ingresos vs Gastos</h3>
-        </div>
+      <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+        <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-6">
+          Ingresos vs Gastos
+        </h3>
 
         {/* Proportion bar */}
-        <div className="flex h-2.5 rounded-full overflow-hidden mb-6">
+        <div className="flex h-2 rounded-full overflow-hidden mb-6 bg-gray-100">
           <div
-            className="bg-dash-success transition-all duration-500 rounded-l-full"
+            className="bg-emerald-500 transition-all duration-500"
             style={{ width: total > 0 ? `${(totalIngresos / total) * 100}%` : "50%" }}
           />
           <div
-            className="bg-dash-danger transition-all duration-500 rounded-r-full"
+            className="bg-red-400 transition-all duration-500"
             style={{ width: total > 0 ? `${(totalGastos / total) * 100}%` : "50%" }}
           />
         </div>
 
         {/* Two columns */}
-        <div className="grid grid-cols-2 gap-4">
-          {/* Ingresos */}
-          <div className="flex flex-col items-center gap-1 p-4 rounded-xl bg-emerald-50/60">
-            <div className="w-9 h-9 rounded-full bg-dash-success/10 flex items-center justify-center mb-1">
-              <svg className="w-4 h-4 text-dash-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-              </svg>
-            </div>
-            <span className="text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Ingresos</span>
-            <span className="text-lg font-bold text-dash-success">{formatEuro(totalIngresos)}</span>
-            <span className="text-xs text-dash-text-secondary">
-              {ingresos.length} movimiento{ingresos.length !== 1 ? "s" : ""}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-gray-100 border border-gray-400 rounded-2xl p-5">
+            <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-500">
+              Ingresos
             </span>
-            <span className="text-[11px] font-medium text-dash-success/70 mt-0.5">
+            <p className="text-2xl font-bold text-emerald-600 mt-2">
+              {formatEuro(totalIngresos)}
+            </p>
+            <p className="text-xs text-gray-500 mt-1">
+              {ingresos.length} movimiento{ingresos.length !== 1 ? "s" : ""} ·{" "}
               {total > 0 ? Math.round((totalIngresos / total) * 100) : 0}% del total
-            </span>
+            </p>
           </div>
 
-          {/* Gastos */}
-          <div className="flex flex-col items-center gap-1 p-4 rounded-xl bg-red-50/60">
-            <div className="w-9 h-9 rounded-full bg-dash-danger/10 flex items-center justify-center mb-1">
-              <svg className="w-4 h-4 text-dash-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-              </svg>
-            </div>
-            <span className="text-xs font-medium text-dash-text-secondary uppercase tracking-wider">Gastos</span>
-            <span className="text-lg font-bold text-dash-danger">{formatEuro(totalGastos)}</span>
-            <span className="text-xs text-dash-text-secondary">
-              {gastos.length} movimiento{gastos.length !== 1 ? "s" : ""}
+          <div className="bg-gray-100 border border-gray-400 rounded-2xl p-5">
+            <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-500">
+              Gastos
             </span>
-            <span className="text-[11px] font-medium text-dash-danger/70 mt-0.5">
+            <p className="text-2xl font-bold text-red-500 mt-2">
+              {formatEuro(totalGastos)}
+            </p>
+            <p className="text-xs text-gray-500 mt-1">
+              {gastos.length} movimiento{gastos.length !== 1 ? "s" : ""} ·{" "}
               {total > 0 ? Math.round((totalGastos / total) * 100) : 0}% del total
-            </span>
+            </p>
           </div>
         </div>
 
         {/* Savings rate */}
         {totalIngresos > 0 && (
-          <div className="mt-5 flex items-center justify-between p-3 rounded-xl bg-indigo-50/50 border border-dash-accent/10">
+          <div className="mt-6 flex items-center justify-between pt-5 border-t border-gray-100">
             <div className="flex items-center gap-2">
-              <FaEuroSign className="w-3 h-3 text-dash-accent" />
-              <span className="text-xs font-medium text-dash-text">Tasa de ahorro</span>
+              <FaEuroSign className="w-3 h-3 text-primary" />
+              <span className="text-xs font-semibold tracking-wider uppercase text-gray-500">
+                Tasa de ahorro
+              </span>
             </div>
-            <span className={`text-sm font-bold ${balance >= 0 ? "text-dash-accent" : "text-dash-danger"}`}>
+            <span
+              className={`text-sm font-bold ${
+                balance >= 0 ? "text-dark" : "text-red-500"
+              }`}
+            >
               {Math.round((balance / totalIngresos) * 100)}%
             </span>
           </div>
@@ -212,10 +190,7 @@ export default function Balance() {
       </div>
 
       {/* All Transactions */}
-      <TransactionsTable
-        movimientos={movimientos}
-        showTypeColumn={true}
-      />
+      <TransactionsTable movimientos={movimientos} showTypeColumn={true} />
     </div>
   );
 }

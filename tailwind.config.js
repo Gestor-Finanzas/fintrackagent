@@ -4,11 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#10B981",
-        secondary: "#374151",
+        primary: "#0D9668",
+        secondary: "#475569",
         bgLight: "#F8FAFC",
         accent: "#06B6D4",
-        dark: "#111827",
+        dark: "#1E3A5F",
+        ink: "#1E3A5F",
         "dash-primary": "#1B2559",
         "dash-primary-hover": "#252F6A",
         "dash-accent": "#818CF8",

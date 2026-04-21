@@ -20,7 +20,6 @@ export default function PeriodFilter({
   const [tempEnd, setTempEnd] = useState(null);
   const pickerRef = useRef(null);
 
-  // Close picker on outside click
   useEffect(() => {
     const handler = (e) => {
       if (pickerRef.current && !pickerRef.current.contains(e.target)) {
@@ -54,36 +53,47 @@ export default function PeriodFilter({
           <button
             key={p.value}
             onClick={() => setPeriodo(p.value)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-150 h-[38px] ${periodo === p.value && !isCustomActive
-                ? "bg-dash-primary text-white"
-                : "bg-white text-dash-text-secondary border border-dash-border hover:border-dash-primary hover:text-dash-primary"
-              }`}
+            className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors duration-150 h-[38px] ${
+              periodo === p.value && !isCustomActive
+                ? "bg-dark text-white"
+                : "bg-gray-100 text-gray-500 border border-gray-400 hover:text-dark"
+            }`}
           >
             {p.label}
           </button>
         ))}
-        {/* Custom date range button */}
         <div className="relative" ref={pickerRef}>
           <button
             onClick={() => setShowPicker(!showPicker)}
-            className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-150 flex items-center justify-center gap-1.5 h-[38px] ${isCustomActive
-                ? "bg-dash-primary text-white"
-                : "bg-white text-dash-text-secondary border border-dash-border hover:border-dash-primary hover:text-dash-primary"
-              }`}
+            className={`px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-150 flex items-center justify-center gap-1.5 h-[38px] ${
+              isCustomActive
+                ? "bg-dark text-white"
+                : "bg-gray-100 text-gray-500 border border-gray-400 hover:text-dark"
+            }`}
             title="Rango personalizado"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
               <path d="M16 2v4M8 2v4M3 10h18" />
             </svg>
           </button>
 
           {showPicker && (
-            <div className="absolute right-0 top-full mt-2 bg-white rounded-2xl shadow-lg border border-dash-border p-4 z-50 min-w-[280px]">
-              <p className="text-xs font-medium text-dash-text mb-3">Rango personalizado</p>
+            <div className="absolute right-0 top-full mt-2 bg-white rounded-2xl border border-gray-200 shadow-lg p-4 z-50 min-w-[280px]">
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">
+                Rango personalizado
+              </p>
               <div className="flex flex-col gap-3">
                 <div>
-                  <label className="text-xs text-dash-text-secondary mb-1 block">Desde</label>
+                  <label className="text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500 mb-1.5 block">
+                    Desde
+                  </label>
                   <DatePicker
                     selected={tempStart}
                     onChange={(d) => setTempStart(d)}
@@ -92,11 +102,13 @@ export default function PeriodFilter({
                     endDate={tempEnd}
                     dateFormat="dd/MM/yyyy"
                     placeholderText="dd/mm/aaaa"
-                    className="w-full px-3 py-2 rounded-xl border border-dash-border text-sm text-dash-text focus:outline-none focus:ring-2 focus:ring-dash-accent/20 focus:border-dash-accent"
+                    className="w-full px-3 py-2 rounded-xl border border-gray-300 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-dash-text-secondary mb-1 block">Hasta</label>
+                  <label className="text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500 mb-1.5 block">
+                    Hasta
+                  </label>
                   <DatePicker
                     selected={tempEnd}
                     onChange={(d) => setTempEnd(d)}
@@ -106,21 +118,21 @@ export default function PeriodFilter({
                     minDate={tempStart}
                     dateFormat="dd/MM/yyyy"
                     placeholderText="dd/mm/aaaa"
-                    className="w-full px-3 py-2 rounded-xl border border-dash-border text-sm text-dash-text focus:outline-none focus:ring-2 focus:ring-dash-accent/20 focus:border-dash-accent"
+                    className="w-full px-3 py-2 rounded-xl border border-gray-300 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   />
                 </div>
                 <div className="flex gap-2 pt-1">
                   <button
                     onClick={handleApply}
                     disabled={!tempStart || !tempEnd}
-                    className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-white bg-dash-primary hover:bg-dash-primary-hover disabled:opacity-40 transition-colors duration-150"
+                    className="flex-1 px-3 py-2 rounded-xl text-xs font-semibold text-white bg-dark hover:bg-primary disabled:opacity-40 transition-colors"
                   >
                     Aplicar
                   </button>
                   {isCustomActive && (
                     <button
                       onClick={handleClear}
-                      className="px-3 py-2 rounded-xl text-xs font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150"
+                      className="px-3 py-2 rounded-xl text-xs font-medium text-gray-500 border border-gray-300 hover:bg-gray-50 transition-colors"
                     >
                       Limpiar
                     </button>
@@ -132,11 +144,8 @@ export default function PeriodFilter({
         </div>
       </div>
 
-      {/* Date range label */}
       {dateRangeLabel && (
-        <span className="text-xs text-dash-text-secondary">
-          {dateRangeLabel}
-        </span>
+        <span className="text-xs text-gray-500">{dateRangeLabel}</span>
       )}
     </div>
   );

@@ -1,141 +1,176 @@
 import { useState } from "react";
-import { FaCheck, FaGift } from "react-icons/fa";
+import { FaCheck, FaGift, FaBan, FaInfinity, FaPiggyBank } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+
+const BILLING_STORAGE_KEY = "fintrack_billing_preference";
 
 export default function Pricing({ onAuthClick }) {
-  const [billingPeriod, setBillingPeriod] = useState("monthly");
+  const { t } = useTranslation();
+  const [billingPeriod, setBillingPeriod] = useState(() => {
+    try {
+      const saved = localStorage.getItem(BILLING_STORAGE_KEY);
+      return saved === "annual" || saved === "monthly" ? saved : "monthly";
+    } catch {
+      return "monthly";
+    }
+  });
+
+  const updateBillingPeriod = (value) => {
+    setBillingPeriod(value);
+    try {
+      localStorage.setItem(BILLING_STORAGE_KEY, value);
+    } catch {
+      /* modo incógnito u otro bloqueo: silenciar */
+    }
+  };
 
   const monthlyPrice = "2,99€";
   const annualPrice = "30€";
 
   const features = [
-    "Transacciones ilimitadas",
-    "Dashboard avanzado con gráficos",
-    "Alertas inteligentes personalizadas",
-    "Exportar en CSV, PDF, Excel",
-    "Análisis profundo de gastos",
-    "Soporte por email prioritario",
-    "Acceso completo a Fin 24/7",
+    t("pricing.features.unlimited"),
+    t("pricing.features.advancedDashboard"),
+    t("pricing.features.alerts"),
+    t("pricing.features.export"),
+    t("pricing.features.analysis"),
+    t("pricing.features.support"),
+    t("pricing.features.access247"),
+  ];
+
+  const benefits = [
+    { icon: FaGift, title: t("pricing.benefit1Title"), desc: t("pricing.benefit1Desc") },
+    { icon: FaBan, title: t("pricing.benefit2Title"), desc: t("pricing.benefit2Desc") },
+    { icon: FaInfinity, title: t("pricing.benefit3Title"), desc: t("pricing.benefit3Desc") },
   ];
 
   return (
-    <section
-      id="pricing"
-      className="bg-gradient-to-br from-bgLight to-white py-20 relative overflow-hidden"
-    >
-      {/* Decoración de fondo */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-accent opacity-5 rounded-full blur-3xl"></div>
+    <section id="pricing" className="bg-white py-14 sm:py-16 md:py-20 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-[40rem] h-[40rem] bg-primary opacity-[0.025] rounded-full blur-3xl" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-10" data-aos="fade-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-dark mb-4">
-            Planes de Suscripción
+      <div className="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
+        <div className="max-w-2xl mb-10 md:mb-12" data-aos="fade-up">
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
+            {t("pricing.eyebrow")}
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-dark leading-tight mb-6">
+            {t("pricing.titleStart")}{" "}
+            <span className="text-primary">{t("pricing.titleAccent")}</span>.
           </h2>
-          <p className="text-lg text-secondary max-w-3xl mx-auto mb-6">
-            Comienza gratis y sin compromisos. Prueba{" "}
-            <span className="font-semibold text-accent">Fin</span> durante 14
-            días con acceso completo, sin tarjeta de crédito. Cuando estés
-            listo, elige el plan perfecto para ti.
+          <p className="text-base md:text-lg text-gray-500 leading-relaxed">
+            {t("pricing.subtitle")}
           </p>
-          <div className="inline-block bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 border-2 border-primary/40 rounded-xl p-0.5 mb-8 hover:border-primary/60 transition-all duration-300 shadow-lg hover:shadow-xl">
-            <div className="bg-gradient-to-r from-primary/5 to-accent/5 px-8 py-4 rounded-lg flex items-center gap-3 justify-center">
-              <FaGift className="text-primary text-2xl animate-pulse-soft mr-1" />
-              <p className="text-dark font-bold text-lg">
-                Acceso Total Gratuito: Primeros 14 días
-              </p>
-            </div>
-          </div>
-
-          {/* Toggle Mensual / Anual */}
-          <div className="flex justify-center mt-5">
-            <div className="relative bg-gray-200 rounded-full p-1 flex">
-              {/* Fondo animado */}
-              <div
-                className="absolute top-1 bottom-1 left-1 w-32 bg-gradient-to-r from-primary to-accent rounded-full shadow-lg-glow transition-transform duration-500 ease-in-out"
-                style={{
-                  transform:
-                    billingPeriod === "monthly"
-                      ? "translateX(0)"
-                      : "translateX(100%)",
-                }}
-              />
-              {/* Mensual */}
-              <button
-                onClick={() => setBillingPeriod("monthly")}
-                className={`relative z-10 w-32 py-2 text-center font-semibold rounded-full transition-colors duration-300 ${billingPeriod === "monthly"
-                  ? "text-white"
-                  : "text-secondary hover:text-dark"
-                  }`}
-              >
-                Mensual
-              </button>
-              {/* Anual */}
-              <button
-                onClick={() => setBillingPeriod("annual")}
-                className={`relative z-10 w-32 py-2 text-center font-semibold rounded-full transition-colors duration-300 ${billingPeriod === "annual"
-                  ? "text-white"
-                  : "text-secondary hover:text-dark"
-                  }`}
-              >
-                Anual
-              </button>
-            </div>
-          </div>
         </div>
 
-        {/* Single Plan Card */}
-        <div className="flex justify-center mb-12 mt-0" data-aos="fade-up">
-          <div className="relative group rounded-2xl transition-all duration-300 transform hover:scale-105 bg-white text-dark shadow-lg border border-gray-200 hover:border-primary max-w-xl w-full">
-            {billingPeriod === "annual" && (
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-4 py-1 rounded-full text-sm font-bold">
-                ¡Ahorras 17%!
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-10 lg:gap-16 items-start">
+          {/* Izquierda: trial highlight */}
+          <div className="md:col-span-2" data-aos="fade-up">
+            <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-8">
+              {t("pricing.trialTitle")}
+            </h3>
+            <div className="flex flex-col gap-7">
+              {benefits.map((b) => (
+                <div key={b.title} className="flex gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <b.icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold text-dark mb-1.5">
+                      {b.title}
+                    </h4>
+                    <p className="text-sm text-gray-500 leading-relaxed">
+                      {b.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Derecha: card del plan */}
+          <div className="md:col-span-3" data-aos="fade-up" data-aos-delay="100">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mb-6">
+              <div className="relative inline-flex bg-gray-100 rounded-xl p-1">
+                <div
+                  className="absolute top-1 bottom-1 w-24 rounded-lg bg-dark transition-transform duration-300 ease-out"
+                  style={{
+                    transform:
+                      billingPeriod === "annual"
+                        ? "translateX(6rem)"
+                        : "translateX(0)",
+                  }}
+                />
+                <button
+                  onClick={() => updateBillingPeriod("monthly")}
+                  className={`relative z-10 w-24 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                    billingPeriod === "monthly"
+                      ? "text-white"
+                      : "text-gray-500 hover:text-dark"
+                  }`}
+                >
+                  {t("pricing.monthly")}
+                </button>
+                <button
+                  onClick={() => updateBillingPeriod("annual")}
+                  className={`relative z-10 w-24 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                    billingPeriod === "annual"
+                      ? "text-white"
+                      : "text-gray-500 hover:text-dark"
+                  }`}
+                >
+                  {t("pricing.annual")}
+                </button>
               </div>
-            )}
-
-            <div className="p-10">
-              <h3 className="text-3xl font-bold mb-3 text-dark">
-                {billingPeriod === "monthly" ? "Plan Mensual" : "Plan Anual"}
-              </h3>
-              <p className="text-gray-600 mb-6">
-                {billingPeriod === "monthly"
-                  ? "Flexibilidad de mes a mes"
-                  : "El mejor valor - Acceso durante un año"}
-              </p>
-
-              <div className="mb-5">
-                <span className="text-6xl font-bold text-primary from-primary to-accent bg-clip-text">
-                  {billingPeriod === "monthly" ? monthlyPrice : annualPrice}
+              {billingPeriod === "annual" && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20 text-xs font-semibold text-primary animate-fade-in">
+                  <FaPiggyBank className="w-3.5 h-3.5" />
+                  {t("pricing.savings")}
                 </span>
-                <span className="text-gray-600 ml-2">
-                  {billingPeriod === "monthly" ? "/mes" : "/año"}
-                </span>
+              )}
+            </div>
+
+            <div className="bg-gray-100 border border-gray-400 rounded-2xl p-6 sm:p-10">
+              <div className="flex items-baseline gap-3 mb-2">
+                <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
+                  {billingPeriod === "monthly" ? t("pricing.planMonthly") : t("pricing.planAnnual")}
+                </h3>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl md:text-6xl font-bold text-dark">
+                    {billingPeriod === "monthly" ? monthlyPrice : annualPrice}
+                  </span>
+                  <span className="text-gray-500 text-sm">
+                    {billingPeriod === "monthly" ? t("pricing.perMonth") : t("pricing.perYear")}
+                  </span>
+                </div>
                 {billingPeriod === "annual" && (
-                  <p className="text-gray-600 text-sm mt-2 font-semibold">
-                    Equivalente a 2,5€ /mes
+                  <p className="text-sm text-gray-500 mt-2">
+                    {t("pricing.equivalentTo")}
                   </p>
                 )}
               </div>
-              <div className="space-y-4 border-t border-gray-200 pt-6">
-                {features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <FaCheck className="text-primary flex-shrink-0" size={20} />
-                    <span className="text-gray-700">{feature}</span>
+
+              <div className="space-y-3 mb-8 pt-6 border-t border-gray-300">
+                {features.map((feature) => (
+                  <div key={feature} className="flex items-center gap-3">
+                    <FaCheck className="text-primary flex-shrink-0 w-3.5 h-3.5" />
+                    <span className="text-sm text-gray-600">{feature}</span>
                   </div>
                 ))}
               </div>
-              <button onClick={onAuthClick} className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 px-6 rounded-lg font-semibold hover:shadow-lg-glow transition duration-300 transform hover:scale-105 mb-1 mt-10 text-lg">
-                Comenzar Ahora
+
+              <button
+                onClick={onAuthClick}
+                className="w-full bg-primary text-white py-3.5 px-6 rounded-xl font-semibold text-sm hover:bg-dark transition-colors duration-200"
+              >
+                {t("pricing.cta")}
               </button>
+              <p className="text-xs text-gray-500 text-center mt-4">
+                {t("pricing.ctaNote")}
+              </p>
             </div>
           </div>
         </div>
-
-        <p className="text-center text-secondary mt-12" data-aos="fade-up">
-          Todos los planes incluyen acceso completo a Fin, tu agente financiero
-          en WhatsApp.
-        </p>
-        <p className="text-center text-secondary" data-aos="fade-up">
-          Cancela cuando quieras, sin compromisos.
-        </p>
       </div>
     </section>
   );

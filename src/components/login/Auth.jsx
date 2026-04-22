@@ -1,230 +1,37 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaTimes, FaEnvelope, FaLock, FaUser, FaWhatsapp, FaEye, FaEyeSlash } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { FaTimes } from "react-icons/fa";
+import AuthForm from "./AuthForm";
+import useEscapeKey from "../../hooks/useEscapeKey";
 
+/**
+ * Modal de login usado desde la landing page (botón "Iniciar sesión").
+ * Para la página dedicada con URL propia, ver <LoginPage />.
+ */
 export default function Auth({ onBack }) {
-  const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const navigate = useNavigate();
-
-  const handleNumberInput = (e) => {
-    e.target.value = e.target.value.replace(/\D/g, "");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!isLogin && password !== confirmPassword) {
-      setPasswordError("Las contraseñas no coinciden");
-      return;
-    }
-    setPasswordError("");
-    localStorage.setItem("fintrack_token", "demo-token-123");
-    navigate("/dashboard");
-  };
-
-  const handleModeSwitch = () => {
-    setIsLogin(!isLogin);
-    setPassword("");
-    setConfirmPassword("");
-    setPasswordError("");
-    setShowPassword(false);
-    setShowConfirm(false);
-  };
-
-  const inputBase =
-    "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary focus:bg-white transition-all duration-200";
-  const inputError =
-    "w-full pl-11 pr-11 py-3 rounded-xl border border-red-300 bg-red-50/30 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300/30 focus:border-red-400 transition-all duration-200";
+  const { t } = useTranslation();
+  useEscapeKey(onBack, true);
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-3 sm:p-4 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="auth-modal-title"
       onClick={onBack}
     >
       <div
-        className="w-full max-w-[420px] bg-white rounded-2xl shadow-2xl relative animate-fade-in overflow-hidden"
+        className="w-full max-w-[420px] bg-white rounded-2xl border border-gray-200 relative animate-fade-in my-4 sm:my-0"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header decorativo */}
-        <div className="bg-gradient-to-br from-primary to-accent px-8 pt-5 pb-5 text-center relative mb-4">
-          <button
-            onClick={onBack}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors duration-200"
-            aria-label="Cerrar"
-          >
-            <FaTimes className="w-3.5 h-3.5" />
-          </button>
-          <h2 className="text-xl font-bold text-white">
-            {isLogin ? "Bienvenido de nuevo" : "Crea tu cuenta"}
-          </h2>
-          <p className="text-white/70 text-sm mt-1">
-            {isLogin
-              ? "Inicia sesión para acceder a tu panel"
-              : "Regístrate y empieza a gestionar tus finanzas"}
-          </p>
-        </div>
-
-        {/* Formulario */}
-        <div className="px-8 pb-8 -mt-4">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-            <form className="flex flex-col gap-3.5" onSubmit={handleSubmit}>
-              {/* Campos de registro */}
-              {!isLogin && (
-                <>
-                  {/* Nombre */}
-                  <div className="relative">
-                    <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="Nombre completo"
-                      required
-                      className={inputBase}
-                    />
-                  </div>
-                  {/* Email */}
-                  <div className="relative">
-                    <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                      type="email"
-                      placeholder="Correo electrónico"
-                      required
-                      className={inputBase}
-                    />
-                  </div>
-                  {/* WhatsApp */}
-                  <div className="relative">
-                    <FaWhatsapp className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="Número de WhatsApp"
-                      required
-                      onInput={handleNumberInput}
-                      maxLength={15}
-                      className={inputBase}
-                    />
-                  </div>
-                  {/* Contraseña */}
-                  <div className="relative">
-                    <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Contraseña"
-                      required
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        if (passwordError) setPasswordError("");
-                      }}
-                      className={inputBase.replace("pr-4", "pr-11")}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                    >
-                      {showPassword ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                  {/* Repetir contraseña */}
-                  <div>
-                    <div className="relative">
-                      <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input
-                        type={showConfirm ? "text" : "password"}
-                        placeholder="Repetir contraseña"
-                        required
-                        value={confirmPassword}
-                        onChange={(e) => {
-                          setConfirmPassword(e.target.value);
-                          if (passwordError) setPasswordError("");
-                        }}
-                        className={
-                          passwordError
-                            ? inputError
-                            : inputBase.replace("pr-4", "pr-11")
-                        }
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirm(!showConfirm)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                      >
-                        {showConfirm ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
-                      </button>
-                    </div>
-                    {passwordError && (
-                      <p className="text-xs text-red-500 mt-1.5 ml-1">{passwordError}</p>
-                    )}
-                  </div>
-                </>
-              )}
-
-              {/* Campos de login */}
-              {isLogin && (
-                <>
-                  <div className="relative">
-                    <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                      type="email"
-                      placeholder="Correo electrónico"
-                      required
-                      className={inputBase}
-                    />
-                  </div>
-                  <div className="relative">
-                    <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Contraseña"
-                      required
-                      className={inputBase.replace("pr-4", "pr-11")}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                    >
-                      {showPassword ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                  <div className="flex justify-end">
-                    <button type="button" className="text-xs text-primary hover:text-primary/80 font-medium transition-colors">
-                      ¿Olvidaste tu contraseña?
-                    </button>
-                  </div>
-                </>
-              )}
-
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-primary to-accent text-white font-semibold py-3 rounded-xl mt-1 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98] transition-all duration-200"
-              >
-                {isLogin ? "Iniciar Sesión" : "Crear Cuenta"}
-              </button>
-            </form>
-
-            {/* Separador */}
-            <div className="flex items-center gap-3 my-5">
-              <div className="flex-1 h-px bg-gray-200" />
-              <span className="text-xs text-gray-400">o</span>
-              <div className="flex-1 h-px bg-gray-200" />
-            </div>
-
-            {/* Switch login/registro */}
-            <p className="text-sm text-gray-500 text-center">
-              {isLogin ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?"}{" "}
-              <button
-                onClick={handleModeSwitch}
-                className="text-primary font-semibold hover:text-primary/80 transition-colors"
-              >
-                {isLogin ? "Registrarse" : "Iniciar Sesión"}
-              </button>
-            </p>
-          </div>
+        <button
+          onClick={onBack}
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 rounded-full text-gray-500 hover:text-dark hover:bg-gray-100 flex items-center justify-center transition-colors z-10"
+          aria-label={t("common.close")}
+        >
+          <FaTimes className="w-3.5 h-3.5" />
+        </button>
+        <div className="px-5 sm:px-8 pt-7 sm:pt-8 pb-6 sm:pb-8">
+          <AuthForm />
         </div>
       </div>
     </div>

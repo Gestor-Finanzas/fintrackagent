@@ -1,110 +1,78 @@
-import { FaRobot, FaWhatsapp, FaShieldAlt, FaLightbulb } from "react-icons/fa";
+import {
+  FaRobot,
+  FaWhatsapp,
+  FaShieldAlt,
+  FaLightbulb,
+  FaUsers,
+  FaExchangeAlt,
+  FaBullseye,
+  FaClock,
+} from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export default function Product() {
+  const { t } = useTranslation();
+  const features = [
+    { icon: FaRobot, title: t("product.features.aiTitle"), desc: t("product.features.aiDesc") },
+    { icon: FaWhatsapp, title: t("product.features.whatsappTitle"), desc: t("product.features.whatsappDesc") },
+    { icon: FaShieldAlt, title: t("product.features.secureTitle"), desc: t("product.features.secureDesc") },
+    { icon: FaLightbulb, title: t("product.features.recommendationsTitle"), desc: t("product.features.recommendationsDesc") },
+  ];
+
+  const stats = [
+    { number: "+3.000", label: t("product.stats.users"), icon: FaUsers },
+    { number: "+70K", label: t("product.stats.transactions"), icon: FaExchangeAlt },
+    { number: "98%", label: t("product.stats.accuracy"), icon: FaBullseye },
+    { number: "24/7", label: t("product.stats.availability"), icon: FaClock },
+  ];
 
   return (
     <section
       id="product"
-      className="bg-gradient-to-br from-bgLight to-white py-20 relative overflow-hidden"
+      className="bg-white py-14 sm:py-16 md:py-20 relative overflow-hidden"
     >
-      {/* Decoración de fondo */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary opacity-5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent opacity-5 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-primary opacity-[0.025] rounded-full blur-3xl" />
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-dark mb-4">
-            Conoce a tu agente personal{" "}
-            <span className="text-primary">Fin</span>
+      <div className="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
+        <div className="max-w-2xl mb-8 md:mb-10" data-aos="fade-up">
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
+            {t("product.eyebrow")}
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-dark leading-tight mb-6">
+            {t("product.title")} <span className="text-primary">{t("product.titleAccent")}</span>.
           </h2>
-          <p className="text-lg text-secondary max-w-3xl mx-auto leading-relaxed">
-            FinTrack es una plataforma revolucionaria de gestión financiera
-            personal que funciona a través de{" "}
-            <span className="font-semibold text-primary">Fin</span>, tu agente
-            financiero inteligente. Conectado a WhatsApp, Fin te permite
-            registrar gastos e ingresos con mensajes naturales. Con inteligencia
-            artificial avanzada, convertimos cada mensaje en datos estructurados
-            y análisis profesionales instantáneos.
+          <p className="text-base md:text-lg text-gray-500 leading-relaxed">
+            {t("product.subtitle")}
           </p>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-6"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center mb-14 md:mb-24">
           <div data-aos="fade-right">
-            <div className="space-y-6">
-              <div
-                className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-              >
-                <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-lg text-white h-fit">
-                  <FaRobot size={24} />
+            <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
+              {t("product.howHelps")}
+            </h3>
+            <div className="flex flex-col gap-6">
+              {features.map((f, i) => (
+                <div key={i} className="flex gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <f.icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold text-dark mb-1.5">
+                      {f.title}
+                    </h4>
+                    <p className="text-sm text-gray-500 leading-relaxed">
+                      {f.desc}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-dark mb-2">
-                    IA Inteligente
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Nuestra IA detecta automáticamente importes, categorías y
-                    fechas de tus mensajes.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-              >
-                <div className="p-3 bg-gradient-to-br from-accent to-primary rounded-lg text-white h-fit">
-                  <FaWhatsapp size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-dark mb-2">
-                    WhatsApp Nativo
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Usa la app que ya tienes. No descargues nada más, solo
-                    escribe en WhatsApp.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-              >
-                <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-lg text-white h-fit">
-                  <FaShieldAlt size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-dark mb-2">
-                    100% Seguro
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Encriptación de nivel bancario. Tus datos son solo tuyos,
-                    siempre.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className="group flex gap-4 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 border border-gray-100 hover:border-primary cursor-pointer"
-              >
-                <div className="p-3 bg-gradient-to-br from-accent to-primary rounded-lg text-white h-fit">
-                  <FaLightbulb size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-dark mb-2">
-                    Recomendaciones
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Recibe insights personalizados sobre tus hábitos de gasto y
-                    ahorro.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           {/* SVG WhatsApp Chat Illustration */}
           <div data-aos="fade-left" className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-20 rounded-2xl blur-2xl"></div>
+            <div className="absolute inset-0 bg-primary opacity-10 rounded-2xl blur-3xl"></div>
             <svg
               viewBox="0 0 320 560"
               fill="none"
@@ -147,10 +115,13 @@ export default function Product() {
                 {/* === HEADER (y=30 h=44 center=52) === */}
                 <rect x="6" y="30" width="308" height="44" fill="url(#whatsappHeader)" />
                 <path d="M18 57l-5-5 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="40" cy="52" r="14" fill="#25D366" />
-                <text x="40" y="52" fill="white" fontSize="14" fontWeight="bold" fontFamily="system-ui" textAnchor="middle" dominantBaseline="central">F</text>
-                <text x="60" y="46" fill="white" fontSize="13" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Fin</text>
-                <text x="60" y="59" fill="white" fontSize="9" opacity="0.75" fontFamily="system-ui" dominantBaseline="central">en línea</text>
+                <clipPath id="avatarClip">
+                  <circle cx="40" cy="52" r="17" />
+                </clipPath>
+                <circle cx="40" cy="52" r="10" fill="white" />
+                <image href="/assets/logo.png" x="27" y="40" width="24" height="24" clipPath="url(#avatarClip)" />
+                <text x="61" y="46" fill="white" fontSize="13" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Fin</text>
+                <text x="61" y="59" fill="white" fontSize="9" opacity="0.75" fontFamily="system-ui" dominantBaseline="central">en línea</text>
                 <circle cx="300" cy="47" r="1.3" fill="white" />
                 <circle cx="300" cy="52" r="1.3" fill="white" />
                 <circle cx="300" cy="57" r="1.3" fill="white" />
@@ -214,8 +185,8 @@ export default function Product() {
                 {/* === MSG 6: BOT SUMMARY (y=376 h=72) === */}
                 <rect x="14" y="376" width="232" height="72" rx="8" fill="white" />
                 <path d="M14 386l-6 4 6 2z" fill="white" />
-                <circle cx="32" cy="391" r="8" fill="#4318FF" opacity="0.12" />
-                <path d="M28 395l2.5-3.5 2.5 1.5 3.5-4.5" stroke="#4318FF" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="32" cy="391" r="8" fill="#1E3A5F" opacity="0.12" />
+                <path d="M28 395l2.5-3.5 2.5 1.5 3.5-4.5" stroke="#1E3A5F" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                 <text x="46" y="391" fill="#303030" fontSize="11" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Resumen de hoy</text>
                 <text x="28" y="408" fill="#303030" fontSize="10" fontFamily="system-ui" dominantBaseline="central">Gastos:</text>
                 <text x="72" y="408" fill="#EE5D50" fontSize="10.5" fontWeight="700" fontFamily="system-ui" dominantBaseline="central">45,00 €</text>
@@ -269,27 +240,30 @@ export default function Product() {
         </div>
 
         {/* Estadísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { number: "+3.000", label: "Usuarios activos" },
-            { number: "+70K", label: "Transacciones procesadas" },
-            { number: "98%", label: "Precisión en IA" },
-            { number: "24/7", label: "Disponibilidad" },
-          ].map((stat, idx) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+          {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-8 bg-white rounded-xl shadow-md text-center border border-gray-100 hover:border-primary hover:shadow-lg transition duration-300 transform hover:scale-105"
+              className="group rounded-2xl p-5 md:p-6 bg-primary/5 border border-primary/20 transition-all duration-300 hover:-translate-y-1"
               data-aos="fade-up"
-              data-aos-delay={idx * 100}
+              data-aos-delay={idx * 80}
             >
-              <p className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+              <div className="flex items-center justify-between mb-2">
+                <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                  <stat.icon className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-semibold tracking-[0.15em] uppercase text-primary/70">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-dark mb-1">
                 {stat.number}
               </p>
-              <p className="text-gray-600">{stat.label}</p>
+              <p className="text-xs md:text-sm text-gray-600">{stat.label}</p>
             </div>
           ))}
         </div>
       </div>
-    </section >
+    </section>
   );
 }

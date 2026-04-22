@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { formatEuro, parseMonto, exportToCSV } from "../../../utils/globalUtils";
 import { parseFechaMock } from "../hooks/useDashboardData";
 import { getCategoryIcon } from "../../../utils/categoryIcons";
@@ -7,18 +8,29 @@ import ModalAddTransaction from "./ModalAddTransaction";
 import ModalEditTransaction from "./ModalEditTransaction";
 import ModalConfirmDelete from "./ModalConfirmDelete";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { translateCategory } from "../../../utils/translateCategory";
 
 const POR_PAGINA = 10;
 
-// Map category names to stable color indices
-const categoryColorCache = {};
-let colorIndex = 0;
-function getCategoryColor(cat) {
-  if (!(cat in categoryColorCache)) {
-    categoryColorCache[cat] = coloresCategorias[colorIndex % coloresCategorias.length];
-    colorIndex++;
-  }
-  return categoryColorCache[cat];
+/**
+ * Icono de ordenación (flecha arriba/abajo) para las cabeceras clicables.
+ * Extraído fuera del componente principal para evitar "Cannot create
+ * components during render" — React 19 deja de tolerar componentes
+ * declarados dentro del cuerpo de otro componente.
+ */
+function SortIcon({ active, direction }) {
+  return (
+    <svg
+      className={`w-3.5 h-3.5 inline-block ml-1 ${active ? "text-primary" : "text-gray-500"}`}
+      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
+    >
+      {active && direction === "asc" ? (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+      ) : (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+      )}
+    </svg>
+  );
 }
 
 export default function TransactionsTable({
@@ -29,6 +41,8 @@ export default function TransactionsTable({
   onDelete,
   showTypeColumn = true,
 }) {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const [busqueda, setBusqueda] = useState("");
   const [sortField, setSortField] = useState("fecha");
   const [sortDesc, setSortDesc] = useState(true);
@@ -37,6 +51,22 @@ export default function TransactionsTable({
   const [modalEdit, setModalEdit] = useState(null);
   const [modalDelete, setModalDelete] = useState(null);
   const editable = !!(onAdd || onEdit || onDelete);
+
+  // Mapa estable de color por categoría — derivado de los movimientos en
+  // lugar de refs mutados en render (React 19 desaconseja ese patrón).
+  // Recomputa solo cuando cambian las categorías presentes.
+  const categoryColors = useMemo(() => {
+    const cache = {};
+    let idx = 0;
+    movimientos.forEach((m) => {
+      if (!(m.categoria in cache)) {
+        cache[m.categoria] = coloresCategorias[idx % coloresCategorias.length];
+        idx += 1;
+      }
+    });
+    return cache;
+  }, [movimientos]);
+  const getCategoryColor = (cat) => categoryColors[cat] || coloresCategorias[0];
 
   const filtered = useMemo(() => {
     let list = [...movimientos];
@@ -75,20 +105,8 @@ export default function TransactionsTable({
     setPagina(1);
   };
 
-  const SortIcon = ({ field }) => (
-    <svg
-      className={`w-3.5 h-3.5 inline-block ml-1 ${sortField === field ? "text-dash-accent" : "text-dash-text-secondary"}`}
-      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
-    >
-      {sortField === field && !sortDesc ? (
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-      ) : (
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-      )}
-    </svg>
-  );
-
   const originalIndex = (item) => movimientos.indexOf(item);
+  const sortDirection = sortDesc ? "desc" : "asc";
 
   // visible columns: fecha + (tipo?) + descripcion(hidden sm) + categoria + cantidad + (acciones?)
   const colCount = 3 + (showTypeColumn ? 1 : 0) + (editable ? 1 : 0);
@@ -98,35 +116,35 @@ export default function TransactionsTable({
       {/* Header */}
       <div className="p-4 sm:px-6 sm:pt-4 pb-4 pb-0 flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-dash-text">Movimientos</h3>
+          <h3 className="text-sm font-semibold text-dark">{t("dashboard.transactions.title")}</h3>
           <div className="hidden sm:flex items-center gap-2">
             <div className="relative">
-              <svg className="w-4 h-4 text-dash-text-secondary absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg className="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               <input
                 type="text"
-                placeholder="Buscar..."
+                placeholder={t("dashboard.transactions.search")}
                 value={busqueda}
                 onChange={(e) => { setBusqueda(e.target.value); setPagina(1); }}
-                className="pl-9 pr-3 py-2 rounded-xl border border-dash-border text-sm text-dash-text focus:outline-none focus:ring-2 focus:ring-dash-accent/20 focus:border-dash-accent w-44 transition-colors duration-150"
+                className="pl-9 pr-3 py-2 rounded-xl border border-gray-200 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary w-44 transition-colors duration-150"
               />
             </div>
             <button
               onClick={() => exportToCSV(filtered)}
-              className="px-3 py-2 rounded-xl text-xs font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150"
+              className="px-3 py-2 rounded-xl text-xs font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors duration-150"
             >
               CSV
             </button>
             {editable && (
               <button
                 onClick={() => setModalAdd(true)}
-                className="px-4 py-2 rounded-xl text-xs font-medium text-white bg-dash-primary hover:bg-dash-primary-hover transition-colors duration-150 flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl text-xs font-medium text-white bg-dark hover:bg-primary transition-colors duration-150 flex items-center gap-1.5"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
-                Añadir
+                {t("dashboard.transactions.add")}
               </button>
             )}
           </div>
@@ -134,33 +152,33 @@ export default function TransactionsTable({
         {/* Mobile layout */}
         <div className="flex flex-col gap-2 sm:hidden">
           <div className="relative">
-            <svg className="w-4 h-4 text-dash-text-secondary absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <svg className="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
               type="text"
-              placeholder="Buscar..."
+              placeholder={t("dashboard.transactions.search")}
               value={busqueda}
               onChange={(e) => { setBusqueda(e.target.value); setPagina(1); }}
-              className="pl-9 pr-3 py-2 rounded-xl border border-dash-border text-sm text-dash-text focus:outline-none focus:ring-2 focus:ring-dash-accent/20 focus:border-dash-accent w-full transition-colors duration-150"
+              className="pl-9 pr-3 py-2 rounded-xl border border-gray-200 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary w-full transition-colors duration-150"
             />
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => exportToCSV(filtered)}
-              className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-dash-text-secondary border border-dash-border hover:bg-gray-50 transition-colors duration-150"
+              className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors duration-150"
             >
               CSV
             </button>
             {editable && (
               <button
                 onClick={() => setModalAdd(true)}
-                className="flex-1 px-4 py-2 rounded-xl text-xs font-medium text-white bg-dash-primary hover:bg-dash-primary-hover transition-colors duration-150 flex items-center justify-center gap-1.5"
+                className="flex-1 px-4 py-2 rounded-xl text-xs font-medium text-white bg-dark hover:bg-primary transition-colors duration-150 flex items-center justify-center gap-1.5"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
-                Añadir
+                {t("dashboard.transactions.add")}
               </button>
             )}
           </div>
@@ -171,63 +189,64 @@ export default function TransactionsTable({
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>
-            <tr className="border-y border-dash-border">
+            <tr className="border-y border-gray-200">
               <th
                 onClick={() => handleSort("fecha")}
-                className="w-[28%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-dash-text-secondary uppercase tracking-wider cursor-pointer select-none"
+                className="w-[28%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none"
               >
-                Fecha <SortIcon field="fecha" />
+                {t("common.date")} <SortIcon active={sortField === "fecha"} direction={sortDirection} />
               </th>
               {showTypeColumn && (
-                <th className="sm:w-[10%] py-3 px-2 sm:px-4 text-xs font-medium text-dash-text-secondary uppercase tracking-wider hidden sm:table-cell">
-                  Tipo
+                <th className="sm:w-[10%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                  {t("common.type")}
                 </th>
               )}
-              <th className="sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-dash-text-secondary uppercase tracking-wider hidden sm:table-cell">
-                Descripción
+              <th className="sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                {t("common.description")}
               </th>
-              <th className="w-[30%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-dash-text-secondary uppercase tracking-wider">
-                Categoría
+              <th className="w-[30%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {t("common.category")}
               </th>
               <th
                 onClick={() => handleSort("monto")}
-                className="w-[28%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-dash-text-secondary uppercase tracking-wider cursor-pointer select-none whitespace-nowrap text-center"
+                className="w-[28%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none whitespace-nowrap text-center"
               >
-                Cantidad <SortIcon field="monto" />
+                {t("common.amount")} <SortIcon active={sortField === "monto"} direction={sortDirection} />
               </th>
               {editable && (
-                <th className="w-[14%] sm:w-[10%] py-3 px-1 sm:px-4 text-xs font-medium text-dash-text-secondary uppercase tracking-wider text-right sm:text-center">
-                  <span className="hidden sm:inline">Acciones</span>
+                <th className="w-[14%] sm:w-[10%] py-3 px-1 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider text-right sm:text-center">
+                  <span className="hidden sm:inline">{t("dashboard.transactions.actions")}</span>
                 </th>
               )}
             </tr>
           </thead>
-          <tbody className="divide-y divide-dash-border">
+          <tbody className="divide-y divide-gray-100">
             {pageItems.length === 0 ? (
               <tr>
-                <td colSpan={colCount} className="py-12 text-center text-sm text-dash-text-secondary">
-                  No hay movimientos
+                <td colSpan={colCount} className="py-12 text-center text-sm text-gray-500">
+                  {t("dashboard.transactions.empty2")}
                 </td>
               </tr>
             ) : (
               pageItems.map((m, i) => {
                 const catColor = getCategoryColor(m.categoria);
+                const rowKey = `${m.fecha}-${m.categoria}-${m.monto}-${m.nombre || ""}-${i}`;
                 return (
-                  <tr key={i} className="hover:bg-gray-50 transition-colors duration-150">
-                    <td className="py-3 px-2 sm:px-4 text-sm text-dash-text whitespace-nowrap">{m.fecha}</td>
+                  <tr key={rowKey} className="hover:bg-gray-50 transition-colors duration-150">
+                    <td className="py-3 px-2 sm:px-4 text-sm text-dark whitespace-nowrap">{m.fecha}</td>
                     {showTypeColumn && (
                       <td className="py-3 px-2 sm:px-4 hidden sm:table-cell">
                         <span
                           className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full ${m.tipo === "ingreso"
-                            ? "bg-emerald-50 text-dash-success"
-                            : "bg-red-50 text-dash-danger"
+                            ? "bg-emerald-50 text-emerald-600"
+                            : "bg-red-50 text-red-500"
                             }`}
                         >
-                          {m.tipo === "ingreso" ? "Ingreso" : "Gasto"}
+                          {m.tipo === "ingreso" ? t("common.income") : t("common.expense")}
                         </span>
                       </td>
                     )}
-                    <td className="py-3 px-2 sm:px-4 text-sm text-dash-text hidden sm:table-cell">
+                    <td className="py-3 px-2 sm:px-4 text-sm text-dark hidden sm:table-cell">
                       {m.nombre || m.categoria}
                     </td>
                     <td className="py-3 px-2 sm:px-4">
@@ -238,29 +257,31 @@ export default function TransactionsTable({
                         >
                           {getCategoryIcon(m.categoria, 12)}
                         </span>
-                        <span className="text-sm text-dash-text-secondary truncate">{m.categoria}</span>
+                        <span className="text-sm text-gray-500 truncate">{translateCategory(m.categoria, t)}</span>
                       </div>
                     </td>
                     <td
-                      className={`py-3 px-2 sm:px-4 text-sm font-semibold whitespace-nowrap text-center ${m.tipo === "ingreso" ? "text-dash-success" : "text-dash-danger"
+                      className={`py-3 px-2 sm:px-4 text-sm font-semibold whitespace-nowrap text-center ${m.tipo === "ingreso" ? "text-emerald-600" : "text-red-500"
                         }`}
                     >
-                      {m.tipo === "ingreso" ? "+" : "-"}{formatEuro(parseMonto(m.monto))}
+                      {m.tipo === "ingreso" ? "+" : "-"}{formatEuro(parseMonto(m.monto), lang)}
                     </td>
                     {editable && (
                       <td className="py-3 px-1 sm:px-4 text-right sm:text-center">
                         <div className="inline-flex items-center gap-0 sm:gap-1">
                           <button
                             onClick={() => setModalEdit({ mov: m, idx: originalIndex(m) })}
-                            className="p-2 rounded-lg text-dash-text-secondary hover:text-dash-accent hover:bg-dash-accent/5 transition-colors duration-150"
+                            aria-label={`${t("common.edit")} ${m.nombre || m.categoria}`}
+                            className="inline-flex items-center justify-center min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] rounded-lg text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
                           >
-                            <FaPen className="w-3 h-3" />
+                            <FaPen className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => setModalDelete(originalIndex(m))}
-                            className="p-2 rounded-lg text-dash-text-secondary hover:text-dash-danger hover:bg-red-50 transition-colors duration-150"
+                            aria-label={`${t("common.delete")} ${m.nombre || m.categoria}`}
+                            className="inline-flex items-center justify-center min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors duration-150"
                           >
-                            <FaTrash className="w-3 h-3" />
+                            <FaTrash className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </td>
@@ -275,15 +296,15 @@ export default function TransactionsTable({
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between px-2 sm:px-4 py-4 border-t border-dash-border">
-          <span className="text-xs text-dash-text-secondary">
-            {filtered.length} resultado{filtered.length !== 1 ? "s" : ""}
+        <div className="flex items-center justify-between px-2 sm:px-4 py-4 border-t border-gray-200">
+          <span className="text-xs text-gray-500">
+            {t("dashboard.transactions.results", { count: filtered.length })}
           </span>
           <div className="flex items-center gap-1">
             <button
               onClick={() => setPagina(Math.max(1, pagina - 1))}
               disabled={pagina === 1}
-              className="p-2 rounded-lg text-dash-text-secondary hover:bg-gray-50 disabled:opacity-30 transition-colors duration-150"
+              className="p-2 rounded-lg text-gray-500 hover:bg-gray-50 disabled:opacity-30 transition-colors duration-150"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -294,8 +315,8 @@ export default function TransactionsTable({
                 key={p}
                 onClick={() => setPagina(p)}
                 className={`w-8 h-8 rounded-lg text-xs font-medium transition-colors duration-150 ${pagina === p
-                  ? "bg-dash-primary text-white"
-                  : "text-dash-text-secondary hover:bg-gray-50"
+                  ? "bg-dark text-white"
+                  : "text-gray-500 hover:bg-gray-50"
                   }`}
               >
                 {p}
@@ -304,7 +325,7 @@ export default function TransactionsTable({
             <button
               onClick={() => setPagina(Math.min(totalPages, pagina + 1))}
               disabled={pagina === totalPages}
-              className="p-2 rounded-lg text-dash-text-secondary hover:bg-gray-50 disabled:opacity-30 transition-colors duration-150"
+              className="p-2 rounded-lg text-gray-500 hover:bg-gray-50 disabled:opacity-30 transition-colors duration-150"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

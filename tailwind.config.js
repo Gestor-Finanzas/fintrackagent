@@ -1,24 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#10B981",
-        secondary: "#374151",
+        primary: "#0D9668",
+        secondary: "#475569",
         bgLight: "#F8FAFC",
         accent: "#06B6D4",
-        dark: "#111827",
-        "dash-primary": "#1B2559",
-        "dash-primary-hover": "#252F6A",
-        "dash-accent": "#818CF8",
-        "dash-text": "#1B2559",
-        "dash-text-secondary": "#8F9BBA",
-        "dash-success": "#34D399",
-        "dash-danger": "#F87171",
-        "dash-warning": "#FBBF24",
-        "dash-bg": "#F4F7FE",
-        "dash-border": "#E2E8F0",
+        dark: "#1E3A5F",
+        ink: "#1E3A5F",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],

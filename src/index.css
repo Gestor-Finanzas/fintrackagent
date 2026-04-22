@@ -10,6 +10,33 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Respetar usuarios con sensibilidad a las animaciones (motion sickness, etc.) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* En iOS, inputs con font-size <16px provocan zoom automático.
+   Subimos la tipografía mínima en formularios móviles. */
+@media (max-width: 640px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 body {
   margin: 0;
   font-family:

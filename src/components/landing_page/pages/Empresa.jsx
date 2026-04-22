@@ -1,132 +1,126 @@
 import PageLayout from "./PageLayout";
-import { FaLightbulb, FaMapMarkerAlt, FaEnvelope, FaShieldAlt, FaUsers, FaRocket, FaEye } from "react-icons/fa";
-
-const valores = [
-  {
-    icon: <FaShieldAlt className="w-5 h-5 text-primary" />,
-    title: "Transparencia",
-    desc: "Sin costes ocultos ni letra pequeña. Comunicamos con claridad.",
-  },
-  {
-    icon: <FaUsers className="w-5 h-5 text-accent" />,
-    title: "Accesibilidad",
-    desc: "Finanzas para todos, independientemente de su experiencia.",
-  },
-  {
-    icon: <FaRocket className="w-5 h-5 text-primary" />,
-    title: "Innovación",
-    desc: "Mejoramos constantemente con IA y nuevas tecnologías.",
-  },
-  {
-    icon: <FaShieldAlt className="w-5 h-5 text-accent" />,
-    title: "Seguridad",
-    desc: "Tus datos financieros merecen el máximo nivel de protección.",
-  },
-];
+import { useTranslation } from "react-i18next";
+import {
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaBalanceScale,
+  FaUsers,
+  FaRocket,
+  FaShieldAlt,
+} from "react-icons/fa";
 
 export default function Empresa() {
+  const { t } = useTranslation();
+  const valores = [
+    { icon: FaBalanceScale, title: t("company.values.transparencyTitle"), desc: t("company.values.transparencyDesc") },
+    { icon: FaUsers, title: t("company.values.accessibilityTitle"), desc: t("company.values.accessibilityDesc") },
+    { icon: FaRocket, title: t("company.values.innovationTitle"), desc: t("company.values.innovationDesc") },
+    { icon: FaShieldAlt, title: t("company.values.securityTitle"), desc: t("company.values.securityDesc") },
+  ];
+  const stats = [
+    { value: "2025", label: t("company.stats.foundedYear") },
+    { value: "+2.000", label: t("company.stats.activeUsers") },
+    { value: "24/7", label: t("company.stats.availability") },
+    { value: "100%", label: t("company.stats.europeanTeam") },
+  ];
+
   return (
     <PageLayout>
-      <section className="bg-gray-50 relative overflow-hidden">
-        {/* Decoración */}
-        <div className="absolute top-20 right-0 w-80 h-80 bg-primary opacity-[0.03] rounded-full blur-3xl" />
-        <div className="absolute bottom-40 left-0 w-96 h-96 bg-accent opacity-[0.03] rounded-full blur-3xl" />
+      <section className="bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-primary opacity-[0.025] rounded-full blur-3xl" />
 
-        <div className="max-w-5xl mx-auto px-6 py-16 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-14">
-            <h1 className="text-3xl md:text-4xl font-bold text-dark mb-4">
-              Conoce FinTrack
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 py-14 sm:py-16 md:py-20 relative z-10">
+          <div className="max-w-2xl mb-12 md:mb-20">
+            <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
+              {t("company.eyebrow")}
+            </span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-dark leading-tight mb-6">
+              {t("company.titleStart")}{" "}
+              <span className="text-primary">{t("company.titleAccent")}</span>.
             </h1>
-            <p className="text-gray-500 max-w-lg mx-auto">
-              Una fintech española con la misión de hacer accesible la gestión financiera personal a todo el mundo.
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+              {t("company.subtitle")}
             </p>
           </div>
 
-          {/* Quiénes somos + Visión */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <FaUsers className="w-5 h-5 text-primary" />
-                </div>
-                <h2 className="text-lg font-semibold text-dark">Quiénes somos</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 md:mb-20">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-gray-100 border border-gray-400 rounded-2xl p-6 md:p-8">
+                <p className="text-2xl md:text-3xl font-bold text-dark mb-1">{s.value}</p>
+                <p className="text-xs md:text-sm text-gray-600">{s.label}</p>
               </div>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                FinTrack es una fintech española fundada en 2024. Nuestro equipo combina experiencia en inteligencia artificial, desarrollo de software y servicios financieros para crear herramientas que realmente simplifican la vida de nuestros usuarios.
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-12 md:mb-20">
+            <div className="border-l-2 border-primary pl-6">
+              <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3">
+                {t("company.whoEyebrow")}
+              </h2>
+              <p className="text-base text-gray-600 leading-relaxed">
+                {t("company.whoText")}
               </p>
             </div>
-
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <FaEye className="w-5 h-5 text-accent" />
-                </div>
-                <h2 className="text-lg font-semibold text-dark">Nuestra visión</h2>
-              </div>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Creemos que la tecnología debe trabajar para las personas, no al revés. Por eso diseñamos FinTrack para integrarse en las herramientas que ya usas a diario, como WhatsApp, en lugar de obligarte a aprender una nueva aplicación.
+            <div className="border-l-2 border-gray-200 pl-6">
+              <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500 mb-3">
+                {t("company.visionEyebrow")}
+              </h2>
+              <p className="text-base text-gray-600 leading-relaxed">
+                {t("company.visionText")}
               </p>
             </div>
           </div>
 
-          {/* Valores */}
-          <div className="mb-10">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                <FaLightbulb className="w-5 h-5 text-primary" />
-              </div>
-              <h2 className="text-lg font-semibold text-dark">Nuestros valores</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {valores.map((v, i) => (
+          <div className="mb-12 md:mb-20">
+            <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-8 sm:mb-10">
+              {t("company.valuesEyebrow")}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {valores.map((v) => (
                 <div
-                  key={i}
-                  className="flex items-start gap-4 p-5 rounded-xl bg-white border border-gray-100 shadow-sm"
+                  key={v.title}
+                  className="group p-6 bg-white border border-gray-200 rounded-2xl hover:border-dark transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center shrink-0">
-                    {v.icon}
+                  <div className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-300 flex items-center justify-center mb-5 group-hover:bg-dark group-hover:border-dark transition-colors">
+                    <v.icon className="w-4 h-4 text-dark group-hover:text-white transition-colors" />
                   </div>
-                  <div>
-                    <h3 className="text-sm font-semibold text-dark">{v.title}</h3>
-                    <p className="text-xs text-gray-500 mt-1">{v.desc}</p>
-                  </div>
+                  <h3 className="text-base font-semibold text-dark mb-2">
+                    {v.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {v.desc}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Sede + Contacto */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <FaMapMarkerAlt className="w-5 h-5 text-primary" />
-                </div>
-                <h2 className="text-lg font-semibold text-dark">Sede</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-10 border-t border-gray-100">
+            <div className="flex items-start gap-4">
+              <FaMapMarkerAlt className="w-4 h-4 text-primary mt-1 shrink-0" />
+              <div>
+                <h3 className="text-sm font-semibold text-dark mb-1">
+                  {t("company.hq")}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {t("company.hqText")}
+                </p>
               </div>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Nuestra sede principal está en Málaga, España. Trabajamos de forma remota con colaboradores en toda Europa, lo que nos permite atraer el mejor talento y ofrecer un servicio global.
-              </p>
             </div>
 
-            <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl border border-primary/10 p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <FaEnvelope className="w-5 h-5 text-primary" />
-                </div>
-                <h2 className="text-lg font-semibold text-dark">Contacto corporativo</h2>
+            <div className="flex items-start gap-4">
+              <FaEnvelope className="w-4 h-4 text-primary mt-1 shrink-0" />
+              <div>
+                <h3 className="text-sm font-semibold text-dark mb-1">
+                  {t("company.corporateContact")}
+                </h3>
+                <a
+                  href="mailto:fintrackagent@gmail.com"
+                  className="text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+                >
+                  fintrackagent@gmail.com
+                </a>
               </div>
-              <p className="text-sm text-gray-500 mb-4">
-                Para consultas empresariales o de prensa, escríbenos directamente.
-              </p>
-              <a
-                href="mailto:fintrackagent@gmail.com"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-gray-200 text-sm font-semibold text-dark hover:border-primary hover:text-primary transition-colors duration-200"
-              >
-                <FaEnvelope className="w-3.5 h-3.5" />
-                fintrackagent@gmail.com
-              </a>
             </div>
           </div>
         </div>

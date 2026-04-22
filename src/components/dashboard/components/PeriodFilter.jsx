@@ -32,7 +32,12 @@ export default function PeriodFilter({
 
   const handleApply = () => {
     if (tempStart && tempEnd) {
-      setCustomRange(tempStart, tempEnd);
+      // Orden defensivo: si el usuario seleccionó las fechas al revés las
+      // reordenamos para no devolver un rango vacío al filtro.
+      const [start, end] = tempStart <= tempEnd
+        ? [tempStart, tempEnd]
+        : [tempEnd, tempStart];
+      setCustomRange(start, end);
       setShowPicker(false);
     }
   };

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const CATEGORIAS = [
   "Nueva funcionalidad",
@@ -9,6 +10,7 @@ const CATEGORIAS = [
 ];
 
 export default function Sugerencias() {
+  const { t } = useTranslation();
   const [form, setForm] = useState({ categoria: "", asunto: "", descripcion: "" });
   const [enviado, setEnviado] = useState(false);
   const [enviando, setEnviando] = useState(false);
@@ -33,13 +35,13 @@ export default function Sugerencias() {
       {/* Editorial header */}
       <div>
         <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
-          Feedback
+          {t("dashboardPages.suggestionsEyebrow")}
         </span>
         <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
-          Sugerencias
+          {t("dashboardPages.suggestionsTitle")}
         </h1>
-        <p className="text-sm text-gray-500 mt-2">
-          Tu opinión nos ayuda a mejorar. Cuéntanos qué te gustaría ver en FinTrack.
+        <p className="text-sm text-gray-600 mt-2">
+          {t("dashboardPages.suggestionsSubtitle")}
         </p>
       </div>
 

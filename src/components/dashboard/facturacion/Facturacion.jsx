@@ -121,7 +121,7 @@ export default function Facturacion() {
                                         <span className="text-base font-semibold">Pago Anual</span>
                                         <span className="text-sm text-gray-500">{datosEconomicos.precioAnual ? datosEconomicos.precioAnual : "30 € / año"}</span>
                                         <span className="text-xs text-gray-400 mt-1">Válido hasta: {formatearFecha(datosEconomicos.fechaFin)}</span>
-                                        <span className="text-xs text-gray-400">Próxima fecha de cobro: {formatearFecha(datosEconomicos.fechaFin)}</span>
+                                        <span className="text-xs text-gray-500">Próxima fecha de cobro: {formatearFecha(datosEconomicos.fechaFin)}</span>
                                     </div>
                                 </label>
                             </div>

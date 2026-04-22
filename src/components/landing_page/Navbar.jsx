@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { FaBars, FaTimes, FaGlobe } from "react-icons/fa";
 
 export default function Navbar({ onAuthClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const handleNav = (anchor) => (e) => {
     e.preventDefault();
@@ -23,17 +25,24 @@ export default function Navbar({ onAuthClick }) {
     setIsOpen(false);
   };
 
+  const toggleLang = () => {
+    const next = i18n.language?.startsWith("es") ? "en" : "es";
+    i18n.changeLanguage(next);
+  };
+
   const links = [
-    { href: "#hero", label: "Inicio" },
-    { href: "#features", label: "Características" },
-    { href: "#workflow", label: "Cómo funciona" },
-    { href: "#pricing", label: "Planes" },
-    { href: "#contact", label: "Contacto" },
+    { href: "#hero", label: t("nav.home") },
+    { href: "#features", label: t("nav.features") },
+    { href: "#workflow", label: t("nav.howItWorks") },
+    { href: "#pricing", label: t("nav.pricing") },
+    { href: "#contact", label: t("nav.contact") },
   ];
+
+  const currentLang = i18n.language?.startsWith("es") ? "ES" : "EN";
 
   return (
     <nav className="bg-white border-b border-gray-100 py-4 px-6 md:px-10 flex justify-between items-center sticky top-0 z-50">
-      <a href="/" className="flex items-center gap-2.5">
+      <a href="/" className="flex items-center gap-2.5" aria-label="FinTrack - Inicio">
         <img
           src="/assets/logo2.png"
           alt="FinTrack"
@@ -44,7 +53,6 @@ export default function Navbar({ onAuthClick }) {
         </span>
       </a>
 
-      {/* Desktop */}
       <ul className="hidden lg:flex items-center gap-8">
         {links.map((l) => (
           <li key={l.href}>
@@ -59,24 +67,42 @@ export default function Navbar({ onAuthClick }) {
         ))}
         <li>
           <button
+            onClick={toggleLang}
+            aria-label={t("nav.language")}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-gray-600 hover:text-dark hover:bg-gray-50 transition-colors"
+          >
+            <FaGlobe className="w-3.5 h-3.5" />
+            {currentLang}
+          </button>
+        </li>
+        <li>
+          <button
             onClick={onAuthClick}
             className="bg-dark text-white text-sm px-5 py-2.5 rounded-xl font-semibold hover:bg-primary transition-colors duration-200"
           >
-            Iniciar sesión
+            {t("nav.login")}
           </button>
         </li>
       </ul>
 
-      {/* Mobile toggle */}
-      <button
-        className="lg:hidden text-dark text-xl"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Menú"
-      >
-        {isOpen ? <FaTimes /> : <FaBars />}
-      </button>
+      <div className="lg:hidden flex items-center gap-2">
+        <button
+          onClick={toggleLang}
+          aria-label={t("nav.language")}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:text-dark transition-colors"
+        >
+          <FaGlobe className="w-3.5 h-3.5" />
+          {currentLang}
+        </button>
+        <button
+          className="text-dark text-xl p-2"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? t("common.close") : t("nav.home")}
+        >
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <ul className="absolute top-full left-0 right-0 bg-white border-b border-gray-100 flex flex-col gap-1 p-4 lg:hidden shadow-sm">
           {links.map((l) => (
@@ -98,7 +124,7 @@ export default function Navbar({ onAuthClick }) {
               }}
               className="w-full bg-dark text-white text-sm px-5 py-3 rounded-xl font-semibold hover:bg-primary transition-colors"
             >
-              Iniciar sesión
+              {t("nav.login")}
             </button>
           </li>
         </ul>

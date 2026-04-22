@@ -1,24 +1,27 @@
 import { FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import LinkFooter from "./LinkFooter";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   const producto = [
-    { to: "/#hero", label: "Inicio" },
-    { to: "/#features", label: "Características" },
-    { to: "/#workflow", label: "Cómo funciona" },
-    { to: "/#pricing", label: "Planes" },
+    { to: "/#hero", label: t("footer.links.home") },
+    { to: "/#features", label: t("footer.links.features") },
+    { to: "/#workflow", label: t("footer.links.howItWorks") },
+    { to: "/#pricing", label: t("footer.links.pricing") },
   ];
   const empresa = [
-    { to: "/empresa", label: "Empresa" },
-    { to: "/faqs", label: "FAQs" },
-    { to: "/contacto", label: "Contacto" },
-    { to: "/sobre-nosotros", label: "Sobre nosotros" },
+    { to: "/empresa", label: t("footer.links.company") },
+    { to: "/faqs", label: t("footer.links.faqs") },
+    { to: "/contacto", label: t("footer.links.contact") },
+    { to: "/sobre-nosotros", label: t("footer.links.aboutUs") },
   ];
   const legal = [
-    { to: "/privacidad", label: "Privacidad" },
-    { to: "/terminos", label: "Términos" },
-    { to: "/cookies", label: "Cookies" },
-    { to: "/seguridad", label: "Seguridad" },
+    { to: "/privacidad", label: t("footer.links.privacy") },
+    { to: "/terminos", label: t("footer.links.terms") },
+    { to: "/cookies", label: t("footer.links.cookies") },
+    { to: "/seguridad", label: t("footer.links.security") },
   ];
 
   return (
@@ -26,12 +29,12 @@ export default function Footer() {
       <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-primary opacity-10 rounded-full blur-3xl" />
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <img
                 src="/assets/logo2.png"
                 alt="FinTrack"
+                loading="lazy"
                 className="w-7 h-7 object-contain"
               />
               <span className="text-lg font-bold text-white tracking-tight">
@@ -39,14 +42,13 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
-              Tu gestión financiera desde WhatsApp, con la ayuda de
-              inteligencia artificial.
+              {t("footer.tagline")}
             </p>
           </div>
 
           <div>
             <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
-              Producto
+              {t("footer.product")}
             </h4>
             <ul className="space-y-3">
               {producto.map((l) => (
@@ -64,7 +66,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
-              Empresa
+              {t("footer.company")}
             </h4>
             <ul className="space-y-3">
               {empresa.map((l) => (
@@ -82,7 +84,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
-              Legal
+              {t("footer.legal")}
             </h4>
             <ul className="space-y-3">
               {legal.map((l) => (
@@ -101,7 +103,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <p className="text-xs text-gray-500">
-            © 2026 FinTrack Agent. Todos los derechos reservados.
+            © 2026 FinTrack Agent. {t("footer.rights")}
           </p>
           <div className="flex gap-5">
             <a

@@ -1,4 +1,5 @@
 import PageLayout from "./PageLayout";
+import { useTranslation } from "react-i18next";
 import { FaEnvelope } from "react-icons/fa";
 
 const secciones = [
@@ -48,6 +49,7 @@ const secciones = [
 ];
 
 export default function LegalSeguridad() {
+  const { t } = useTranslation();
   return (
     <PageLayout>
       <section className="bg-white relative overflow-hidden">
@@ -57,7 +59,7 @@ export default function LegalSeguridad() {
           {/* Hero editorial */}
           <div className="max-w-2xl mb-12 md:mb-20">
             <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
-              Información legal
+              {t("legal.eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-dark leading-tight mb-6">
               Seguridad en <span className="text-primary">FinTrack</span>.
@@ -126,7 +128,7 @@ export default function LegalSeguridad() {
               <FaEnvelope className="w-4 h-4 text-primary mt-1 shrink-0" />
               <div>
                 <h3 className="text-sm font-semibold text-dark mb-1">
-                  Equipo de seguridad
+                  {t("legal.securityTeamTitle")}
                 </h3>
                 <a
                   href="mailto:fintrackagent@gmail.com"
@@ -137,8 +139,8 @@ export default function LegalSeguridad() {
               </div>
             </div>
             <div className="flex items-start md:justify-end">
-              <span className="text-xs text-gray-400">
-                Última actualización: 1 de marzo de 2026
+              <span className="text-xs text-gray-500">
+                {t("legal.lastUpdated")}
               </span>
             </div>
           </div>

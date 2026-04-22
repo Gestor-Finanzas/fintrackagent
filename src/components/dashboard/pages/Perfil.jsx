@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import mockUser from "../../../mocks/mockUser.json";
 import mockDatos from "../../../mocks/mockDatosEconomicos.json";
@@ -10,6 +11,7 @@ import {
 } from "react-icons/fa";
 
 export default function Perfil() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [user, setUser] = useState(mockUser);
   const [form, setForm] = useState(user);
@@ -92,21 +94,25 @@ export default function Perfil() {
       {/* Editorial header */}
       <div>
         <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
-          Configuración
+          {t("dashboardPages.profileEyebrow")}
         </span>
         <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
-          Mi perfil
+          {t("dashboardPages.profileTitle")}
         </h1>
         <p className="text-sm text-gray-500 mt-2">
-          Gestiona tu información personal y preferencias de cuenta.
+          {t("dashboardPages.profileSubtitle")}
         </p>
       </div>
 
       {/* Feedback toast */}
       {feedback.msg && (
-        <div className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium border animate-fade-in ${feedback.type === "success"
-          ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-          : "bg-red-50 text-red-600 border-red-200"
+        <div
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium border animate-fade-in ${feedback.type === "success"
+            ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+            : "bg-red-50 text-red-600 border-red-200"
           }`}>
           {feedback.type === "success"
             ? <FaCheck className="w-3.5 h-3.5 shrink-0" />
@@ -126,7 +132,7 @@ export default function Perfil() {
             <div className="flex-1 min-w-0">
               <h2 className="text-base sm:text-lg font-bold text-dark truncate">{user.nombre}</h2>
               <p className="text-sm text-gray-500 truncate">{user.email}</p>
-              <div className="flex items-center gap-1.5 mt-1.5 text-xs text-gray-400">
+              <div className="flex items-center gap-1.5 mt-1.5 text-xs text-gray-500">
                 <FaCalendarAlt className="w-3 h-3 shrink-0" />
                 <span>Miembro desde {memberSince}</span>
               </div>
@@ -469,7 +475,7 @@ export default function Perfil() {
                 disabled={confirmText !== "ELIMINAR"}
                 onClick={() => {
                   localStorage.removeItem("fintrack_token");
-                  window.location.href = "/";
+                  window.location.href = "/login";
                 }}
                 className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-500 hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >

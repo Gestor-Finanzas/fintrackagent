@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
   FaCrown, FaCalendarAlt, FaClock, FaFileInvoiceDollar,
@@ -10,6 +11,7 @@ import mockDatos from "../../../mocks/mockDatosEconomicos.json";
 import { formatEuro, formatearFecha } from "../../../utils/globalUtils";
 
 export default function Facturacion() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [datos] = useState(mockDatos);
   const [facturas] = useState(mockFacturas);
@@ -31,13 +33,13 @@ export default function Facturacion() {
       {/* Editorial header */}
       <div>
         <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
-          Suscripción
+          {t("dashboardPages.billingEyebrow")}
         </span>
         <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
-          Facturación
+          {t("dashboardPages.billingTitle")}
         </h1>
-        <p className="text-sm text-gray-500 mt-2">
-          Gestiona tu suscripción, método de pago y facturas.
+        <p className="text-sm text-gray-600 mt-2">
+          {t("dashboardPages.billingSubtitle")}
         </p>
       </div>
 
@@ -137,18 +139,18 @@ export default function Facturacion() {
       </div>
 
       {/* Invoice Summary */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-2xl border border-gray-200 p-4 text-center">
-          <p className="text-xs text-gray-500 mb-1">Total facturado</p>
-          <p className="text-lg font-bold text-dark">{formatEuro(totalFacturado)}</p>
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="bg-white rounded-2xl border border-gray-200 p-3 sm:p-4 text-center">
+          <p className="text-[10px] sm:text-xs text-gray-500 mb-1 leading-tight">Total facturado</p>
+          <p className="text-sm sm:text-lg font-bold text-dark break-words whitespace-normal leading-tight">{formatEuro(totalFacturado)}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4 text-center">
-          <p className="text-xs text-gray-500 mb-1">Pagado</p>
-          <p className="text-lg font-bold text-emerald-500">{formatEuro(totalPagado)}</p>
+        <div className="bg-white rounded-2xl border border-gray-200 p-3 sm:p-4 text-center">
+          <p className="text-[10px] sm:text-xs text-gray-500 mb-1 leading-tight">Pagado</p>
+          <p className="text-sm sm:text-lg font-bold text-emerald-500 break-words whitespace-normal leading-tight">{formatEuro(totalPagado)}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4 text-center">
-          <p className="text-xs text-gray-500 mb-1">Pendiente</p>
-          <p className="text-lg font-bold text-amber-500">{formatEuro(totalPendiente)}</p>
+        <div className="bg-white rounded-2xl border border-gray-200 p-3 sm:p-4 text-center">
+          <p className="text-[10px] sm:text-xs text-gray-500 mb-1 leading-tight">Pendiente</p>
+          <p className="text-sm sm:text-lg font-bold text-amber-500 break-words whitespace-normal leading-tight">{formatEuro(totalPendiente)}</p>
         </div>
       </div>
 

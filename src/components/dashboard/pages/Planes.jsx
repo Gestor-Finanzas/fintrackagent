@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import mockDatos from "../../../mocks/mockDatosEconomicos.json";
 import {
@@ -41,6 +42,7 @@ const TRUST_ITEMS = [
 ];
 
 export default function Planes() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [datos] = useState(mockDatos);
   const [selected, setSelected] = useState("Anual");
@@ -70,14 +72,13 @@ export default function Planes() {
       {/* Editorial header */}
       <div>
         <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
-          Suscripción
+          {t("dashboardPages.planEyebrow")}
         </span>
         <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
-          Un plan, acceso <span className="text-primary">completo</span>.
+          {t("dashboardPages.planTitle")} <span className="text-primary">{t("dashboardPages.planAccent")}</span>.
         </h1>
-        <p className="text-sm text-gray-500 mt-2 max-w-lg">
-          Elige cómo prefieres pagar. Sin sorpresas, sin letras pequeñas y
-          cancela cuando quieras.
+        <p className="text-sm text-gray-600 mt-2 max-w-lg">
+          {t("dashboardPages.planSubtitle")}
         </p>
       </div>
 

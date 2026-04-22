@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import icons, { availableIcons, getCategoryIcon } from "../../../utils/categoryIcons";
 import { coloresCategorias } from "../../../utils/categoriasColors";
 
@@ -18,6 +19,7 @@ const defaultCategories = [
 ];
 
 export default function Categorias() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState(defaultCategories);
   const [modalOpen, setModalOpen] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
@@ -99,7 +101,7 @@ export default function Categorias() {
         <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
           {title}
         </h3>
-        <span className="text-xs text-gray-400">{items.length}</span>
+        <span className="text-xs text-gray-500">{items.length}</span>
       </div>
       <div className="flex flex-col gap-3">
         {items.map((cat) => {
@@ -215,13 +217,13 @@ export default function Categorias() {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
-            Configuración
+            {t("dashboardPages.categoriesEyebrow")}
           </span>
           <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
-            Categorías
+            {t("dashboardPages.categoriesTitle")}
           </h1>
-          <p className="text-sm text-gray-500 mt-2">
-            Gestiona las categorías y subcategorías de tus ingresos y gastos.
+          <p className="text-sm text-gray-600 mt-2">
+            {t("dashboardPages.categoriesSubtitle")}
           </p>
         </div>
         <button

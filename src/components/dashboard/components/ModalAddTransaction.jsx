@@ -3,10 +3,13 @@ import DatePicker from "react-datepicker";
 import { es } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import { formatFechaMock } from "../hooks/useDashboardData";
+import { categoriasByTipo as categorias } from "../../../config/categories";
+import useEscapeKey from "../../../hooks/useEscapeKey";
 
-const categorias = {
-  ingreso: ["Salario", "Venta", "Intereses", "Freelance", "Regalo", "Otro"],
-  gasto: ["Supermercado", "Transporte", "Restaurantes", "Ocio", "Suscripciones", "Café", "Otro"],
+const todayMidnight = () => {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
 };
 
 export default function ModalAddTransaction({ isOpen, onClose, onAdd, defaultType }) {
@@ -14,8 +17,9 @@ export default function ModalAddTransaction({ isOpen, onClose, onAdd, defaultTyp
   const [categoria, setCategoria] = useState("");
   const [nombre, setNombre] = useState("");
   const [monto, setMonto] = useState("");
-  const [fecha, setFecha] = useState(new Date());
+  const [fecha, setFecha] = useState(todayMidnight);
 
+  useEscapeKey(onClose, isOpen);
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
@@ -31,7 +35,7 @@ export default function ModalAddTransaction({ isOpen, onClose, onAdd, defaultTyp
     setCategoria("");
     setNombre("");
     setMonto("");
-    setFecha(new Date());
+    setFecha(todayMidnight());
     onClose();
   };
 
@@ -39,16 +43,25 @@ export default function ModalAddTransaction({ isOpen, onClose, onAdd, defaultTyp
     "w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors";
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-      <div className="bg-white rounded-2xl border border-gray-200 w-full max-w-md animate-fade-in">
+    <div
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-add-title"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl border border-gray-200 w-full max-w-md animate-fade-in max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between p-6 pb-0">
           <div>
             <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-1">
               Registro
             </span>
-            <h3 className="text-xl font-bold text-dark">Nuevo movimiento</h3>
+            <h3 id="modal-add-title" className="text-xl font-bold text-dark">Nuevo movimiento</h3>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-dark transition-colors">
+          <button onClick={onClose} aria-label="Cerrar" className="text-gray-400 hover:text-dark transition-colors">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>

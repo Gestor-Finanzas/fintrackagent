@@ -61,7 +61,7 @@ export default function Balance() {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: "#fff", titleColor: "#1B2559", bodyColor: "#1B2559",
+        backgroundColor: "#fff", titleColor: "#1E3A5F", bodyColor: "#1E3A5F",
         borderColor: "#E2E8F0", borderWidth: 1, padding: 12, cornerRadius: 12,
         callbacks: { label: (ctx) => `Balance: ${formatEuro(ctx.parsed.y)}` },
       },

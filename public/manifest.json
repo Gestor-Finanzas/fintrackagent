@@ -1,0 +1,16 @@
+{
+  "short_name": "FinTrack",
+  "name": "FinTrack Agent — Gestiona tus finanzas desde WhatsApp",
+  "description": "Controla tus finanzas desde WhatsApp con la ayuda de Fin, tu agente de IA.",
+  "icons": [
+    {
+      "src": "/assets/logo2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1E3A5F",
+  "background_color": "#FFFFFF"
+}

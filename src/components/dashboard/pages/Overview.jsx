@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Line, Doughnut } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
 import useDashboardData, { parseFechaMock, formatFechaLarga } from "../hooks/useDashboardData";
 import PeriodFilter from "../components/PeriodFilter";
 import SummaryCard from "../components/SummaryCard";
@@ -10,6 +11,7 @@ import { coloresCategorias } from "../../../utils/categoriasColors";
 import { getCategoryIcon } from "../../../utils/categoryIcons";
 
 export default function Overview() {
+  const { t } = useTranslation();
   const {
     periodo, setPeriodo,
     customRange, setCustomRange, dateRangeLabel,
@@ -37,7 +39,7 @@ export default function Overview() {
       labels: sorted.map(([f]) => f.slice(0, 5)),
       datasets: [
         {
-          label: "Ingresos",
+          label: t("dashboard.summary.income"),
           data: sorted.map(([, v]) => v.ing),
           borderColor: "#34D399",
           backgroundColor: "rgba(52,211,153,0.08)",
@@ -48,7 +50,7 @@ export default function Overview() {
           pointHoverRadius: 5,
         },
         {
-          label: "Gastos",
+          label: t("dashboard.summary.expenses"),
           data: sorted.map(([, v]) => v.gas),
           borderColor: "#F87171",
           backgroundColor: "rgba(248,113,113,0.08)",
@@ -60,7 +62,7 @@ export default function Overview() {
         },
       ],
     };
-  }, [ingresos, gastos]);
+  }, [ingresos, gastos, t]);
 
   // Expenses by category for donut
   const donutData = useMemo(() => {
@@ -96,8 +98,8 @@ export default function Overview() {
       legend: { display: true, position: "top", align: "center", onHover: (e) => { e.native.target.style.cursor = "pointer"; }, onLeave: (e) => { e.native.target.style.cursor = "default"; }, labels: { boxWidth: 14, boxHeight: 14, useBorderRadius: true, borderRadius: 3, font: { size: 12 }, color: "#8F9BBA", padding: 24 } },
       tooltip: {
         backgroundColor: "#fff",
-        titleColor: "#1B2559",
-        bodyColor: "#1B2559",
+        titleColor: "#1E3A5F",
+        bodyColor: "#1E3A5F",
         borderColor: "#E2E8F0",
         borderWidth: 1,
         padding: 12,
@@ -123,8 +125,8 @@ export default function Overview() {
       legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 }, color: "#8F9BBA", padding: 16 } },
       tooltip: {
         backgroundColor: "#fff",
-        titleColor: "#1B2559",
-        bodyColor: "#1B2559",
+        titleColor: "#1E3A5F",
+        bodyColor: "#1E3A5F",
         borderColor: "#E2E8F0",
         borderWidth: 1,
         padding: 12,
@@ -137,9 +139,9 @@ export default function Overview() {
 
   const greeting = () => {
     const h = new Date().getHours();
-    if (h < 12) return "Buenos días";
-    if (h < 20) return "Buenas tardes";
-    return "Buenas noches";
+    if (h < 12) return t("dashboard.greeting.morning");
+    if (h < 20) return t("dashboard.greeting.afternoon");
+    return t("dashboard.greeting.evening");
   };
 
   // Spanish date: "1 de marzo de 2026"
@@ -173,24 +175,24 @@ export default function Overview() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <SummaryCard
-          label="Ingresos"
+          label={t("dashboard.summary.income")}
           value={formatEuro(totalIngresos)}
           color="text-emerald-600"
         />
         <SummaryCard
-          label="Gastos"
+          label={t("dashboard.summary.expenses")}
           value={formatEuro(totalGastos)}
           color="text-red-500"
         />
         <SummaryCard
-          label="Balance"
+          label={t("dashboard.summary.balance")}
           value={formatEuro(balance)}
           color={balance >= 0 ? "text-dark" : "text-red-500"}
         />
       </div>
 
       {/* Ingresos vs Gastos — full width */}
-      <ChartCard title="Ingresos vs Gastos">
+      <ChartCard title={t("dashboard.charts.incomeVsExpenses")}>
         <div className="h-72 lg:h-80 min-h-[250px]">
           <Line data={lineData} options={chartOptions} />
         </div>
@@ -201,25 +203,26 @@ export default function Overview() {
         <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
-              Últimos movimientos
+              {t("dashboard.transactions.recent")}
             </h3>
             <button
               onClick={() => navigate("/dashboard/ingresos")}
               className="text-xs font-semibold text-dark hover:text-primary transition-colors"
             >
-              Ver todos →
+              {t("common.seeAll")} →
             </button>
           </div>
           <div className="flex flex-col divide-y divide-gray-100">
             {recent.length === 0 ? (
               <p className="text-sm text-gray-500 py-8 text-center">
-                No hay movimientos para este período
+                {t("dashboard.transactions.empty")}
               </p>
             ) : (
               recent.map((m, i) => {
                 const catColor = m.tipo === "ingreso" ? "#10B981" : "#F87171";
+                const itemKey = `${m.fecha}-${m.categoria}-${m.monto}-${i}`;
                 return (
-                  <div key={i} className="flex items-center gap-4 py-3.5">
+                  <div key={itemKey} className="flex items-center gap-4 py-3.5">
                     <div
                       className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                       style={{ backgroundColor: catColor + "14", color: catColor }}
@@ -248,7 +251,7 @@ export default function Overview() {
             )}
           </div>
         </div>
-        <ChartCard title="Gastos por categoría">
+        <ChartCard title={t("dashboard.charts.expensesByCategory")}>
           <div className="h-72 lg:h-full min-h-[250px]">
             <Doughnut data={donutData} options={donutOptions} />
           </div>

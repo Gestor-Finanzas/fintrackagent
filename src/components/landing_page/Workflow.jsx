@@ -1,29 +1,14 @@
+import { useTranslation } from "react-i18next";
+
 export default function Workflow() {
+  const { t } = useTranslation();
   const steps = [
-    {
-      title: "Crea tu cuenta",
-      desc: "Regístrate con tu correo electrónico y verifica en segundos, sin complicaciones.",
-    },
-    {
-      title: "Vincula WhatsApp",
-      desc: "Conecta tu número de WhatsApp. Fin, tu agente financiero, estará disponible 24/7.",
-    },
-    {
-      title: "Registra transacciones",
-      desc: 'Envía mensajes naturales como "Comida 15€" o "Nómina 2.000€". También por voz.',
-    },
-    {
-      title: "IA analiza al momento",
-      desc: "Nuestro motor detecta monto, categoría, tipo y fecha de forma automática.",
-    },
-    {
-      title: "Visualiza en tiempo real",
-      desc: "Dashboard profesional con gráficos, tendencias mensuales y comparativas.",
-    },
-    {
-      title: "Exporta y comparte",
-      desc: "Descarga tus datos en CSV para auditoría, análisis avanzado o contabilidad.",
-    },
+    { title: t("workflow.steps.s1Title"), desc: t("workflow.steps.s1Desc") },
+    { title: t("workflow.steps.s2Title"), desc: t("workflow.steps.s2Desc") },
+    { title: t("workflow.steps.s3Title"), desc: t("workflow.steps.s3Desc") },
+    { title: t("workflow.steps.s4Title"), desc: t("workflow.steps.s4Desc") },
+    { title: t("workflow.steps.s5Title"), desc: t("workflow.steps.s5Desc") },
+    { title: t("workflow.steps.s6Title"), desc: t("workflow.steps.s6Desc") },
   ];
 
   return (
@@ -36,22 +21,21 @@ export default function Workflow() {
       <div className="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
         <div className="max-w-2xl mb-14" data-aos="fade-up">
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
-            Cómo funciona
+            {t("workflow.eyebrow")}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-            De un mensaje a{" "}
-            <span className="text-primary">datos accionables</span>.
+            {t("workflow.titleStart")}{" "}
+            <span className="text-primary">{t("workflow.titleAccent")}</span>.
           </h2>
           <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-            Fin simplifica la gestión financiera en seis pasos, diseñados para
-            que controles tus finanzas conversando con naturalidad.
+            {t("workflow.subtitle")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14">
           {steps.map((s, i) => (
             <div
-              key={i}
+              key={s.title}
               className="flex gap-5"
               data-aos="fade-up"
               data-aos-delay={i * 80}

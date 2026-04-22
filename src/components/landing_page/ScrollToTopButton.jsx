@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaArrowUp } from "react-icons/fa";
 
 export default function ScrollToTopButton() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function ScrollToTopButton() {
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-2 pointer-events-none"
       }`}
-      aria-label="Volver arriba"
+      aria-label={t("scrollTop")}
     >
       <FaArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
     </button>

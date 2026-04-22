@@ -8,36 +8,22 @@ import {
   FaBullseye,
   FaClock,
 } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export default function Product() {
+  const { t } = useTranslation();
   const features = [
-    {
-      icon: FaRobot,
-      title: "IA inteligente",
-      desc: "Detección automática de importes, categorías y fechas en cada mensaje.",
-    },
-    {
-      icon: FaWhatsapp,
-      title: "WhatsApp nativo",
-      desc: "Usa la app que ya tienes. No descargues nada más, solo escribe en WhatsApp.",
-    },
-    {
-      icon: FaShieldAlt,
-      title: "100% seguro",
-      desc: "Encriptación de nivel bancario. Tus datos son solo tuyos, siempre.",
-    },
-    {
-      icon: FaLightbulb,
-      title: "Recomendaciones",
-      desc: "Insights personalizados sobre tus hábitos de gasto y ahorro.",
-    },
+    { icon: FaRobot, title: t("product.features.aiTitle"), desc: t("product.features.aiDesc") },
+    { icon: FaWhatsapp, title: t("product.features.whatsappTitle"), desc: t("product.features.whatsappDesc") },
+    { icon: FaShieldAlt, title: t("product.features.secureTitle"), desc: t("product.features.secureDesc") },
+    { icon: FaLightbulb, title: t("product.features.recommendationsTitle"), desc: t("product.features.recommendationsDesc") },
   ];
 
   const stats = [
-    { number: "+3.000", label: "Usuarios activos", icon: FaUsers },
-    { number: "+70K", label: "Transacciones procesadas", icon: FaExchangeAlt },
-    { number: "98%", label: "Precisión en IA", icon: FaBullseye },
-    { number: "24/7", label: "Disponibilidad", icon: FaClock },
+    { number: "+3.000", label: t("product.stats.users"), icon: FaUsers },
+    { number: "+70K", label: t("product.stats.transactions"), icon: FaExchangeAlt },
+    { number: "98%", label: t("product.stats.accuracy"), icon: FaBullseye },
+    { number: "24/7", label: t("product.stats.availability"), icon: FaClock },
   ];
 
   return (
@@ -50,22 +36,20 @@ export default function Product() {
       <div className="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
         <div className="max-w-2xl mb-8 md:mb-10" data-aos="fade-up">
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
-            El producto
+            {t("product.eyebrow")}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-dark leading-tight mb-6">
-            Conoce a tu agente <span className="text-primary">Fin</span>.
+            {t("product.title")} <span className="text-primary">{t("product.titleAccent")}</span>.
           </h2>
           <p className="text-base md:text-lg text-gray-500 leading-relaxed">
-            Una plataforma de gestión financiera personal que funciona a través
-            de Fin, tu agente inteligente. Conectado a WhatsApp, convierte cada
-            mensaje natural en datos estructurados y análisis instantáneos.
+            {t("product.subtitle")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center mb-14 md:mb-24">
           <div data-aos="fade-right">
             <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
-              Cómo te ayuda Fin
+              {t("product.howHelps")}
             </h3>
             <div className="flex flex-col gap-6">
               {features.map((f, i) => (
@@ -134,6 +118,7 @@ export default function Product() {
                 <clipPath id="avatarClip">
                   <circle cx="40" cy="52" r="17" />
                 </clipPath>
+                <circle cx="40" cy="52" r="10" fill="white" />
                 <image href="/assets/logo.png" x="27" y="40" width="24" height="24" clipPath="url(#avatarClip)" />
                 <text x="61" y="46" fill="white" fontSize="13" fontWeight="600" fontFamily="system-ui" dominantBaseline="central">Fin</text>
                 <text x="61" y="59" fill="white" fontSize="9" opacity="0.75" fontFamily="system-ui" dominantBaseline="central">en línea</text>

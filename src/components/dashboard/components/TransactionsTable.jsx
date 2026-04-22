@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import { formatEuro, parseMonto, exportToCSV } from "../../../utils/globalUtils";
 import { parseFechaMock } from "../hooks/useDashboardData";
 import { getCategoryIcon } from "../../../utils/categoryIcons";
@@ -9,17 +9,6 @@ import ModalConfirmDelete from "./ModalConfirmDelete";
 import { FaPen, FaTrash } from "react-icons/fa";
 
 const POR_PAGINA = 10;
-
-// Map category names to stable color indices
-const categoryColorCache = {};
-let colorIndex = 0;
-function getCategoryColor(cat) {
-  if (!(cat in categoryColorCache)) {
-    categoryColorCache[cat] = coloresCategorias[colorIndex % coloresCategorias.length];
-    colorIndex++;
-  }
-  return categoryColorCache[cat];
-}
 
 export default function TransactionsTable({
   movimientos,
@@ -37,6 +26,19 @@ export default function TransactionsTable({
   const [modalEdit, setModalEdit] = useState(null);
   const [modalDelete, setModalDelete] = useState(null);
   const editable = !!(onAdd || onEdit || onDelete);
+
+  // Cache de colores por categoría LOCAL al componente — evita que dos tablas
+  // abiertas al mismo tiempo compartan estado global y se desincronicen.
+  const colorCacheRef = useRef({});
+  const colorIndexRef = useRef(0);
+  const getCategoryColor = useCallback((cat) => {
+    if (!(cat in colorCacheRef.current)) {
+      colorCacheRef.current[cat] =
+        coloresCategorias[colorIndexRef.current % coloresCategorias.length];
+      colorIndexRef.current += 1;
+    }
+    return colorCacheRef.current[cat];
+  }, []);
 
   const filtered = useMemo(() => {
     let list = [...movimientos];
@@ -212,8 +214,9 @@ export default function TransactionsTable({
             ) : (
               pageItems.map((m, i) => {
                 const catColor = getCategoryColor(m.categoria);
+                const rowKey = `${m.fecha}-${m.categoria}-${m.monto}-${m.nombre || ""}-${i}`;
                 return (
-                  <tr key={i} className="hover:bg-gray-50 transition-colors duration-150">
+                  <tr key={rowKey} className="hover:bg-gray-50 transition-colors duration-150">
                     <td className="py-3 px-2 sm:px-4 text-sm text-dark whitespace-nowrap">{m.fecha}</td>
                     {showTypeColumn && (
                       <td className="py-3 px-2 sm:px-4 hidden sm:table-cell">
@@ -252,15 +255,17 @@ export default function TransactionsTable({
                         <div className="inline-flex items-center gap-0 sm:gap-1">
                           <button
                             onClick={() => setModalEdit({ mov: m, idx: originalIndex(m) })}
-                            className="p-2 rounded-lg text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
+                            aria-label={`Editar ${m.nombre || m.categoria}`}
+                            className="inline-flex items-center justify-center min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] rounded-lg text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
                           >
-                            <FaPen className="w-3 h-3" />
+                            <FaPen className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => setModalDelete(originalIndex(m))}
-                            className="p-2 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors duration-150"
+                            aria-label={`Eliminar ${m.nombre || m.categoria}`}
+                            className="inline-flex items-center justify-center min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors duration-150"
                           >
-                            <FaTrash className="w-3 h-3" />
+                            <FaTrash className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </td>

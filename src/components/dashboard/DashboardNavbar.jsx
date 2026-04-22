@@ -1,21 +1,29 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import mockUser from "../../mocks/mockUser.json";
-import { FaUser, FaSignOutAlt, FaTags, FaLightbulb, FaCrown } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaTags, FaLightbulb, FaCrown, FaGlobe } from "react-icons/fa";
 import { HiOutlineHome, HiArrowTrendingUp, HiArrowTrendingDown, HiChartBar } from "react-icons/hi2";
-
-const tabs = [
-  { label: "Principal", path: "/dashboard", icon: HiOutlineHome },
-  { label: "Ingresos", path: "/dashboard/ingresos", icon: HiArrowTrendingUp },
-  { label: "Gastos", path: "/dashboard/gastos", icon: HiArrowTrendingDown },
-  { label: "Balance", path: "/dashboard/balance", icon: HiChartBar },
-];
 
 export default function DashboardNavbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const tabs = [
+    { label: t("dashboard.nav.principal"), path: "/dashboard", icon: HiOutlineHome },
+    { label: t("dashboard.nav.income"), path: "/dashboard/ingresos", icon: HiArrowTrendingUp },
+    { label: t("dashboard.nav.expenses"), path: "/dashboard/gastos", icon: HiArrowTrendingDown },
+    { label: t("dashboard.nav.balance"), path: "/dashboard/balance", icon: HiChartBar },
+  ];
+
+  const toggleLang = () => {
+    const next = i18n.language?.startsWith("es") ? "en" : "es";
+    i18n.changeLanguage(next);
+  };
+  const currentLang = i18n.language?.startsWith("es") ? "ES" : "EN";
 
   useEffect(() => {
     function handleClick(e) {
@@ -41,7 +49,7 @@ export default function DashboardNavbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("fintrack_token");
-    window.location.href = "/";
+    window.location.href = "/login";
   };
 
   return (
@@ -82,11 +90,19 @@ export default function DashboardNavbar() {
             {/* Plan + User */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <button
+                onClick={toggleLang}
+                aria-label={t("nav.language")}
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:text-dark hover:bg-gray-50 transition-colors"
+              >
+                <FaGlobe className="w-3 h-3" />
+                {currentLang}
+              </button>
+              <button
                 onClick={() => navigate("/dashboard/facturacion")}
                 className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-400 text-dark text-xs font-semibold hover:bg-gray-200 transition-colors"
               >
                 <FaCrown className="w-3 h-3 text-primary" />
-                Mi plan
+                {t("dashboard.nav.plan")}
               </button>
 
               <div className="relative" ref={dropdownRef}>
@@ -132,7 +148,7 @@ export default function DashboardNavbar() {
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <FaUser className="text-gray-400 w-3.5 h-3.5" /> Mi perfil
+                      <FaUser className="text-gray-400 w-3.5 h-3.5" /> {t("dashboard.nav.profile")}
                     </button>
                     <button
                       onClick={() => {
@@ -141,7 +157,7 @@ export default function DashboardNavbar() {
                       }}
                       className="sm:hidden w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <FaCrown className="text-primary w-3.5 h-3.5" /> Mi plan
+                      <FaCrown className="text-primary w-3.5 h-3.5" /> {t("dashboard.nav.plan")}
                     </button>
                     <button
                       onClick={() => {
@@ -150,7 +166,7 @@ export default function DashboardNavbar() {
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <FaTags className="text-gray-400 w-3.5 h-3.5" /> Categorías
+                      <FaTags className="text-gray-400 w-3.5 h-3.5" /> {t("dashboard.nav.categories")}
                     </button>
                     <button
                       onClick={() => {
@@ -159,14 +175,20 @@ export default function DashboardNavbar() {
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                     >
-                      <FaLightbulb className="text-gray-400 w-3.5 h-3.5" /> Sugerencias
+                      <FaLightbulb className="text-gray-400 w-3.5 h-3.5" /> {t("dashboard.nav.suggestions")}
+                    </button>
+                    <button
+                      onClick={toggleLang}
+                      className="sm:hidden w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      <FaGlobe className="text-gray-400 w-3.5 h-3.5" /> {t("nav.language")} · {currentLang}
                     </button>
                     <div className="border-t border-gray-100 my-1" />
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
                     >
-                      <FaSignOutAlt className="w-3.5 h-3.5" /> Cerrar sesión
+                      <FaSignOutAlt className="w-3.5 h-3.5" /> {t("dashboard.nav.logout")}
                     </button>
                   </div>
                 )}
@@ -186,7 +208,7 @@ export default function DashboardNavbar() {
               className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg transition-colors ${
                 isActive(tab.path)
                   ? "text-dark"
-                  : "text-gray-400"
+                  : "text-gray-500"
               }`}
             >
               <tab.icon className="w-5 h-5" />

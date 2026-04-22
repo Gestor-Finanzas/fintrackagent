@@ -1,144 +1,132 @@
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import LinkFooter from "./LinkFooter";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
+  const producto = [
+    { to: "/#hero", label: t("footer.links.home") },
+    { to: "/#features", label: t("footer.links.features") },
+    { to: "/#workflow", label: t("footer.links.howItWorks") },
+    { to: "/#pricing", label: t("footer.links.pricing") },
+  ];
+  const empresa = [
+    { to: "/empresa", label: t("footer.links.company") },
+    { to: "/faqs", label: t("footer.links.faqs") },
+    { to: "/contacto", label: t("footer.links.contact") },
+    { to: "/sobre-nosotros", label: t("footer.links.aboutUs") },
+  ];
+  const legal = [
+    { to: "/privacidad", label: t("footer.links.privacy") },
+    { to: "/terminos", label: t("footer.links.terms") },
+    { to: "/cookies", label: t("footer.links.cookies") },
+    { to: "/seguridad", label: t("footer.links.security") },
+  ];
+
   return (
-    <footer className="bg-dark text-white py-8">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
-          {/* Columna 1: Logo y descripción */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
-              <img src="/assets/logo.png" alt="Logo" className="w-6 h-6 md:w-7 md:h-7 object-contain mr-1" />
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+    <footer className="bg-dark py-16 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-primary opacity-10 rounded-full blur-3xl" />
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-2.5 mb-4">
+              <img
+                src="/assets/logo2.png"
+                alt="FinTrack"
+                loading="lazy"
+                className="w-7 h-7 object-contain"
+              />
+              <span className="text-lg font-bold text-white tracking-tight">
                 FinTrack
-              </h3>
+              </span>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Controla tus finanzas desde WhatsApp con la ayuda de IA avanzada.
+            <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
+              {t("footer.tagline")}
             </p>
           </div>
 
-          {/* Columna 2: Producto */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Producto</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>
-                <LinkFooter to="/#hero" className="hover:text-primary transition">
-                  Inicio
-                </LinkFooter>
-              </li>
-              <li>
-                <LinkFooter to="/#features" className="hover:text-primary transition">
-                  Características
-                </LinkFooter>
-              </li>
-              <li>
-                <LinkFooter to="/#workflow" className="hover:text-primary transition">
-                  Cómo funciona
-                </LinkFooter>
-              </li>
-              <li>
-                <LinkFooter to="/#pricing" className="hover:text-primary transition">
-                  Planes
-                </LinkFooter>
-              </li>
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
+              {t("footer.product")}
+            </h4>
+            <ul className="space-y-3">
+              {producto.map((l) => (
+                <li key={l.to}>
+                  <LinkFooter
+                    to={l.to}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                  >
+                    {l.label}
+                  </LinkFooter>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Columna 3: Empresa */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Empresa</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>
-                <a href="/empresa" className="hover:text-primary transition">
-                  Empresa
-                </a>
-              </li>
-              <li>
-                <a href="/faqs" className="hover:text-primary transition">
-                  FAQs
-                </a>
-              </li>
-              <li>
-                <a href="/contacto" className="hover:text-primary transition">
-                  Contacto
-                </a>
-              </li>
-              <li>
-                <a href="/sobre-nosotros" className="hover:text-primary transition">
-                  Sobre Nosotros
-                </a>
-              </li>
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
+              {t("footer.company")}
+            </h4>
+            <ul className="space-y-3">
+              {empresa.map((l) => (
+                <li key={l.to}>
+                  <a
+                    href={l.to}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Columna 4: Legal */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Legal</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>
-                <a href="/privacidad" className="hover:text-primary transition">
-                  Privacidad
-                </a>
-              </li>
-              <li>
-                <a href="/terminos" className="hover:text-primary transition">
-                  Términos
-                </a>
-              </li>
-              <li>
-                <a href="/cookies" className="hover:text-primary transition">
-                  Cookies
-                </a>
-              </li>
-              <li>
-                <a href="/seguridad" className="hover:text-primary transition">
-                  Seguridad
-                </a>
-              </li>
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-5">
+              {t("footer.legal")}
+            </h4>
+            <ul className="space-y-3">
+              {legal.map((l) => (
+                <li key={l.to}>
+                  <a
+                    href={l.to}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Separador */}
-        <div className="border-t border-gray-700 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              &copy; 2026 FinTrack Agent. Todos los derechos reservados.
-            </p>
-
-            {/* Redes sociales */}
-            <div className="flex gap-6 mt-6 md:mt-0">
-              <a
-                href="/#hero"
-                className="text-gray-400 hover:text-primary transition duration-300 text-xl"
-                aria-label="Facebook"
-              >
-                <FaFacebook />
-              </a>
-              <a
-                href="/#hero"
-                className="text-gray-400 hover:text-primary transition duration-300 text-xl"
-                aria-label="Twitter"
-              >
-                <FaTwitter />
-              </a>
-              <a
-                href="/#hero"
-                className="text-gray-400 hover:text-primary transition duration-300 text-xl"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin />
-              </a>
-              <a
-                href="/#hero"
-                className="text-gray-400 hover:text-primary transition duration-300 text-xl"
-                aria-label="Instagram"
-              >
-                <FaInstagram />
-              </a>
-            </div>
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <p className="text-xs text-gray-500">
+            © 2026 FinTrack Agent. {t("footer.rights")}
+          </p>
+          <div className="flex gap-5">
+            <a
+              href="/#hero"
+              aria-label="LinkedIn"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
+              <FaLinkedin className="w-4 h-4" />
+            </a>
+            <a
+              href="/#hero"
+              aria-label="Twitter"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
+              <FaTwitter className="w-4 h-4" />
+            </a>
+            <a
+              href="/#hero"
+              aria-label="Instagram"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
+              <FaInstagram className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </div>

@@ -42,15 +42,15 @@ export default function Faqs() {
   return (
     <div>
       <div className="max-w-3xl mx-auto py-2">
-        <h1 className="text-2xl font-bold text-dash-text mb-8">Preguntas Frecuentes</h1>
+        <h1 className="text-2xl font-bold text-dark mb-8">Preguntas Frecuentes</h1>
         {sections.map((section) => (
           <section key={section.title} className="mb-8">
-            <h2 className="text-lg font-semibold text-dash-text mb-4">{section.title}</h2>
+            <h2 className="text-lg font-semibold text-dark mb-4">{section.title}</h2>
             <div className="flex flex-col gap-3">
               {section.items.map((item) => (
-                <div key={item.q} className="bg-white rounded-xl border border-dash-border p-4">
-                  <h3 className="text-sm font-semibold text-dash-text mb-1">{item.q}</h3>
-                  <p className="text-sm text-dash-text-secondary">{item.a}</p>
+                <div key={item.q} className="bg-white rounded-xl border border-gray-200 p-4">
+                  <h3 className="text-sm font-semibold text-dark mb-1">{item.q}</h3>
+                  <p className="text-sm text-gray-500">{item.a}</p>
                 </div>
               ))}
             </div>

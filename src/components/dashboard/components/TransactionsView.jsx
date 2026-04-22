@@ -19,7 +19,8 @@ import {
  * Todo el contenido (datasets, totales, colores, textos) se deriva de `type`.
  */
 export default function TransactionsView({ type }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const {
     periodo, setPeriodo,
     customRange, setCustomRange, dateRangeLabel,
@@ -91,7 +92,7 @@ export default function TransactionsView({ type }) {
       ...baseLineOptions.plugins,
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
-        callbacks: { label: (ctx) => `${formatEuro(ctx.parsed.y)}` },
+        callbacks: { label: (ctx) => `${formatEuro(ctx.parsed.y, lang)}` },
       },
     },
     scales: {
@@ -100,11 +101,11 @@ export default function TransactionsView({ type }) {
         ...baseLineOptions.scales.y,
         ticks: {
           ...baseLineOptions.scales.y.ticks,
-          callback: (v) => formatEuro(v),
+          callback: (v) => formatEuro(v, lang),
         },
       },
     },
-  }), []);
+  }), [lang]);
 
   const donutOptions = useMemo(() => ({
     ...baseDonutOptions,
@@ -112,10 +113,10 @@ export default function TransactionsView({ type }) {
       ...baseDonutOptions.plugins,
       tooltip: {
         ...baseDonutOptions.plugins.tooltip,
-        callbacks: { label: (ctx) => `${ctx.label}: ${formatEuro(ctx.parsed)}` },
+        callbacks: { label: (ctx) => `${ctx.label}: ${formatEuro(ctx.parsed, lang)}` },
       },
     },
-  }), []);
+  }), [lang]);
 
   const eyebrow = isIncome
     ? `${t("common.total")} ${t("dashboard.summary.income").toLowerCase()}`
@@ -135,7 +136,7 @@ export default function TransactionsView({ type }) {
           </h1>
           <p className="text-base text-gray-600 mt-3">
             <span className={`text-xl font-bold ${totalColor}`}>
-              {formatEuro(total)}
+              {formatEuro(total, lang)}
             </span>
           </p>
         </div>

@@ -79,28 +79,47 @@ export function getDateRange(arr) {
 }
 // Utilidades globales para formateo y otras funciones
 
+// Por ahora forzamos formato español en todas las cantidades: punto como
+// separador de miles, coma para decimales, y el símbolo "€" al final
+// ("1.500,00 €"). Cuando soportemos otras monedas / locales pasaremos el
+// idioma real y mapearemos aquí. El segundo argumento `lang` se mantiene por
+// compatibilidad con los call-sites pero se ignora.
+const CURRENCY_LOCALE = "es-ES";
+
 /**
- * Formatea un número como euro con separador de miles y decimales en español.
- * @param {number} amount
- * @returns {string}
+ * Formatea un número como euro en formato español:
+ * - separador de miles con punto — incluido SIEMPRE, incluso en 4 dígitos
+ *   ("1.500 €", no "1500 €"). El default de es-ES es "auto"/"min2", que
+ *   omite el separador con 4 cifras; con `useGrouping: "always"` lo
+ *   forzamos en todos los casos.
+ * - decimales con coma
+ * - sin decimales si el importe es entero (1.500 € en vez de 1.500,00 €)
+ *
+ * @param {number|string} amount
  */
 export function formatEuro(amount) {
-  // Utilidades globales para formateo y otras funciones
   const num = Number(amount) || 0;
-  // Separar parte entera y decimal
-  let [ent, dec] = num.toFixed(2).split('.');
-  ent = ent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  // Si los decimales son 00, no mostrar
-  if (dec === '00') {
-    return ent + ' €';
-  }
-  // Si solo hay un decimal (ej: 20,5), mostrar como 20,50
-  if (dec[1] === '0' && dec[0] !== '0') {
-    dec = dec[0] + '0';
-  }
-  // Si los decimales terminan en 0, quitar el 0 (excepto el caso anterior)
-  else if (dec[1] === '0') {
-    dec = dec[0];
-  }
-  return ent + ',' + dec + ' €';
+  const isWhole = Number.isInteger(num);
+  return new Intl.NumberFormat(CURRENCY_LOCALE, {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: isWhole ? 0 : 2,
+    maximumFractionDigits: 2,
+    useGrouping: "always",
+  }).format(num);
+}
+
+/**
+ * Formatea un número con dos decimales en formato español ("2,99"), SIN
+ * símbolo de moneda. Útil cuando el diseño pinta el "€" aparte.
+ *
+ * @param {number|string} amount
+ */
+export function formatNumber(amount) {
+  const num = Number(amount) || 0;
+  return new Intl.NumberFormat(CURRENCY_LOCALE, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: "always",
+  }).format(num);
 }

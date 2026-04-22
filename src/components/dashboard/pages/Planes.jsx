@@ -2,51 +2,63 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import mockDatos from "../../../mocks/mockDatosEconomicos.json";
+import { formatNumber } from "../../../utils/globalUtils";
 import {
   FaCrown, FaTimes, FaShieldAlt, FaLock, FaBolt, FaChartLine, FaHeadset, FaInfinity, FaClock, FaCalendarAlt, FaRedo,
 } from "react-icons/fa";
 
-const BILLING_OPTIONS = [
-  {
-    id: "Mensual",
-    label: "Mensual",
-    price: "2,99",
-    cycle: "mes",
-    detail: "35,88 €/año en total",
-    popular: false,
-    cta: "Suscribirse mensual",
-  },
-  {
-    id: "Anual",
-    label: "Anual",
-    price: "29,99",
-    cycle: "año",
-    detail: "Equivale a 2,50 €/mes",
-    savings: "Ahorras un 17%",
-    popular: true,
-    cta: "Suscribirse anual",
-  },
-];
-
-const PRO_FEATURES = [
-  { icon: FaInfinity, text: "Transacciones ilimitadas" },
-  { icon: FaChartLine, text: "Gráficos y reportes avanzados" },
-  { icon: FaBolt, text: "Asistente IA financiero" },
-  { icon: FaHeadset, text: "Soporte prioritario" },
-];
-
-const TRUST_ITEMS = [
-  { icon: FaShieldAlt, text: "Pagos seguros con cifrado SSL" },
-  { icon: FaLock, text: "Tus datos nunca se comparten" },
-  { icon: FaTimes, text: "Cancela cuando quieras" },
-];
-
 export default function Planes() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const navigate = useNavigate();
   const [datos] = useState(mockDatos);
   const [selected, setSelected] = useState("Anual");
   const [modalConfirm, setModalConfirm] = useState(false);
+
+  // Opciones de facturación. Los textos se traducen en tiempo de render para
+  // respetar el idioma activo — no declararlos como constantes fuera del componente.
+  const BILLING_OPTIONS = [
+    {
+      id: "Mensual",
+      label: t("plans.billingOptions.monthly.label"),
+      price: formatNumber(2.99, lang),
+      cycle: t("plans.billingOptions.monthly.cycle"),
+      detail: t("plans.billingOptions.monthly.detail"),
+      popular: false,
+      cta: t("plans.billingOptions.monthly.cta"),
+    },
+    {
+      id: "Anual",
+      label: t("plans.billingOptions.annual.label"),
+      price: formatNumber(29.99, lang),
+      cycle: t("plans.billingOptions.annual.cycle"),
+      detail: t("plans.billingOptions.annual.detail"),
+      savings: t("plans.billingOptions.annual.savings"),
+      popular: true,
+      cta: t("plans.billingOptions.annual.cta"),
+    },
+  ];
+
+  const PRO_FEATURES = [
+    { icon: FaInfinity, text: t("plans.features.unlimited") },
+    { icon: FaChartLine, text: t("plans.features.charts") },
+    { icon: FaBolt, text: t("plans.features.aiAssistant") },
+    { icon: FaHeadset, text: t("plans.features.prioritySupport") },
+  ];
+
+  const TRUST_ITEMS = [
+    { icon: FaShieldAlt, text: t("plans.trust.ssl") },
+    { icon: FaLock, text: t("plans.trust.privacy") },
+    { icon: FaTimes, text: t("plans.trust.cancel") },
+  ];
+
+  const FAQS = [
+    { q: t("plans.faqs.q1"), a: t("plans.faqs.a1") },
+    { q: t("plans.faqs.q2"), a: t("plans.faqs.a2") },
+    { q: t("plans.faqs.q3"), a: t("plans.faqs.a3") },
+    { q: t("plans.faqs.q4"), a: t("plans.faqs.a4") },
+    { q: t("plans.faqs.q5"), a: t("plans.faqs.a5") },
+  ];
 
   const isFree = datos.tarifa === "Gratis";
   const isCurrentBilling = (id) => datos.tarifa === id;
@@ -92,13 +104,13 @@ export default function Planes() {
             <div className="flex-1">
               <h3 className="text-sm font-bold text-dark">
                 {trialDays > 0
-                  ? `Tu prueba gratuita termina en ${trialDays} día${trialDays !== 1 ? "s" : ""}`
-                  : "Tu prueba gratuita ha expirado"}
+                  ? t("plans.trialEnds", { count: trialDays })
+                  : t("plans.trialExpired")}
               </h3>
               <p className="text-xs text-gray-500 mt-0.5">
                 {trialDays > 0
-                  ? "Cuando termine, se bloqueará el acceso al dashboard y al asistente IA hasta que elijas un plan."
-                  : "El acceso al dashboard y al asistente IA está bloqueado. Elige un plan para continuar."}
+                  ? t("plans.trialDescActive")
+                  : t("plans.trialDescExpired")}
               </p>
             </div>
             {trialDays > 0 && (
@@ -118,7 +130,7 @@ export default function Planes() {
 
       {/* What you get */}
       <div className="bg-white rounded-2xl border border-gray-200 p-6">
-        <h2 className="text-base font-semibold text-dark mb-4">Todo lo que incluye</h2>
+        <h2 className="text-base font-semibold text-dark mb-4">{t("plans.whatIncludes")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {PRO_FEATURES.map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-3 p-3 rounded-xl bg-primary/5">
@@ -131,8 +143,8 @@ export default function Planes() {
 
       {/* Billing options */}
       <div>
-        <h2 className="text-base font-semibold text-dark mb-1 text-center">Elige tu forma de pago</h2>
-        <p className="text-xs text-gray-500 text-center mb-5">Mismo acceso, distinta frecuencia de cobro</p>
+        <h2 className="text-base font-semibold text-dark mb-1 text-center">{t("plans.chooseBilling")}</h2>
+        <p className="text-xs text-gray-500 text-center mb-5">{t("plans.sameAccess")}</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 pt-3">
           {BILLING_OPTIONS.map((option) => {
@@ -161,8 +173,8 @@ export default function Planes() {
                       }
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-dark">Plan {option.label}</h3>
-                      <p className="text-xs text-gray-500">{hasSavings ? "Un solo pago al año" : "Cobro cada mes"}</p>
+                      <h3 className="text-lg font-bold text-dark">{t("plans.planName", { name: option.label })}</h3>
+                      <p className="text-xs text-gray-500">{hasSavings ? t("plans.billingYearOnce") : t("plans.billingMonthly")}</p>
                     </div>
                   </div>
 
@@ -184,7 +196,7 @@ export default function Planes() {
                         : "bg-dark text-white hover:bg-primary"
                       }`}
                   >
-                    {current ? "Plan actual" : option.cta}
+                    {current ? t("plans.currentPlanBtn") : option.cta}
                   </button>
                 </div>
               </div>
@@ -207,7 +219,7 @@ export default function Planes() {
         </div>
         <div className="border-t border-gray-200 mt-5 pt-5 text-center">
           <p className="text-xs text-gray-500">
-            Pagos procesados de forma segura por <span className="font-semibold text-dark">Stripe</span>
+            {t("plans.trustBy")} <span className="font-semibold text-dark">Stripe</span>
           </p>
           <div className="flex items-center justify-center gap-3 mt-3 text-gray-500">
             <svg className="h-5" viewBox="0 0 60 25" fill="currentColor"><rect width="60" height="25" rx="4" opacity="0.1" /><text x="30" y="17" textAnchor="middle" fontSize="10" fontWeight="600" fill="currentColor">VISA</text></svg>
@@ -219,30 +231,9 @@ export default function Planes() {
 
       {/* FAQ section */}
       <div className="bg-white rounded-2xl border border-gray-200 p-6">
-        <h2 className="text-base font-semibold text-dark mb-4">Preguntas frecuentes</h2>
+        <h2 className="text-base font-semibold text-dark mb-4">{t("plans.faqTitle")}</h2>
         <div className="space-y-4">
-          {[
-            {
-              q: "¿Qué pasa cuando terminan los 14 días de prueba?",
-              a: "Se bloquea el acceso al dashboard y al asistente IA. Tus datos se conservan y podrás acceder a todo de nuevo en cuanto elijas un plan de pago.",
-            },
-            {
-              q: "¿Los dos planes dan el mismo acceso?",
-              a: "Sí, ambas opciones desbloquean exactamente las mismas funcionalidades. La única diferencia es la frecuencia de cobro: mensual o anual con descuento.",
-            },
-            {
-              q: "¿Puedo cancelar en cualquier momento?",
-              a: "Sí, puedes cancelar tu suscripción cuando quieras desde la sección de facturación. Seguirás teniendo acceso hasta que termine tu período de facturación actual.",
-            },
-            {
-              q: "¿Puedo cambiar entre mensual y anual?",
-              a: "Por supuesto. Puedes cambiar tu forma de pago en cualquier momento. El cambio se aplica en tu próximo ciclo de facturación.",
-            },
-            {
-              q: "¿Es seguro el pago?",
-              a: "Todos los pagos se procesan a través de Stripe, la plataforma de pagos líder mundial. Nunca almacenamos los datos de tu tarjeta.",
-            },
-          ].map(({ q, a }) => (
+          {FAQS.map(({ q, a }) => (
             <div key={q} className="border-b border-gray-200 pb-4 last:border-0 last:pb-0">
               <h3 className="text-sm font-semibold text-dark">{q}</h3>
               <p className="text-sm text-gray-500 mt-1">{a}</p>
@@ -257,7 +248,7 @@ export default function Planes() {
           onClick={() => navigate(-1)}
           className="text-sm text-gray-500 hover:text-dark transition-colors"
         >
-          &larr; Volver
+          &larr; {t("plans.back")}
         </button>
       </div>
 
@@ -269,13 +260,17 @@ export default function Planes() {
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
                 <FaCrown className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="text-lg font-bold text-dark">Confirmar suscripción</h3>
+              <h3 className="text-lg font-bold text-dark">{t("plans.confirmModal.title")}</h3>
               <p className="text-sm text-gray-500 mt-2">
-                Vas a suscribirte al plan <span className="font-semibold text-dark">Pro {selected}</span>.
-                {selected === "Anual" ? " Se te cobrarán 29,99 €/año." : " Se te cobrarán 2,99 €/mes."}
+                {t("plans.confirmModal.bodyStart")}{" "}
+                <span className="font-semibold text-dark">Pro {selected}</span>.
+                {" "}
+                {selected === "Anual"
+                  ? t("plans.confirmModal.bodyAnnual")
+                  : t("plans.confirmModal.bodyMonthly")}
               </p>
               <p className="text-xs text-gray-500 mt-2">
-                Tendrás acceso completo a todas las funcionalidades de FinTrack.
+                {t("plans.confirmModal.bodyEnd")}
               </p>
             </div>
             <div className="flex gap-3">
@@ -283,13 +278,13 @@ export default function Planes() {
                 onClick={() => setModalConfirm(false)}
                 className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors"
               >
-                Cancelar
+                {t("plans.confirmModal.cancel")}
               </button>
               <button
                 onClick={handleConfirm}
                 className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors"
               >
-                Confirmar
+                {t("plans.confirmModal.confirm")}
               </button>
             </div>
           </div>

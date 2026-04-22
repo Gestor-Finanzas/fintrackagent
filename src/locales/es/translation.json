@@ -218,7 +218,22 @@
       "new": "Nuevo movimiento",
       "edit": "Editar movimiento",
       "delete": "Eliminar movimiento",
-      "confirmDelete": "Esta acción no se puede deshacer. ¿Estás seguro de que quieres eliminar este movimiento?"
+      "confirmDelete": "Esta acción no se puede deshacer. ¿Estás seguro de que quieres eliminar este movimiento?",
+      "title": "Movimientos",
+      "search": "Buscar...",
+      "add": "Añadir",
+      "empty2": "No hay movimientos",
+      "optional": "Opcional",
+      "amountLabel": "Cantidad (€)",
+      "selectPlaceholder": "Seleccionar...",
+      "registryEyebrow": "Registro",
+      "editEyebrow": "Edición",
+      "addCta": "Añadir movimiento",
+      "saveChanges": "Guardar cambios",
+      "actions": "Acciones",
+      "results": "{{count}} resultado",
+      "results_plural": "{{count}} resultados",
+      "confirmEyebrow": "Confirmar acción"
     },
     "period": {
       "week": "Semana",
@@ -273,7 +288,18 @@
     "hasAccount": "¿Ya tienes cuenta?",
     "register": "Registrarse",
     "passwordMismatch": "Las contraseñas no coinciden",
-    "or": "o"
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres.",
+    "or": "o",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "checkEmail": "Cuenta creada. Revisa tu correo para confirmar tu dirección antes de iniciar sesión.",
+    "forgotComingSoon": "Recuperación de contraseña disponible próximamente. Escríbenos a soporte si necesitas acceso.",
+    "genericError": "Ha ocurrido un error. Inténtalo de nuevo en unos segundos.",
+    "errorInvalidCredentials": "Email o contraseña incorrectos.",
+    "errorUserExists": "Ya existe una cuenta con este email. Inicia sesión en su lugar.",
+    "errorEmailNotConfirmed": "Tu email aún no está confirmado. Revisa tu bandeja de entrada.",
+    "errorPassword": "La contraseña no cumple los requisitos mínimos.",
+    "errorRateLimit": "Demasiados intentos. Espera unos minutos antes de volver a probar."
   },
   "scrollTop": "Volver arriba",
   "about": {
@@ -390,5 +416,285 @@
     "suggestionsEyebrow": "Feedback",
     "suggestionsTitle": "Sugerencias",
     "suggestionsSubtitle": "Tu opinión nos ayuda a mejorar. Cuéntanos qué te gustaría ver en FinTrack."
+  },
+  "profile": {
+    "sections": {
+      "main": "Datos principales",
+      "mainSubtitle": "Información básica de contacto.",
+      "more": "Más datos",
+      "moreSubtitle": "Información opcional para enriquecer tu perfil."
+    },
+    "fields": {
+      "nameFull": "Nombre completo",
+      "name": "Nombre",
+      "lastName": "Apellidos",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "city": "Ciudad",
+      "address": "Dirección",
+      "gender": "Sexo",
+      "birthdate": "Fecha de nacimiento",
+      "whatsapp": "WhatsApp"
+    },
+    "placeholders": {
+      "name": "Tu nombre",
+      "lastName": "Tus apellidos",
+      "phone": "+34 600 000 000",
+      "city": "Tu ciudad",
+      "address": "Calle, número, piso...",
+      "gender": "Selecciona una opción",
+      "whatsapp": "+34 600 000 000"
+    },
+    "gender": {
+      "male": "Hombre",
+      "female": "Mujer",
+      "other": "Otro",
+      "preferNot": "Prefiero no decirlo"
+    },
+    "memberSince": "Miembro desde {{date}}",
+    "editButton": "Editar",
+    "myPlan": "Mi plan",
+    "planFree": "Plan Gratis",
+    "planNamed": "Plan {{name}}",
+    "accountActive": "Activa",
+    "accountInactive": "Inactiva",
+    "trialDaysLeft": "Te quedan {{days}} días de prueba gratuita.",
+    "nextCharge": "Próximo cobro: {{date}}",
+    "daysRemaining": "{{days}} días restantes",
+    "consumed": "{{pct}}% consumido",
+    "pickPlan": "Escoger plan",
+    "managePlan": "Gestionar plan",
+    "securityHeader": "Seguridad y cuenta",
+    "password": "Contraseña",
+    "passwordDesc": "Cambia tu contraseña de acceso",
+    "changeBtn": "Cambiar",
+    "deleteAccount": "Eliminar cuenta",
+    "deleteAccountDesc": "Acción permanente e irreversible",
+    "deleteBtn": "Eliminar",
+    "passwordModal": {
+      "eyebrow": "Seguridad",
+      "title": "Cambiar contraseña",
+      "description": "Introduce tu contraseña actual y la nueva (mínimo 8 caracteres).",
+      "currentLabel": "Contraseña actual",
+      "currentPlaceholder": "Tu contraseña actual",
+      "newLabel": "Nueva contraseña",
+      "newPlaceholder": "Mínimo 8 caracteres",
+      "repeatLabel": "Repetir contraseña",
+      "repeatPlaceholder": "Repite la contraseña",
+      "mismatch": "Las contraseñas no coinciden"
+    },
+    "deleteModal": {
+      "eyebrow": "Acción irreversible",
+      "title": "Eliminar cuenta",
+      "intro": "Esta acción",
+      "introAccent": "no se puede deshacer",
+      "introEnd": ". Se eliminarán permanentemente:",
+      "item1": "Todos tus datos personales",
+      "item2": "Historial de transacciones e ingresos",
+      "item3": "Categorías personalizadas",
+      "item4": "Suscripción y datos de facturación",
+      "confirmLabel": "Escribe",
+      "confirmLabelAccent": "ELIMINAR",
+      "confirmLabelEnd": "para confirmar",
+      "confirmPlaceholder": "ELIMINAR",
+      "cancelBtn": "Cancelar",
+      "deleteBtn": "Eliminar cuenta"
+    },
+    "feedback": {
+      "saved": "Datos actualizados correctamente.",
+      "saveError": "No se pudieron guardar los cambios. Inténtalo de nuevo.",
+      "passwordChanged": "Contraseña cambiada correctamente.",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres.",
+      "passwordMismatch": "Las contraseñas no coinciden.",
+      "currentPasswordRequired": "Introduce tu contraseña actual.",
+      "currentPasswordWrong": "La contraseña actual no es correcta.",
+      "passwordChangeError": "No se pudo cambiar la contraseña.",
+      "samePassword": "La nueva contraseña debe ser distinta a la actual.",
+      "loadingProfile": "Cargando perfil..."
+    },
+    "emailReadOnly": "El correo no se puede cambiar desde aquí",
+    "actions": {
+      "cancel": "Cancelar",
+      "saveChanges": "Guardar cambios",
+      "saving": "Guardando...",
+      "save": "Guardar"
+    }
+  },
+  "balancePage": {
+    "eyebrow": "Situación global",
+    "title": "Balance",
+    "balanceNet": "Balance neto",
+    "evolutionChart": "Evolución del balance",
+    "compareTitle": "Ingresos vs Gastos",
+    "movementsCount": "{{count}} movimiento · {{pct}}% del total",
+    "movementsCount_plural": "{{count}} movimientos · {{pct}}% del total",
+    "savingsRate": "Tasa de ahorro"
+  },
+  "billing": {
+    "currentPlan": "Plan actual",
+    "planPro": "Plan Pro · {{tier}}",
+    "statusActive": "Activa",
+    "statusInactive": "Inactiva",
+    "changePlan": "Cambiar plan",
+    "startDate": "Fecha de inicio",
+    "nextCharge": "Próximo cobro",
+    "endDate": "Fin del período",
+    "paymentMethod": "Método de pago",
+    "changeBtn": "Cambiar",
+    "expires": "Expira {{date}}",
+    "cancelTitle": "Cancelar suscripción",
+    "cancelDesc": "Mantendrás el acceso hasta el fin del período actual.",
+    "cancelCta": "Cancelar suscripción",
+    "totalBilled": "Total facturado",
+    "totalPaid": "Pagado",
+    "totalPending": "Pendiente",
+    "historyTitle": "Historial de facturas",
+    "table": {
+      "number": "Nº Factura",
+      "date": "Fecha",
+      "concept": "Concepto",
+      "amount": "Importe",
+      "status": "Estado",
+      "pdf": "PDF"
+    },
+    "statusPaid": "Pagada",
+    "statusPending": "Pendiente",
+    "cancelModal": {
+      "title": "Cancelar suscripción",
+      "body": "¿Estás seguro? Mantendrás el acceso hasta el {{date}}. Después se bloqueará el dashboard y el asistente IA.",
+      "keep": "Mantener plan",
+      "confirm": "Cancelar plan"
+    },
+    "cyclePerMonth": "mes",
+    "cyclePerYear": "año"
+  },
+  "plans": {
+    "trialEnds": "Tu prueba gratuita termina en {{count}} día",
+    "trialEnds_plural": "Tu prueba gratuita termina en {{count}} días",
+    "trialExpired": "Tu prueba gratuita ha expirado",
+    "trialDescActive": "Cuando termine, se bloqueará el acceso al dashboard y al asistente IA hasta que elijas un plan.",
+    "trialDescExpired": "El acceso al dashboard y al asistente IA está bloqueado. Elige un plan para continuar.",
+    "whatIncludes": "Todo lo que incluye",
+    "chooseBilling": "Elige tu forma de pago",
+    "sameAccess": "Mismo acceso, distinta frecuencia de cobro",
+    "billingYearOnce": "Un solo pago al año",
+    "billingMonthly": "Cobro cada mes",
+    "planName": "Plan {{name}}",
+    "currentPlanBtn": "Plan actual",
+    "back": "Volver",
+    "trustBy": "Pagos procesados de forma segura por",
+    "faqTitle": "Preguntas frecuentes",
+    "billingOptions": {
+      "monthly": {
+        "label": "Mensual",
+        "cycle": "mes",
+        "detail": "35,88 €/año en total",
+        "cta": "Suscribirse mensual"
+      },
+      "annual": {
+        "label": "Anual",
+        "cycle": "año",
+        "detail": "Equivale a 2,50 €/mes",
+        "savings": "Ahorras un 17%",
+        "cta": "Suscribirse anual"
+      }
+    },
+    "features": {
+      "unlimited": "Transacciones ilimitadas",
+      "charts": "Gráficos y reportes avanzados",
+      "aiAssistant": "Asistente IA financiero",
+      "prioritySupport": "Soporte prioritario"
+    },
+    "trust": {
+      "ssl": "Pagos seguros con cifrado SSL",
+      "privacy": "Tus datos nunca se comparten",
+      "cancel": "Cancela cuando quieras"
+    },
+    "faqs": {
+      "q1": "¿Qué pasa cuando terminan los 14 días de prueba?",
+      "a1": "Se bloquea el acceso al dashboard y al asistente IA. Tus datos se conservan y podrás acceder a todo de nuevo en cuanto elijas un plan de pago.",
+      "q2": "¿Los dos planes dan el mismo acceso?",
+      "a2": "Sí, ambas opciones desbloquean exactamente las mismas funcionalidades. La única diferencia es la frecuencia de cobro: mensual o anual con descuento.",
+      "q3": "¿Puedo cancelar en cualquier momento?",
+      "a3": "Sí, puedes cancelar tu suscripción cuando quieras desde la sección de facturación. Seguirás teniendo acceso hasta que termine tu período de facturación actual.",
+      "q4": "¿Puedo cambiar entre mensual y anual?",
+      "a4": "Por supuesto. Puedes cambiar tu forma de pago en cualquier momento. El cambio se aplica en tu próximo ciclo de facturación.",
+      "q5": "¿Es seguro el pago?",
+      "a5": "Todos los pagos se procesan a través de Stripe, la plataforma de pagos líder mundial. Nunca almacenamos los datos de tu tarjeta."
+    },
+    "confirmModal": {
+      "title": "Confirmar suscripción",
+      "bodyStart": "Vas a suscribirte al plan",
+      "bodyAnnual": "Se te cobrarán 29,99 €/año.",
+      "bodyMonthly": "Se te cobrarán 2,99 €/mes.",
+      "bodyEnd": "Tendrás acceso completo a todas las funcionalidades de FinTrack.",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar"
+    }
+  },
+  "categoriesPage": {
+    "newCategory": "Nueva categoría",
+    "editCategory": "Editar categoría",
+    "incomeGroup": "Categorías de ingresos",
+    "expenseGroup": "Categorías de gastos",
+    "subCount": "{{count}} subcategoría",
+    "subCount_plural": "{{count}} subcategorías",
+    "addSubTooltip": "Añadir subcategoría",
+    "editTooltip": "Editar categoría",
+    "deleteTooltip": "Eliminar categoría",
+    "deleteSubTooltip": "Eliminar subcategoría",
+    "addSubInline": "Añadir subcategoría",
+    "form": {
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Ej: Educación",
+      "typeLabel": "Tipo",
+      "typeIncome": "Ingreso",
+      "typeExpense": "Gasto",
+      "iconLabel": "Icono",
+      "save": "Guardar cambios",
+      "create": "Crear categoría"
+    },
+    "subModal": {
+      "title": "Nueva subcategoría",
+      "inContext": "En",
+      "placeholder": "Ej: Nómina, Netflix, Gasolina...",
+      "cancel": "Cancelar",
+      "add": "Añadir"
+    },
+    "deleteModal": {
+      "title": "Eliminar categoría",
+      "body": "¿Eliminar",
+      "subsWarning": "Se eliminarán también sus {{count}} subcategoría.",
+      "subsWarning_plural": "Se eliminarán también sus {{count}} subcategorías.",
+      "cancel": "Cancelar",
+      "delete": "Eliminar"
+    },
+    "deleteSubModal": {
+      "title": "Eliminar subcategoría",
+      "body": "¿Eliminar",
+      "of": "de",
+      "cancel": "Cancelar",
+      "delete": "Eliminar"
+    }
+  },
+  "suggestions": {
+    "categories": {
+      "feature": "Nueva funcionalidad",
+      "design": "Mejora de diseño",
+      "performance": "Rendimiento",
+      "bugfix": "Corrección de errores",
+      "other": "Otra"
+    },
+    "sentTitle": "Sugerencia enviada",
+    "sentBody": "Gracias por tu feedback. Revisaremos tu sugerencia lo antes posible.",
+    "sentAgain": "Enviar otra sugerencia",
+    "categoryLabel": "Categoría",
+    "categoryPlaceholder": "Selecciona una categoría",
+    "subjectLabel": "Asunto",
+    "subjectPlaceholder": "Resumen breve de tu sugerencia",
+    "descriptionLabel": "Descripción",
+    "descriptionPlaceholder": "Describe tu sugerencia con el mayor detalle posible...",
+    "sending": "Enviando...",
+    "send": "Enviar sugerencia"
   }
 }

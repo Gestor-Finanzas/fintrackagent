@@ -218,7 +218,22 @@
       "new": "New transaction",
       "edit": "Edit transaction",
       "delete": "Delete transaction",
-      "confirmDelete": "This action cannot be undone. Are you sure you want to delete this transaction?"
+      "confirmDelete": "This action cannot be undone. Are you sure you want to delete this transaction?",
+      "title": "Transactions",
+      "search": "Search...",
+      "add": "Add",
+      "empty2": "No transactions",
+      "optional": "Optional",
+      "amountLabel": "Amount (€)",
+      "selectPlaceholder": "Select...",
+      "registryEyebrow": "Record",
+      "editEyebrow": "Edit",
+      "addCta": "Add transaction",
+      "saveChanges": "Save changes",
+      "actions": "Actions",
+      "results": "{{count}} result",
+      "results_plural": "{{count}} results",
+      "confirmEyebrow": "Confirm action"
     },
     "period": {
       "week": "Week",
@@ -273,7 +288,18 @@
     "hasAccount": "Already have an account?",
     "register": "Sign up",
     "passwordMismatch": "Passwords do not match",
-    "or": "or"
+    "passwordTooShort": "Password must be at least 8 characters.",
+    "or": "or",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "checkEmail": "Account created. Check your inbox to confirm your email before signing in.",
+    "forgotComingSoon": "Password recovery coming soon. Write to support if you need access.",
+    "genericError": "Something went wrong. Please try again in a few seconds.",
+    "errorInvalidCredentials": "Invalid email or password.",
+    "errorUserExists": "An account with this email already exists. Sign in instead.",
+    "errorEmailNotConfirmed": "Your email is not confirmed yet. Check your inbox.",
+    "errorPassword": "Password does not meet the minimum requirements.",
+    "errorRateLimit": "Too many attempts. Please wait a few minutes before trying again."
   },
   "scrollTop": "Scroll to top",
   "about": {
@@ -390,5 +416,285 @@
     "suggestionsEyebrow": "Feedback",
     "suggestionsTitle": "Suggestions",
     "suggestionsSubtitle": "Your opinion helps us improve. Tell us what you'd like to see in FinTrack."
+  },
+  "profile": {
+    "sections": {
+      "main": "Main info",
+      "mainSubtitle": "Basic contact details.",
+      "more": "More info",
+      "moreSubtitle": "Optional information to complete your profile."
+    },
+    "fields": {
+      "nameFull": "Full name",
+      "name": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "city": "City",
+      "address": "Address",
+      "gender": "Gender",
+      "birthdate": "Date of birth",
+      "whatsapp": "WhatsApp"
+    },
+    "placeholders": {
+      "name": "Your first name",
+      "lastName": "Your last name",
+      "phone": "+34 600 000 000",
+      "city": "Your city",
+      "address": "Street, number, floor...",
+      "gender": "Select an option",
+      "whatsapp": "+34 600 000 000"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other",
+      "preferNot": "Prefer not to say"
+    },
+    "memberSince": "Member since {{date}}",
+    "editButton": "Edit",
+    "myPlan": "My plan",
+    "planFree": "Free plan",
+    "planNamed": "{{name}} plan",
+    "accountActive": "Active",
+    "accountInactive": "Inactive",
+    "trialDaysLeft": "You have {{days}} days of free trial left.",
+    "nextCharge": "Next charge: {{date}}",
+    "daysRemaining": "{{days}} days remaining",
+    "consumed": "{{pct}}% used",
+    "pickPlan": "Choose plan",
+    "managePlan": "Manage plan",
+    "securityHeader": "Security and account",
+    "password": "Password",
+    "passwordDesc": "Change your access password",
+    "changeBtn": "Change",
+    "deleteAccount": "Delete account",
+    "deleteAccountDesc": "Permanent and irreversible action",
+    "deleteBtn": "Delete",
+    "passwordModal": {
+      "eyebrow": "Security",
+      "title": "Change password",
+      "description": "Enter your current password and the new one (minimum 8 characters).",
+      "currentLabel": "Current password",
+      "currentPlaceholder": "Your current password",
+      "newLabel": "New password",
+      "newPlaceholder": "Minimum 8 characters",
+      "repeatLabel": "Repeat password",
+      "repeatPlaceholder": "Repeat the password",
+      "mismatch": "Passwords do not match"
+    },
+    "deleteModal": {
+      "eyebrow": "Irreversible action",
+      "title": "Delete account",
+      "intro": "This action",
+      "introAccent": "cannot be undone",
+      "introEnd": ". The following will be permanently removed:",
+      "item1": "All your personal data",
+      "item2": "Transaction and income history",
+      "item3": "Custom categories",
+      "item4": "Subscription and billing data",
+      "confirmLabel": "Type",
+      "confirmLabelAccent": "DELETE",
+      "confirmLabelEnd": "to confirm",
+      "confirmPlaceholder": "DELETE",
+      "cancelBtn": "Cancel",
+      "deleteBtn": "Delete account"
+    },
+    "feedback": {
+      "saved": "Data updated successfully.",
+      "saveError": "Could not save the changes. Please try again.",
+      "passwordChanged": "Password changed successfully.",
+      "passwordTooShort": "Password must be at least 8 characters.",
+      "passwordMismatch": "Passwords do not match.",
+      "currentPasswordRequired": "Please enter your current password.",
+      "currentPasswordWrong": "Your current password is incorrect.",
+      "passwordChangeError": "Could not change the password.",
+      "samePassword": "The new password must be different from the current one.",
+      "loadingProfile": "Loading profile..."
+    },
+    "emailReadOnly": "Email cannot be changed from here",
+    "actions": {
+      "cancel": "Cancel",
+      "saveChanges": "Save changes",
+      "saving": "Saving...",
+      "save": "Save"
+    }
+  },
+  "balancePage": {
+    "eyebrow": "Global overview",
+    "title": "Balance",
+    "balanceNet": "Net balance",
+    "evolutionChart": "Balance evolution",
+    "compareTitle": "Income vs Expenses",
+    "movementsCount": "{{count}} transaction · {{pct}}% of total",
+    "movementsCount_plural": "{{count}} transactions · {{pct}}% of total",
+    "savingsRate": "Savings rate"
+  },
+  "billing": {
+    "currentPlan": "Current plan",
+    "planPro": "Pro plan · {{tier}}",
+    "statusActive": "Active",
+    "statusInactive": "Inactive",
+    "changePlan": "Change plan",
+    "startDate": "Start date",
+    "nextCharge": "Next charge",
+    "endDate": "Period end",
+    "paymentMethod": "Payment method",
+    "changeBtn": "Change",
+    "expires": "Expires {{date}}",
+    "cancelTitle": "Cancel subscription",
+    "cancelDesc": "You will keep access until the end of the current period.",
+    "cancelCta": "Cancel subscription",
+    "totalBilled": "Total billed",
+    "totalPaid": "Paid",
+    "totalPending": "Pending",
+    "historyTitle": "Invoice history",
+    "table": {
+      "number": "Invoice No.",
+      "date": "Date",
+      "concept": "Concept",
+      "amount": "Amount",
+      "status": "Status",
+      "pdf": "PDF"
+    },
+    "statusPaid": "Paid",
+    "statusPending": "Pending",
+    "cancelModal": {
+      "title": "Cancel subscription",
+      "body": "Are you sure? You will keep access until {{date}}. After that, the dashboard and the AI assistant will be locked.",
+      "keep": "Keep plan",
+      "confirm": "Cancel plan"
+    },
+    "cyclePerMonth": "month",
+    "cyclePerYear": "year"
+  },
+  "plans": {
+    "trialEnds": "Your free trial ends in {{count}} day",
+    "trialEnds_plural": "Your free trial ends in {{count}} days",
+    "trialExpired": "Your free trial has expired",
+    "trialDescActive": "When it ends, access to the dashboard and the AI assistant will be locked until you choose a plan.",
+    "trialDescExpired": "Access to the dashboard and the AI assistant is locked. Choose a plan to continue.",
+    "whatIncludes": "Everything included",
+    "chooseBilling": "Choose your billing",
+    "sameAccess": "Same access, different billing frequency",
+    "billingYearOnce": "A single payment per year",
+    "billingMonthly": "Billed every month",
+    "planName": "{{name}} plan",
+    "currentPlanBtn": "Current plan",
+    "back": "Back",
+    "trustBy": "Payments processed securely by",
+    "faqTitle": "Frequently asked questions",
+    "billingOptions": {
+      "monthly": {
+        "label": "Monthly",
+        "cycle": "month",
+        "detail": "€35.88/year in total",
+        "cta": "Subscribe monthly"
+      },
+      "annual": {
+        "label": "Annual",
+        "cycle": "year",
+        "detail": "Equivalent to €2.50/month",
+        "savings": "Save 17%",
+        "cta": "Subscribe annually"
+      }
+    },
+    "features": {
+      "unlimited": "Unlimited transactions",
+      "charts": "Advanced charts and reports",
+      "aiAssistant": "Financial AI assistant",
+      "prioritySupport": "Priority support"
+    },
+    "trust": {
+      "ssl": "Secure payments with SSL encryption",
+      "privacy": "Your data is never shared",
+      "cancel": "Cancel anytime"
+    },
+    "faqs": {
+      "q1": "What happens when the 14-day trial ends?",
+      "a1": "Access to the dashboard and the AI assistant is blocked. Your data is preserved and you'll regain full access as soon as you pick a paid plan.",
+      "q2": "Do both plans offer the same access?",
+      "a2": "Yes, both options unlock exactly the same features. The only difference is the billing frequency: monthly, or annual with a discount.",
+      "q3": "Can I cancel anytime?",
+      "a3": "Yes, you can cancel your subscription whenever you want from the billing section. You'll keep access until your current billing period ends.",
+      "q4": "Can I switch between monthly and annual?",
+      "a4": "Absolutely. You can change your billing frequency at any time. The change will apply at your next billing cycle.",
+      "q5": "Is payment secure?",
+      "a5": "All payments are processed through Stripe, the world's leading payment platform. We never store your card details."
+    },
+    "confirmModal": {
+      "title": "Confirm subscription",
+      "bodyStart": "You're about to subscribe to the plan",
+      "bodyAnnual": "You will be charged €29.99/year.",
+      "bodyMonthly": "You will be charged €2.99/month.",
+      "bodyEnd": "You'll have full access to every FinTrack feature.",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "categoriesPage": {
+    "newCategory": "New category",
+    "editCategory": "Edit category",
+    "incomeGroup": "Income categories",
+    "expenseGroup": "Expense categories",
+    "subCount": "{{count}} subcategory",
+    "subCount_plural": "{{count}} subcategories",
+    "addSubTooltip": "Add subcategory",
+    "editTooltip": "Edit category",
+    "deleteTooltip": "Delete category",
+    "deleteSubTooltip": "Delete subcategory",
+    "addSubInline": "Add subcategory",
+    "form": {
+      "nameLabel": "Name",
+      "namePlaceholder": "E.g. Education",
+      "typeLabel": "Type",
+      "typeIncome": "Income",
+      "typeExpense": "Expense",
+      "iconLabel": "Icon",
+      "save": "Save changes",
+      "create": "Create category"
+    },
+    "subModal": {
+      "title": "New subcategory",
+      "inContext": "In",
+      "placeholder": "E.g. Salary, Netflix, Fuel...",
+      "cancel": "Cancel",
+      "add": "Add"
+    },
+    "deleteModal": {
+      "title": "Delete category",
+      "body": "Delete",
+      "subsWarning": "Its {{count}} subcategory will also be deleted.",
+      "subsWarning_plural": "Its {{count}} subcategories will also be deleted.",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "deleteSubModal": {
+      "title": "Delete subcategory",
+      "body": "Delete",
+      "of": "from",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    }
+  },
+  "suggestions": {
+    "categories": {
+      "feature": "New feature",
+      "design": "Design improvement",
+      "performance": "Performance",
+      "bugfix": "Bug fix",
+      "other": "Other"
+    },
+    "sentTitle": "Suggestion sent",
+    "sentBody": "Thanks for your feedback. We'll review your suggestion as soon as possible.",
+    "sentAgain": "Send another suggestion",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "Select a category",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "Short summary of your suggestion",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Describe your suggestion with as much detail as possible...",
+    "sending": "Sending...",
+    "send": "Send suggestion"
   }
 }

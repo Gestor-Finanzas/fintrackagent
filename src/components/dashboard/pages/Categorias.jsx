@@ -137,7 +137,7 @@ export default function Categorias() {
                   <span className="text-sm font-medium text-dark truncate block">{cat.name}</span>
                   {hasSubs && (
                     <span className="text-[11px] text-gray-500">
-                      {cat.subcategories.length} subcategoría{cat.subcategories.length !== 1 ? "s" : ""}
+                      {t("categoriesPage.subCount", { count: cat.subcategories.length })}
                     </span>
                   )}
                 </div>
@@ -145,7 +145,7 @@ export default function Categorias() {
                   <button
                     onClick={() => openAddSub(globalIdx)}
                     className="p-1.5 rounded-lg text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors"
-                    title="Añadir subcategoría"
+                    title={t("categoriesPage.addSubTooltip")}
                   >
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -154,7 +154,7 @@ export default function Categorias() {
                   <button
                     onClick={() => openEdit(globalIdx)}
                     className="p-1.5 rounded-lg text-gray-500 hover:text-primary hover:bg-primary/5 transition-colors"
-                    title="Editar categoría"
+                    title={t("categoriesPage.editTooltip")}
                   >
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -163,7 +163,7 @@ export default function Categorias() {
                   <button
                     onClick={() => setDeleteIndex(globalIdx)}
                     className="p-1.5 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors"
-                    title="Eliminar categoría"
+                    title={t("categoriesPage.deleteTooltip")}
                   >
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -185,7 +185,7 @@ export default function Categorias() {
                       <button
                         onClick={() => setDeleteSubInfo({ catIdx: globalIdx, subIdx })}
                         className="p-1 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover/sub:opacity-100 transition-all"
-                        title="Eliminar subcategoría"
+                        title={t("categoriesPage.deleteSubTooltip")}
                       >
                         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -200,7 +200,7 @@ export default function Categorias() {
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
-                    Añadir subcategoría
+                    {t("categoriesPage.addSubInline")}
                   </button>
                 </div>
               )}
@@ -233,12 +233,12 @@ export default function Categorias() {
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
-          Nueva categoría
+          {t("categoriesPage.newCategory")}
         </button>
       </div>
 
-      {renderCategoryList(ingresos, "Categorías de ingresos")}
-      {renderCategoryList(gastos, "Categorías de gastos")}
+      {renderCategoryList(ingresos, t("categoriesPage.incomeGroup"))}
+      {renderCategoryList(gastos, t("categoriesPage.expenseGroup"))}
 
       {/* Add/Edit Category Modal */}
       {modalOpen && (
@@ -246,7 +246,7 @@ export default function Categorias() {
           <div className="bg-white rounded-2xl border border-gray-200 w-full max-w-md animate-fade-in">
             <div className="flex items-center justify-between p-6 pb-0">
               <h3 className="text-lg font-semibold text-dark">
-                {editIndex !== null ? "Editar categoría" : "Nueva categoría"}
+                {editIndex !== null ? t("categoriesPage.editCategory") : t("categoriesPage.newCategory")}
               </h3>
               <button onClick={() => setModalOpen(false)} className="p-2 rounded-lg text-gray-500 hover:text-dark hover:bg-gray-50 transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -256,36 +256,36 @@ export default function Categorias() {
             </div>
             <div className="p-6 flex flex-col gap-4">
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-[0.15em] mb-1.5 block">Nombre</label>
+                <label className="text-xs font-medium text-gray-500 uppercase tracking-[0.15em] mb-1.5 block">{t("categoriesPage.form.nameLabel")}</label>
                 <input
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Ej: Educación"
+                  placeholder={t("categoriesPage.form.namePlaceholder")}
                   className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-[0.15em] mb-1.5 block">Tipo</label>
+                <label className="text-xs font-medium text-gray-500 uppercase tracking-[0.15em] mb-1.5 block">{t("categoriesPage.form.typeLabel")}</label>
                 <div className="flex gap-2">
-                  {["ingreso", "gasto"].map((t) => (
+                  {["ingreso", "gasto"].map((ty) => (
                     <button
-                      key={t}
-                      onClick={() => setForm({ ...form, type: t })}
-                      className={`flex-1 px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-150 ${form.type === t
-                        ? t === "ingreso" ? "bg-emerald-50 text-emerald-600 border border-emerald-300" : "bg-red-50 text-red-500 border border-red-300"
+                      key={ty}
+                      onClick={() => setForm({ ...form, type: ty })}
+                      className={`flex-1 px-3 py-2 rounded-xl text-sm font-medium transition-colors duration-150 ${form.type === ty
+                        ? ty === "ingreso" ? "bg-emerald-50 text-emerald-600 border border-emerald-300" : "bg-red-50 text-red-500 border border-red-300"
                         : "bg-white text-gray-500 border border-gray-200 hover:bg-gray-50"
                         }`}
                     >
-                      {t === "ingreso" ? "Ingreso" : "Gasto"}
+                      {ty === "ingreso" ? t("categoriesPage.form.typeIncome") : t("categoriesPage.form.typeExpense")}
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-medium text-gray-500 uppercase tracking-[0.15em] mb-2 block">Icono</label>
+                <label className="text-xs font-medium text-gray-500 uppercase tracking-[0.15em] mb-2 block">{t("categoriesPage.form.iconLabel")}</label>
                 <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-48 overflow-y-auto">
                   {availableIcons.map((iconName) => (
                     <button
@@ -309,7 +309,7 @@ export default function Categorias() {
                 disabled={!form.name.trim()}
                 className="w-full py-2.5 rounded-xl text-sm font-medium text-white bg-dark hover:bg-primary disabled:opacity-40 transition-colors duration-150"
               >
-                {editIndex !== null ? "Guardar cambios" : "Crear categoría"}
+                {editIndex !== null ? t("categoriesPage.form.save") : t("categoriesPage.form.create")}
               </button>
             </div>
           </div>
@@ -320,15 +320,15 @@ export default function Categorias() {
       {subModalOpen && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl border border-gray-200 w-full max-w-sm p-6 animate-fade-in">
-            <h3 className="text-lg font-semibold text-dark mb-1">Nueva subcategoría</h3>
+            <h3 className="text-lg font-semibold text-dark mb-1">{t("categoriesPage.subModal.title")}</h3>
             <p className="text-sm text-gray-500 mb-4">
-              En <strong>{subCatParent !== null ? categories[subCatParent]?.name : ""}</strong>
+              {t("categoriesPage.subModal.inContext")} <strong>{subCatParent !== null ? categories[subCatParent]?.name : ""}</strong>
             </p>
             <input
               type="text"
               value={subCatName}
               onChange={(e) => setSubCatName(e.target.value)}
-              placeholder="Ej: Nómina, Netflix, Gasolina..."
+              placeholder={t("categoriesPage.subModal.placeholder")}
               className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary mb-4"
               autoFocus
               onKeyDown={(e) => e.key === "Enter" && handleAddSub()}
@@ -338,14 +338,14 @@ export default function Categorias() {
                 onClick={() => setSubModalOpen(false)}
                 className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors"
               >
-                Cancelar
+                {t("categoriesPage.subModal.cancel")}
               </button>
               <button
                 onClick={handleAddSub}
                 disabled={!subCatName.trim()}
                 className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-dark hover:bg-primary disabled:opacity-40 transition-colors"
               >
-                Añadir
+                {t("categoriesPage.subModal.add")}
               </button>
             </div>
           </div>
@@ -361,21 +361,21 @@ export default function Categorias() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-dark text-center mb-2">Eliminar categoría</h3>
+            <h3 className="text-lg font-semibold text-dark text-center mb-2">{t("categoriesPage.deleteModal.title")}</h3>
             <p className="text-sm text-gray-500 text-center mb-1">
-              ¿Eliminar <strong>{categories[deleteIndex]?.name}</strong>?
+              {t("categoriesPage.deleteModal.body")} <strong>{categories[deleteIndex]?.name}</strong>?
             </p>
             {categories[deleteIndex]?.subcategories?.length > 0 && (
               <p className="text-xs text-red-500 text-center mb-4">
-                Se eliminarán también sus {categories[deleteIndex].subcategories.length} subcategoría{categories[deleteIndex].subcategories.length !== 1 ? "s" : ""}.
+                {t("categoriesPage.deleteModal.subsWarning", { count: categories[deleteIndex].subcategories.length })}
               </p>
             )}
             <div className="flex gap-3 mt-4">
               <button onClick={() => setDeleteIndex(null)} className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors">
-                Cancelar
+                {t("categoriesPage.deleteModal.cancel")}
               </button>
               <button onClick={handleDelete} className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-red-500 hover:bg-red-600 transition-colors">
-                Eliminar
+                {t("categoriesPage.deleteModal.delete")}
               </button>
             </div>
           </div>
@@ -386,16 +386,16 @@ export default function Categorias() {
       {deleteSubInfo && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl border border-gray-200 p-6 w-full max-w-sm animate-fade-in">
-            <h3 className="text-lg font-semibold text-dark text-center mb-2">Eliminar subcategoría</h3>
+            <h3 className="text-lg font-semibold text-dark text-center mb-2">{t("categoriesPage.deleteSubModal.title")}</h3>
             <p className="text-sm text-gray-500 text-center mb-6">
-              ¿Eliminar <strong>{categories[deleteSubInfo.catIdx]?.subcategories[deleteSubInfo.subIdx]}</strong> de {categories[deleteSubInfo.catIdx]?.name}?
+              {t("categoriesPage.deleteSubModal.body")} <strong>{categories[deleteSubInfo.catIdx]?.subcategories[deleteSubInfo.subIdx]}</strong> {t("categoriesPage.deleteSubModal.of")} {categories[deleteSubInfo.catIdx]?.name}?
             </p>
             <div className="flex gap-3">
               <button onClick={() => setDeleteSubInfo(null)} className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors">
-                Cancelar
+                {t("categoriesPage.deleteSubModal.cancel")}
               </button>
               <button onClick={handleDeleteSub} className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-red-500 hover:bg-red-600 transition-colors">
-                Eliminar
+                {t("categoriesPage.deleteSubModal.delete")}
               </button>
             </div>
           </div>

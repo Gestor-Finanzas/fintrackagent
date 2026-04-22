@@ -1,14 +1,17 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import mockUser from "../../mocks/mockUser.json";
 import { FaUser, FaSignOutAlt, FaTags, FaLightbulb, FaCrown, FaGlobe } from "react-icons/fa";
 import { HiOutlineHome, HiArrowTrendingUp, HiArrowTrendingDown, HiChartBar } from "react-icons/hi2";
+import { useAuth } from "../../contexts/AuthContext";
+import { useProfile } from "../../contexts/ProfileContext";
 
 export default function DashboardNavbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { t, i18n } = useTranslation();
+  const { signOut } = useAuth();
+  const { displayName, firstName, email: displayEmail, initials } = useProfile();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -40,16 +43,9 @@ export default function DashboardNavbar() {
     return location.pathname.startsWith(path);
   };
 
-  const initials = mockUser.nombre
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
-  const handleLogout = () => {
-    localStorage.removeItem("fintrack_token");
-    window.location.href = "/login";
+  const handleLogout = async () => {
+    await signOut();
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -116,7 +112,7 @@ export default function DashboardNavbar() {
                     {initials}
                   </div>
                   <span className="hidden md:inline text-sm font-medium text-dark">
-                    {mockUser.nombre}
+                    {firstName}
                   </span>
                   <svg
                     className={`w-4 h-4 text-gray-400 transition-transform duration-150 hidden sm:block ${
@@ -135,10 +131,10 @@ export default function DashboardNavbar() {
                   <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl border border-gray-200 shadow-lg py-2 animate-fade-in">
                     <div className="px-4 py-3 border-b border-gray-100 mb-1">
                       <p className="text-sm font-semibold text-dark">
-                        {mockUser.nombre}
+                        {displayName}
                       </p>
                       <p className="text-xs text-gray-500 truncate">
-                        {mockUser.email}
+                        {displayEmail}
                       </p>
                     </div>
                     <button

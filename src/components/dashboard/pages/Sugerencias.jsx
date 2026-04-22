@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const CATEGORIAS = [
-  "Nueva funcionalidad",
-  "Mejora de diseño",
-  "Rendimiento",
-  "Corrección de errores",
-  "Otra",
-];
-
 export default function Sugerencias() {
   const { t } = useTranslation();
   const [form, setForm] = useState({ categoria: "", asunto: "", descripcion: "" });
   const [enviado, setEnviado] = useState(false);
   const [enviando, setEnviando] = useState(false);
+
+  const CATEGORIAS = [
+    { key: "feature", label: t("suggestions.categories.feature") },
+    { key: "design", label: t("suggestions.categories.design") },
+    { key: "performance", label: t("suggestions.categories.performance") },
+    { key: "bugfix", label: t("suggestions.categories.bugfix") },
+    { key: "other", label: t("suggestions.categories.other") },
+  ];
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -54,22 +54,22 @@ export default function Sugerencias() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-dark mb-2">Sugerencia enviada</h2>
+            <h2 className="text-xl font-bold text-dark mb-2">{t("suggestions.sentTitle")}</h2>
             <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">
-              Gracias por tu feedback. Revisaremos tu sugerencia lo antes posible.
+              {t("suggestions.sentBody")}
             </p>
             <button
               onClick={() => setEnviado(false)}
               className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-dark text-white hover:bg-primary transition-colors"
             >
-              Enviar otra sugerencia
+              {t("suggestions.sentAgain")}
             </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div>
               <label className="block text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500 mb-1.5">
-                Categoría
+                {t("suggestions.categoryLabel")}
               </label>
               <select
                 name="categoria"
@@ -78,10 +78,10 @@ export default function Sugerencias() {
                 className={inputClass}
                 required
               >
-                <option value="">Selecciona una categoría</option>
+                <option value="">{t("suggestions.categoryPlaceholder")}</option>
                 {CATEGORIAS.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
+                  <option key={cat.key} value={cat.key}>
+                    {cat.label}
                   </option>
                 ))}
               </select>
@@ -89,14 +89,14 @@ export default function Sugerencias() {
 
             <div>
               <label className="block text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500 mb-1.5">
-                Asunto
+                {t("suggestions.subjectLabel")}
               </label>
               <input
                 type="text"
                 name="asunto"
                 value={form.asunto}
                 onChange={handleChange}
-                placeholder="Resumen breve de tu sugerencia"
+                placeholder={t("suggestions.subjectPlaceholder")}
                 className={inputClass}
                 required
               />
@@ -104,13 +104,13 @@ export default function Sugerencias() {
 
             <div>
               <label className="block text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-500 mb-1.5">
-                Descripción
+                {t("suggestions.descriptionLabel")}
               </label>
               <textarea
                 name="descripcion"
                 value={form.descripcion}
                 onChange={handleChange}
-                placeholder="Describe tu sugerencia con el mayor detalle posible..."
+                placeholder={t("suggestions.descriptionPlaceholder")}
                 rows={5}
                 className={`${inputClass} resize-none`}
                 required
@@ -122,7 +122,7 @@ export default function Sugerencias() {
               disabled={enviando}
               className="w-full sm:w-auto sm:self-end px-6 py-3 rounded-xl text-sm font-semibold bg-dark text-white hover:bg-primary disabled:opacity-50 transition-colors"
             >
-              {enviando ? "Enviando..." : "Enviar sugerencia"}
+              {enviando ? t("suggestions.sending") : t("suggestions.send")}
             </button>
           </form>
         )}

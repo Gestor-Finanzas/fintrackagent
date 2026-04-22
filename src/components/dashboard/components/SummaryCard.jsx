@@ -1,6 +1,6 @@
 export default function SummaryCard({ label, value, color, hint }) {
   return (
-    <div className="bg-gray-100 border border-gray-400 rounded-2xl p-5 sm:p-6">
+    <div className="bg-gray-100 border border-gray-400 rounded-2xl p-5 sm:p-5">
       <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gray-500">
         {label}
       </span>

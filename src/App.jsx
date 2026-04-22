@@ -12,7 +12,9 @@ import Footer from "./components/landing_page/Footer";
 import ScrollToTopButton from "./components/landing_page/ScrollToTopButton";
 import Auth from "./components/login/Auth";
 import ProtectedRoute from "./components/login/ProtectedRoute";
+import PublicOnlyRoute from "./components/login/PublicOnlyRoute";
 import NotFound from "./components/NotFound";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const LoginPage = lazy(() => import("./components/login/LoginPage"));
 
@@ -103,44 +105,53 @@ function App() {
 
   return (
     <Router>
-      <HtmlLangSync />
-      <Suspense fallback={<PageFallback />}>
-        <Routes>
-          <Route path="/" element={<Landing setShowAuth={setShowAuth} showAuth={showAuth} />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+      <AuthProvider>
+        <HtmlLangSync />
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/" element={<Landing setShowAuth={setShowAuth} showAuth={showAuth} />} />
+            <Route
+              path="/login"
+              element={
+                <PublicOnlyRoute>
+                  <LoginPage />
+                </PublicOnlyRoute>
+              }
+            />
+            <Route path="/sobre-nosotros" element={<SobreNosotros />} />
 
-          {/* Public pages */}
-          <Route path="/empresa" element={<Empresa />} />
-          <Route path="/faqs" element={<FaqsPublic />} />
-          <Route path="/contacto" element={<ContactoPage />} />
-          <Route path="/privacidad" element={<LegalPrivacidad />} />
-          <Route path="/terminos" element={<LegalTerminos />} />
-          <Route path="/cookies" element={<LegalCookies />} />
-          <Route path="/seguridad" element={<LegalSeguridad />} />
+            {/* Public pages */}
+            <Route path="/empresa" element={<Empresa />} />
+            <Route path="/faqs" element={<FaqsPublic />} />
+            <Route path="/contacto" element={<ContactoPage />} />
+            <Route path="/privacidad" element={<LegalPrivacidad />} />
+            <Route path="/terminos" element={<LegalTerminos />} />
+            <Route path="/cookies" element={<LegalCookies />} />
+            <Route path="/seguridad" element={<LegalSeguridad />} />
 
-          {/* Dashboard */}
-          <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
-            <Route index element={<Overview />} />
-            <Route path="ingresos" element={<Ingresos />} />
-            <Route path="gastos" element={<Gastos />} />
-            <Route path="balance" element={<Balance />} />
-            <Route path="perfil" element={<Perfil />} />
-            <Route path="facturacion" element={<Facturacion />} />
-            <Route path="planes" element={<Planes />} />
-            <Route path="categorias" element={<Categorias />} />
-            <Route path="sugerencias" element={<Sugerencias />} />
-            <Route path="faqs" element={<Faqs />} />
-            <Route path="privacidad" element={<Privacidad />} />
-            <Route path="terminos" element={<Terminos />} />
-            <Route path="cookies" element={<Cookies />} />
-            <Route path="seguridad" element={<Seguridad />} />
-          </Route>
+            {/* Dashboard */}
+            <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+              <Route index element={<Overview />} />
+              <Route path="ingresos" element={<Ingresos />} />
+              <Route path="gastos" element={<Gastos />} />
+              <Route path="balance" element={<Balance />} />
+              <Route path="perfil" element={<Perfil />} />
+              <Route path="facturacion" element={<Facturacion />} />
+              <Route path="planes" element={<Planes />} />
+              <Route path="categorias" element={<Categorias />} />
+              <Route path="sugerencias" element={<Sugerencias />} />
+              <Route path="faqs" element={<Faqs />} />
+              <Route path="privacidad" element={<Privacidad />} />
+              <Route path="terminos" element={<Terminos />} />
+              <Route path="cookies" element={<Cookies />} />
+              <Route path="seguridad" element={<Seguridad />} />
+            </Route>
 
-          {/* 404 catch-all */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+            {/* 404 catch-all */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </AuthProvider>
     </Router>
   );
 }

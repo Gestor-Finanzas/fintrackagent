@@ -43,7 +43,7 @@ export default class ErrorBoundary extends Component {
               Error inesperado
             </span>
             <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight mb-4">
-              Algo ha ido mal.
+              Algo ha ido mal
             </h1>
             <p className="text-sm text-gray-500 leading-relaxed mb-8">
               Hemos registrado el error. Prueba a recargar la página o vuelve

@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import useEscapeKey from "../../../hooks/useEscapeKey";
 
 export default function ModalConfirmDelete({ isOpen, onClose, onConfirm }) {
+  const { t } = useTranslation();
   useEscapeKey(onClose, isOpen);
   if (!isOpen) return null;
 
@@ -18,14 +20,13 @@ export default function ModalConfirmDelete({ isOpen, onClose, onConfirm }) {
       >
         <div className="mb-5">
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-red-500 mb-2">
-            Confirmar acción
+            {t("dashboard.transactions.confirmEyebrow")}
           </span>
           <h3 id="modal-delete-title" className="text-xl font-bold text-dark">
-            Eliminar movimiento
+            {t("dashboard.transactions.delete")}
           </h3>
           <p className="text-sm text-gray-600 mt-2">
-            Esta acción no se puede deshacer. ¿Estás seguro de que quieres
-            eliminar este movimiento?
+            {t("dashboard.transactions.confirmDelete")}
           </p>
         </div>
         <div className="flex gap-3">
@@ -33,13 +34,13 @@ export default function ModalConfirmDelete({ isOpen, onClose, onConfirm }) {
             onClick={onClose}
             className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 border border-gray-300 hover:bg-gray-50 transition-colors"
           >
-            Cancelar
+            {t("common.cancel")}
           </button>
           <button
             onClick={onConfirm}
             className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-500 hover:bg-red-600 transition-colors"
           >
-            Eliminar
+            {t("common.delete")}
           </button>
         </div>
       </div>

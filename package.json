@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@supabase/supabase-js": "^2.104.0",
     "aos": "^2.3.4",
     "chart.js": "^4.5.1",
     "i18next": "^26.0.6",

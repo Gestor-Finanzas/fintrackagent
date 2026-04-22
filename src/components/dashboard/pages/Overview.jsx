@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Line, Doughnut } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
 import useDashboardData, { parseFechaMock, formatFechaLarga } from "../hooks/useDashboardData";
+import { useProfile } from "../../../contexts/ProfileContext";
 import PeriodFilter from "../components/PeriodFilter";
 import SummaryCard from "../components/SummaryCard";
 import ChartCard from "../components/ChartCard";
@@ -11,15 +12,22 @@ import { coloresCategorias } from "../../../utils/categoriasColors";
 import { getCategoryIcon } from "../../../utils/categoryIcons";
 
 export default function Overview() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  const { firstName } = useProfile();
   const {
     periodo, setPeriodo,
     customRange, setCustomRange, dateRangeLabel,
     ingresos, gastos, movimientos,
     totalIngresos, totalGastos, balance,
-    usuario,
   } = useDashboardData();
   const navigate = useNavigate();
+
+  // Estado local para el toggle de la leyenda (click oculta/muestra la serie).
+  // Replicamos el comportamiento nativo de Chart.js pero en HTML para poder
+  // controlar la separación leyenda ↔ gráfico con Tailwind.
+  const [hiddenSeries, setHiddenSeries] = useState({ ingresos: false, gastos: false });
+  const toggleSeries = (key) => setHiddenSeries((prev) => ({ ...prev, [key]: !prev[key] }));
 
   // Aggregate by date for line chart
   const lineData = useMemo(() => {
@@ -48,6 +56,7 @@ export default function Overview() {
           borderWidth: 2,
           pointRadius: 3,
           pointHoverRadius: 5,
+          hidden: hiddenSeries.ingresos,
         },
         {
           label: t("dashboard.summary.expenses"),
@@ -59,10 +68,11 @@ export default function Overview() {
           borderWidth: 2,
           pointRadius: 3,
           pointHoverRadius: 5,
+          hidden: hiddenSeries.gastos,
         },
       ],
     };
-  }, [ingresos, gastos, t]);
+  }, [ingresos, gastos, t, hiddenSeries]);
 
   // Expenses by category for donut
   const donutData = useMemo(() => {
@@ -95,7 +105,9 @@ export default function Overview() {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: true, position: "top", align: "center", onHover: (e) => { e.native.target.style.cursor = "pointer"; }, onLeave: (e) => { e.native.target.style.cursor = "default"; }, labels: { boxWidth: 14, boxHeight: 14, useBorderRadius: true, borderRadius: 3, font: { size: 12 }, color: "#8F9BBA", padding: 24 } },
+      // Leyenda nativa desactivada: la pintamos nosotros en HTML arriba del
+      // canvas para poder controlar la separación visual con Tailwind.
+      legend: { display: false },
       tooltip: {
         backgroundColor: "#fff",
         titleColor: "#1E3A5F",
@@ -104,14 +116,14 @@ export default function Overview() {
         borderWidth: 1,
         padding: 12,
         cornerRadius: 12,
-        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatEuro(ctx.parsed.y)}` },
+        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatEuro(ctx.parsed.y, lang)}` },
       },
     },
     scales: {
       x: { grid: { display: false }, ticks: { color: "#8F9BBA", font: { size: 11 } } },
       y: {
         grid: { color: "#F4F7FE" },
-        ticks: { color: "#8F9BBA", font: { size: 11 }, callback: (v) => formatEuro(v) },
+        ticks: { color: "#8F9BBA", font: { size: 11 }, callback: (v) => formatEuro(v, lang) },
       },
     },
     animation: { duration: 500 },
@@ -131,7 +143,7 @@ export default function Overview() {
         borderWidth: 1,
         padding: 12,
         cornerRadius: 12,
-        callbacks: { label: (ctx) => `${ctx.label}: ${formatEuro(ctx.parsed)}` },
+        callbacks: { label: (ctx) => `${ctx.label}: ${formatEuro(ctx.parsed, lang)}` },
       },
     },
     animation: { duration: 500 },
@@ -158,7 +170,7 @@ export default function Overview() {
           <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
             {greeting()},{" "}
             <span className="text-primary">
-              {usuario.nombre.split(" ")[0]}
+              {firstName}
             </span>
             .
           </h1>
@@ -176,23 +188,45 @@ export default function Overview() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <SummaryCard
           label={t("dashboard.summary.income")}
-          value={formatEuro(totalIngresos)}
+          value={formatEuro(totalIngresos, lang)}
           color="text-emerald-600"
         />
         <SummaryCard
           label={t("dashboard.summary.expenses")}
-          value={formatEuro(totalGastos)}
+          value={formatEuro(totalGastos, lang)}
           color="text-red-500"
         />
         <SummaryCard
           label={t("dashboard.summary.balance")}
-          value={formatEuro(balance)}
+          value={formatEuro(balance, lang)}
           color={balance >= 0 ? "text-dark" : "text-red-500"}
         />
       </div>
 
       {/* Ingresos vs Gastos — full width */}
       <ChartCard title={t("dashboard.charts.incomeVsExpenses")}>
+        {/* Leyenda personalizada — click para ocultar/mostrar serie. */}
+        <div className="flex items-center justify-center gap-6 mb-5">
+          {[
+            { key: "ingresos", label: t("dashboard.summary.income"), color: "#34D399" },
+            { key: "gastos", label: t("dashboard.summary.expenses"), color: "#F87171" },
+          ].map((serie) => (
+            <button
+              key={serie.key}
+              type="button"
+              onClick={() => toggleSeries(serie.key)}
+              className={`flex items-center gap-2 text-xs font-medium transition-opacity duration-150 ${
+                hiddenSeries[serie.key] ? "opacity-40 line-through" : "opacity-100"
+              }`}
+            >
+              <span
+                className="w-3.5 h-3.5 rounded-sm shrink-0"
+                style={{ backgroundColor: serie.color }}
+              />
+              <span className="text-gray-500">{serie.label}</span>
+            </button>
+          ))}
+        </div>
         <div className="h-72 lg:h-80 min-h-[250px]">
           <Line data={lineData} options={chartOptions} />
         </div>
@@ -206,7 +240,7 @@ export default function Overview() {
               {t("dashboard.transactions.recent")}
             </h3>
             <button
-              onClick={() => navigate("/dashboard/ingresos")}
+              onClick={() => navigate("/dashboard/balance")}
               className="text-xs font-semibold text-dark hover:text-primary transition-colors"
             >
               {t("common.seeAll")} →
@@ -243,7 +277,7 @@ export default function Overview() {
                       }`}
                     >
                       {m.tipo === "ingreso" ? "+" : "-"}
-                      {formatEuro(parseMonto(m.monto))}
+                      {formatEuro(parseMonto(m.monto), lang)}
                     </span>
                   </div>
                 );

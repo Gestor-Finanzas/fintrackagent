@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Line } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
 import useDashboardData, { parseFechaMock } from "../hooks/useDashboardData";
 import PeriodFilter from "../components/PeriodFilter";
 import SummaryCard from "../components/SummaryCard";
@@ -9,6 +10,8 @@ import { formatEuro, parseMonto } from "../../../utils/globalUtils";
 import { FaEuroSign } from "react-icons/fa";
 
 export default function Balance() {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const {
     periodo, setPeriodo,
     customRange, setCustomRange, dateRangeLabel,
@@ -42,7 +45,7 @@ export default function Balance() {
     labels: balanceEvolution.map((d) => d.label),
     datasets: [
       {
-        label: "Balance",
+        label: t("common.balance"),
         data: balanceEvolution.map((d) => d.value),
         borderColor: "#818CF8",
         backgroundColor: "rgba(129,140,248,0.08)",
@@ -53,7 +56,7 @@ export default function Balance() {
         pointHoverRadius: 5,
       },
     ],
-  }), [balanceEvolution]);
+  }), [balanceEvolution, t]);
 
   const chartOptions = {
     responsive: true,
@@ -63,12 +66,12 @@ export default function Balance() {
       tooltip: {
         backgroundColor: "#fff", titleColor: "#1E3A5F", bodyColor: "#1E3A5F",
         borderColor: "#E2E8F0", borderWidth: 1, padding: 12, cornerRadius: 12,
-        callbacks: { label: (ctx) => `Balance: ${formatEuro(ctx.parsed.y)}` },
+        callbacks: { label: (ctx) => `${t("common.balance")}: ${formatEuro(ctx.parsed.y, lang)}` },
       },
     },
     scales: {
       x: { grid: { display: false }, ticks: { color: "#8F9BBA", font: { size: 11 } } },
-      y: { grid: { color: "#F4F7FE" }, ticks: { color: "#8F9BBA", font: { size: 11 }, callback: (v) => formatEuro(v) } },
+      y: { grid: { color: "#F4F7FE" }, ticks: { color: "#8F9BBA", font: { size: 11 }, callback: (v) => formatEuro(v, lang) } },
     },
     animation: { duration: 500 },
   };
@@ -81,10 +84,10 @@ export default function Balance() {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-2">
-            Situación global
+            {t("balancePage.eyebrow")}
           </span>
           <h1 className="text-3xl md:text-4xl font-bold text-dark leading-tight">
-            Balance
+            {t("balancePage.title")}
           </h1>
         </div>
         <PeriodFilter
@@ -99,24 +102,24 @@ export default function Balance() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <SummaryCard
-          label="Ingresos"
-          value={formatEuro(totalIngresos)}
+          label={t("dashboard.summary.income")}
+          value={formatEuro(totalIngresos, lang)}
           color="text-emerald-600"
         />
         <SummaryCard
-          label="Gastos"
-          value={formatEuro(totalGastos)}
+          label={t("dashboard.summary.expenses")}
+          value={formatEuro(totalGastos, lang)}
           color="text-red-500"
         />
         <SummaryCard
-          label="Balance neto"
-          value={formatEuro(balance)}
+          label={t("balancePage.balanceNet")}
+          value={formatEuro(balance, lang)}
           color={balance >= 0 ? "text-dark" : "text-red-500"}
         />
       </div>
 
       {/* Balance Evolution Chart */}
-      <ChartCard title="Evolución del balance">
+      <ChartCard title={t("balancePage.evolutionChart")}>
         <div className="h-80 lg:h-full min-h-[280px]">
           <Line data={lineData} options={chartOptions} />
         </div>
@@ -125,7 +128,7 @@ export default function Balance() {
       {/* Income vs Expenses Comparison */}
       <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
         <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-6">
-          Ingresos vs Gastos
+          {t("balancePage.compareTitle")}
         </h3>
 
         {/* Proportion bar */}
@@ -144,27 +147,31 @@ export default function Balance() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-gray-100 border border-gray-400 rounded-2xl p-5">
             <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-500">
-              Ingresos
+              {t("dashboard.summary.income")}
             </span>
             <p className="text-2xl font-bold text-emerald-600 mt-2">
-              {formatEuro(totalIngresos)}
+              {formatEuro(totalIngresos, lang)}
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              {ingresos.length} movimiento{ingresos.length !== 1 ? "s" : ""} ·{" "}
-              {total > 0 ? Math.round((totalIngresos / total) * 100) : 0}% del total
+              {t("balancePage.movementsCount", {
+                count: ingresos.length,
+                pct: total > 0 ? Math.round((totalIngresos / total) * 100) : 0,
+              })}
             </p>
           </div>
 
           <div className="bg-gray-100 border border-gray-400 rounded-2xl p-5">
             <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-500">
-              Gastos
+              {t("dashboard.summary.expenses")}
             </span>
             <p className="text-2xl font-bold text-red-500 mt-2">
-              {formatEuro(totalGastos)}
+              {formatEuro(totalGastos, lang)}
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              {gastos.length} movimiento{gastos.length !== 1 ? "s" : ""} ·{" "}
-              {total > 0 ? Math.round((totalGastos / total) * 100) : 0}% del total
+              {t("balancePage.movementsCount", {
+                count: gastos.length,
+                pct: total > 0 ? Math.round((totalGastos / total) * 100) : 0,
+              })}
             </p>
           </div>
         </div>
@@ -175,7 +182,7 @@ export default function Balance() {
             <div className="flex items-center gap-2">
               <FaEuroSign className="w-3 h-3 text-primary" />
               <span className="text-xs font-semibold tracking-wider uppercase text-gray-500">
-                Tasa de ahorro
+                {t("balancePage.savingsRate")}
               </span>
             </div>
             <span

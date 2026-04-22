@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { formatEuro } from "../../../utils/globalUtils";
 import { coloresCategorias } from "../../../utils/categoriasColors";
 import { getCategoryIcon } from "../../../utils/categoryIcons";
 
 export default function CategoryBreakdown({ items, total }) {
+  const { i18n } = useTranslation();
   return (
     <div className="flex flex-col gap-4">
       {items.map((item, i) => {
@@ -22,7 +24,7 @@ export default function CategoryBreakdown({ items, total }) {
                   {item.categoria}
                 </span>
                 <span className="text-sm font-semibold text-dark ml-2 shrink-0">
-                  {formatEuro(item.monto)}
+                  {formatEuro(item.monto, i18n.language)}
                 </span>
               </div>
               <div className="w-full bg-gray-100 rounded-full h-1.5">

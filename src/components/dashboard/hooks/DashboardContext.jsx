@@ -156,7 +156,6 @@ export function DashboardProvider({ children }) {
       if (!mounted) return;
       if (error) {
         if (import.meta.env.DEV) {
-          // eslint-disable-next-line no-console
           console.error("[Dashboard] Error cargando movimientos:", error);
         }
         setAllMovimientos([]);
@@ -206,13 +205,6 @@ export function DashboardProvider({ children }) {
     return `${formatFechaCorta(start)} — ${formatFechaCorta(end)} ${end.getFullYear()}`;
   }, [activeRange]);
 
-  const usuario = useMemo(() => ({
-    nombre: authUser?.user_metadata?.full_name
-      || authUser?.email?.split("@")[0]
-      || "Usuario",
-    email: authUser?.email || "",
-  }), [authUser]);
-
   // --- Acciones ---
   const handleSetPeriodo = useCallback((p) => {
     setPeriodo(p);
@@ -241,7 +233,6 @@ export function DashboardProvider({ children }) {
       .single();
     if (error) {
       if (import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
         console.error("[Dashboard] addMovimiento:", error);
       }
       return;
@@ -266,7 +257,6 @@ export function DashboardProvider({ children }) {
       .single();
     if (error) {
       if (import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
         console.error("[Dashboard] editMovimiento:", error);
       }
       return;
@@ -285,7 +275,6 @@ export function DashboardProvider({ children }) {
       .eq("id", target.id);
     if (error) {
       if (import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
         console.error("[Dashboard] deleteMovimiento:", error);
       }
       return;
@@ -305,14 +294,13 @@ export function DashboardProvider({ children }) {
     totalIngresos,
     totalGastos,
     balance,
-    usuario,
     loading: loadingMovimientos,
     addMovimiento,
     editMovimiento,
     deleteMovimiento,
   }), [
     periodo, handleSetPeriodo, customRange, handleSetCustomRange, dateRangeLabel,
-    ingresos, gastos, movimientos, totalIngresos, totalGastos, balance, usuario,
+    ingresos, gastos, movimientos, totalIngresos, totalGastos, balance,
     loadingMovimientos, addMovimiento, editMovimiento, deleteMovimiento,
   ]);
 

@@ -63,7 +63,7 @@ export default function Contact() {
       setStatus("sent");
       setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setStatus("idle"), 4000);
-    } catch (err) {
+    } catch (_err) {
       setStatus("error");
       setErrorMsg(t("contact.errorSend"));
     }

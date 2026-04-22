@@ -68,7 +68,6 @@ export default function Perfil() {
       if (error) throw error;
     } catch (err) {
       if (import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
         console.error("[Perfil] delete_my_account falló:", err);
       }
     } finally {

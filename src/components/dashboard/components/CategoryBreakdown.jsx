@@ -2,9 +2,10 @@ import { useTranslation } from "react-i18next";
 import { formatEuro } from "../../../utils/globalUtils";
 import { coloresCategorias } from "../../../utils/categoriasColors";
 import { getCategoryIcon } from "../../../utils/categoryIcons";
+import { translateCategory } from "../../../utils/translateCategory";
 
 export default function CategoryBreakdown({ items, total }) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <div className="flex flex-col gap-4">
       {items.map((item, i) => {
@@ -21,7 +22,7 @@ export default function CategoryBreakdown({ items, total }) {
             <div className="flex-1 min-w-0">
               <div className="flex justify-between items-center mb-1">
                 <span className="text-sm font-medium text-dark truncate">
-                  {item.categoria}
+                  {translateCategory(item.categoria, t)}
                 </span>
                 <span className="text-sm font-semibold text-dark ml-2 shrink-0">
                   {formatEuro(item.monto, i18n.language)}

@@ -60,7 +60,6 @@ export function ProfileProvider({ children }) {
       .single();
     if (error) {
       if (import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
         console.error("[ProfileContext] fetch failed:", error);
       }
       setProfile(null);

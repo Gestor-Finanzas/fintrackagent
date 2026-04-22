@@ -39,7 +39,6 @@ export function AuthProvider({ children }) {
       })
       .catch((err) => {
         if (import.meta.env.DEV) {
-          // eslint-disable-next-line no-console
           console.error("[AuthContext] getSession falló:", err);
         }
         if (mounted) setLoading(false);

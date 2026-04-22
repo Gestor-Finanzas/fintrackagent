@@ -256,6 +256,20 @@
       "suggestions": "Sugerencias",
       "logout": "Cerrar sesión",
       "billing": "Facturación"
+    },
+    "categories": {
+      "Salario": "Salario",
+      "Venta": "Venta",
+      "Freelance": "Freelance",
+      "Regalo": "Regalo",
+      "Intereses": "Intereses",
+      "Supermercado": "Supermercado",
+      "Transporte": "Transporte",
+      "Restaurantes": "Restaurantes",
+      "Ocio": "Ocio",
+      "Suscripciones": "Suscripciones",
+      "Bar": "Bar",
+      "Otro": "Otro"
     }
   },
   "notFound": {

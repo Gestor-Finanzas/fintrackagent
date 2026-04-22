@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useCallback } from "react";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { formatEuro, parseMonto, exportToCSV } from "../../../utils/globalUtils";
 import { parseFechaMock } from "../hooks/useDashboardData";
@@ -8,8 +8,30 @@ import ModalAddTransaction from "./ModalAddTransaction";
 import ModalEditTransaction from "./ModalEditTransaction";
 import ModalConfirmDelete from "./ModalConfirmDelete";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { translateCategory } from "../../../utils/translateCategory";
 
 const POR_PAGINA = 10;
+
+/**
+ * Icono de ordenación (flecha arriba/abajo) para las cabeceras clicables.
+ * Extraído fuera del componente principal para evitar "Cannot create
+ * components during render" — React 19 deja de tolerar componentes
+ * declarados dentro del cuerpo de otro componente.
+ */
+function SortIcon({ active, direction }) {
+  return (
+    <svg
+      className={`w-3.5 h-3.5 inline-block ml-1 ${active ? "text-primary" : "text-gray-500"}`}
+      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
+    >
+      {active && direction === "asc" ? (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+      ) : (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+      )}
+    </svg>
+  );
+}
 
 export default function TransactionsTable({
   movimientos,
@@ -30,18 +52,21 @@ export default function TransactionsTable({
   const [modalDelete, setModalDelete] = useState(null);
   const editable = !!(onAdd || onEdit || onDelete);
 
-  // Cache de colores por categoría LOCAL al componente — evita que dos tablas
-  // abiertas al mismo tiempo compartan estado global y se desincronicen.
-  const colorCacheRef = useRef({});
-  const colorIndexRef = useRef(0);
-  const getCategoryColor = useCallback((cat) => {
-    if (!(cat in colorCacheRef.current)) {
-      colorCacheRef.current[cat] =
-        coloresCategorias[colorIndexRef.current % coloresCategorias.length];
-      colorIndexRef.current += 1;
-    }
-    return colorCacheRef.current[cat];
-  }, []);
+  // Mapa estable de color por categoría — derivado de los movimientos en
+  // lugar de refs mutados en render (React 19 desaconseja ese patrón).
+  // Recomputa solo cuando cambian las categorías presentes.
+  const categoryColors = useMemo(() => {
+    const cache = {};
+    let idx = 0;
+    movimientos.forEach((m) => {
+      if (!(m.categoria in cache)) {
+        cache[m.categoria] = coloresCategorias[idx % coloresCategorias.length];
+        idx += 1;
+      }
+    });
+    return cache;
+  }, [movimientos]);
+  const getCategoryColor = (cat) => categoryColors[cat] || coloresCategorias[0];
 
   const filtered = useMemo(() => {
     let list = [...movimientos];
@@ -80,20 +105,8 @@ export default function TransactionsTable({
     setPagina(1);
   };
 
-  const SortIcon = ({ field }) => (
-    <svg
-      className={`w-3.5 h-3.5 inline-block ml-1 ${sortField === field ? "text-primary" : "text-gray-500"}`}
-      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
-    >
-      {sortField === field && !sortDesc ? (
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-      ) : (
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-      )}
-    </svg>
-  );
-
   const originalIndex = (item) => movimientos.indexOf(item);
+  const sortDirection = sortDesc ? "desc" : "asc";
 
   // visible columns: fecha + (tipo?) + descripcion(hidden sm) + categoria + cantidad + (acciones?)
   const colCount = 3 + (showTypeColumn ? 1 : 0) + (editable ? 1 : 0);
@@ -181,7 +194,7 @@ export default function TransactionsTable({
                 onClick={() => handleSort("fecha")}
                 className="w-[28%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none"
               >
-                {t("common.date")} <SortIcon field="fecha" />
+                {t("common.date")} <SortIcon active={sortField === "fecha"} direction={sortDirection} />
               </th>
               {showTypeColumn && (
                 <th className="sm:w-[10%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
@@ -198,7 +211,7 @@ export default function TransactionsTable({
                 onClick={() => handleSort("monto")}
                 className="w-[28%] sm:w-[20%] py-3 px-2 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer select-none whitespace-nowrap text-center"
               >
-                {t("common.amount")} <SortIcon field="monto" />
+                {t("common.amount")} <SortIcon active={sortField === "monto"} direction={sortDirection} />
               </th>
               {editable && (
                 <th className="w-[14%] sm:w-[10%] py-3 px-1 sm:px-4 text-xs font-medium text-gray-500 uppercase tracking-wider text-right sm:text-center">
@@ -244,7 +257,7 @@ export default function TransactionsTable({
                         >
                           {getCategoryIcon(m.categoria, 12)}
                         </span>
-                        <span className="text-sm text-gray-500 truncate">{m.categoria}</span>
+                        <span className="text-sm text-gray-500 truncate">{translateCategory(m.categoria, t)}</span>
                       </div>
                     </td>
                     <td

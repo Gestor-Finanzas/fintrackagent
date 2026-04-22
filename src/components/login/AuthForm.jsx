@@ -95,7 +95,7 @@ export default function AuthForm({ onSuccess }) {
         if (onSuccess) onSuccess();
         else navigate(redirectTo, { replace: true });
       }
-    } catch (err) {
+    } catch (_err) {
       setError(t("auth.genericError"));
     } finally {
       setLoading(false);

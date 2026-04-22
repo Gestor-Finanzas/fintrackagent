@@ -10,6 +10,7 @@ import ChartCard from "../components/ChartCard";
 import { formatEuro, parseMonto } from "../../../utils/globalUtils";
 import { coloresCategorias } from "../../../utils/categoriasColors";
 import { getCategoryIcon } from "../../../utils/categoryIcons";
+import { translateCategory } from "../../../utils/translateCategory";
 
 export default function Overview() {
   const { t, i18n } = useTranslation();
@@ -82,7 +83,7 @@ export default function Overview() {
     });
     const entries = Object.entries(map).sort((a, b) => b[1] - a[1]);
     return {
-      labels: entries.map(([c]) => c),
+      labels: entries.map(([c]) => translateCategory(c, t)),
       datasets: [
         {
           data: entries.map(([, v]) => v),
@@ -92,7 +93,7 @@ export default function Overview() {
         },
       ],
     };
-  }, [gastos]);
+  }, [gastos, t]);
 
   // Last 5 transactions
   const recent = useMemo(() => {
@@ -268,7 +269,7 @@ export default function Overview() {
                         {m.nombre || m.categoria}
                       </p>
                       <p className="text-xs text-gray-500">
-                        {m.categoria} · {m.fecha}
+                        {translateCategory(m.categoria, t)} · {m.fecha}
                       </p>
                     </div>
                     <span

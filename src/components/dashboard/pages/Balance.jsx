@@ -27,18 +27,18 @@ export default function Balance() {
     const sorted = [...allDates].sort(
       (a, b) => parseFechaMock(a).getTime() - parseFechaMock(b).getTime()
     );
-    let running = 0;
-    const data = sorted.map((fecha) => {
+    // Acumulado día a día con reduce para mantenerlo inmutable
+    // (mutar una variable dentro de map dispara la regla react-hooks/immutability).
+    return sorted.reduce((acc, fecha) => {
       const dayInc = ingresos
         .filter((i) => i.fecha === fecha)
         .reduce((a, c) => a + parseMonto(c.monto), 0);
       const dayExp = gastos
         .filter((g) => g.fecha === fecha)
         .reduce((a, c) => a + parseMonto(c.monto), 0);
-      running += dayInc - dayExp;
-      return { label: fecha.slice(0, 5), value: running };
-    });
-    return data;
+      const previous = acc.length > 0 ? acc[acc.length - 1].value : 0;
+      return [...acc, { label: fecha.slice(0, 5), value: previous + dayInc - dayExp }];
+    }, []);
   }, [ingresos, gastos]);
 
   const lineData = useMemo(() => ({

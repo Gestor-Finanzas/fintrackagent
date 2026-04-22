@@ -8,6 +8,7 @@ import CategoryBreakdown from "./CategoryBreakdown";
 import TransactionsTable from "./TransactionsTable";
 import { formatEuro, parseMonto } from "../../../utils/globalUtils";
 import { coloresCategorias } from "../../../utils/categoriasColors";
+import { translateCategory } from "../../../utils/translateCategory";
 import {
   chartColors,
   baseLineOptions,
@@ -73,7 +74,7 @@ export default function TransactionsView({ type }) {
   }, [items, lineColor, lineBgColor, isIncome, t]);
 
   const donutData = useMemo(() => ({
-    labels: byCategory.map((c) => c.categoria),
+    labels: byCategory.map((c) => translateCategory(c.categoria, t)),
     datasets: [
       {
         data: byCategory.map((c) => c.monto),
@@ -84,7 +85,7 @@ export default function TransactionsView({ type }) {
         hoverOffset: 4,
       },
     ],
-  }), [byCategory]);
+  }), [byCategory, t]);
 
   const chartOptions = useMemo(() => ({
     ...baseLineOptions,

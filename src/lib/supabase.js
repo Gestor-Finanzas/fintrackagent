@@ -16,7 +16,6 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 if (!supabaseUrl || !supabaseAnonKey) {
   // Aviso en desarrollo; en producción estas variables son obligatorias.
   if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
     console.warn(
       "[supabase] Faltan VITE_SUPABASE_URL o VITE_SUPABASE_ANON_KEY en .env",
     );

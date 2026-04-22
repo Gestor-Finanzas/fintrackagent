@@ -59,7 +59,7 @@ export function ProfileProvider({ children }) {
       .eq("id", authUser.id)
       .single();
     if (error) {
-      if (process.env.NODE_ENV !== "production") {
+      if (import.meta.env.DEV) {
         // eslint-disable-next-line no-console
         console.error("[ProfileContext] fetch failed:", error);
       }

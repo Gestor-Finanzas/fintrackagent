@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
         setLoading(false);
       })
       .catch((err) => {
-        if (process.env.NODE_ENV !== "production") {
+        if (import.meta.env.DEV) {
           // eslint-disable-next-line no-console
           console.error("[AuthContext] getSession falló:", err);
         }

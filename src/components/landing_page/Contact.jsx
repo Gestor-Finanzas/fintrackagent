@@ -40,7 +40,7 @@ export default function Contact() {
     setStatus("loading");
     setErrorMsg("");
     try {
-      const endpoint = process.env.REACT_APP_CONTACT_ENDPOINT;
+      const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
       if (!endpoint) {
         // Sin backend configurado: fallback a mailto: para que el usuario
         // no pierda su mensaje. Abre el cliente de correo con todo pre-rellenado.

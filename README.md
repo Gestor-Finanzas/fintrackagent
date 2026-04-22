@@ -9,7 +9,7 @@ Plataforma de gestión financiera personal: registra gastos e ingresos por **Wha
 | Categoría | Tecnología |
 |---|---|
 | Framework | React 19 |
-| Build tool | Create React App (react-scripts 5) |
+| Build tool | Vite 7 |
 | Routing | React Router DOM 7 |
 | Estilos | Tailwind CSS 3 + PostCSS + Autoprefixer |
 | Gráficos | Chart.js 4 + react-chartjs-2 |
@@ -34,28 +34,27 @@ Plataforma de gestión financiera personal: registra gastos e ingresos por **Wha
 ```bash
 git clone https://github.com/Gestor-Finanzas/fintrackagent.git
 cd fintrackagent
-npm install --legacy-peer-deps
+npm install
 ```
-
-> `--legacy-peer-deps` es necesario por una incompatibilidad menor entre react-scripts 5 y las últimas versiones de algunas dependencias. Ya está configurado en `.npmrc`.
 
 ### Variables de entorno
 
 Copia `.env.example` a `.env` y rellena con los valores de tu proyecto de Supabase (Settings → API):
 
 ```bash
-REACT_APP_SUPABASE_URL=https://<tu-proyecto>.supabase.co
-REACT_APP_SUPABASE_ANON_KEY=<tu-anon-key>
+VITE_SUPABASE_URL=https://<tu-proyecto>.supabase.co
+VITE_SUPABASE_ANON_KEY=<tu-anon-key>
 ```
 
 > Usa solo la **anon key** (pública). Nunca pongas la `service_role` key en el frontend.
+> Todas las variables expuestas al cliente deben empezar por `VITE_`.
 
 ---
 
 ## Desarrollo
 
 ```bash
-npm start
+npm run dev
 ```
 
 Abre http://localhost:3000
@@ -67,6 +66,12 @@ npm run build
 ```
 
 Los archivos estáticos se generan en `/build`.
+
+Para previsualizar el build localmente:
+
+```bash
+npm run preview
+```
 
 ---
 
@@ -137,9 +142,10 @@ fintrackagent/
 │   ├── hooks/                   # useEscapeKey, etc.
 │   ├── App.jsx                  # Router + providers
 │   ├── i18n.js                  # Configuración i18next
-│   └── index.js                 # Entry point
+│   └── main.jsx                 # Entry point (Vite)
+├── index.html                   # Entry HTML de Vite
+├── vite.config.js
 ├── .env.example
-├── .npmrc                       # legacy-peer-deps
 ├── vercel.json                  # Headers de seguridad y SPA rewrites
 ├── tailwind.config.js
 ├── postcss.config.js

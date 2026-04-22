@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     // TODO: reportar a servicio de error tracking cuando esté configurado.
-    if (process.env.NODE_ENV !== "production") {
+    if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
       console.error("ErrorBoundary capturó un error:", error, errorInfo);
     }

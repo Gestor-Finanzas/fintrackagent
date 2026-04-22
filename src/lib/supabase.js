@@ -4,21 +4,21 @@ import { createClient } from "@supabase/supabase-js";
  * Cliente de Supabase para toda la app.
  *
  * Requiere dos variables de entorno (ver `.env.example`):
- *   REACT_APP_SUPABASE_URL        — URL del proyecto (Settings → API → Project URL)
- *   REACT_APP_SUPABASE_ANON_KEY   — clave pública anon (Settings → API → anon public)
+ *   VITE_SUPABASE_URL        — URL del proyecto (Settings → API → Project URL)
+ *   VITE_SUPABASE_ANON_KEY   — clave pública anon (Settings → API → anon public)
  *
  * La clave anon es segura de exponer en frontend: las políticas RLS
  * del backend controlan qué datos puede leer cada usuario.
  */
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   // Aviso en desarrollo; en producción estas variables son obligatorias.
-  if (process.env.NODE_ENV !== "production") {
+  if (import.meta.env.DEV) {
     // eslint-disable-next-line no-console
     console.warn(
-      "[supabase] Faltan REACT_APP_SUPABASE_URL o REACT_APP_SUPABASE_ANON_KEY en .env",
+      "[supabase] Faltan VITE_SUPABASE_URL o VITE_SUPABASE_ANON_KEY en .env",
     );
   }
 }

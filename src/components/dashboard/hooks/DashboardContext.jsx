@@ -155,7 +155,7 @@ export function DashboardProvider({ children }) {
         .order("fecha", { ascending: false });
       if (!mounted) return;
       if (error) {
-        if (process.env.NODE_ENV !== "production") {
+        if (import.meta.env.DEV) {
           // eslint-disable-next-line no-console
           console.error("[Dashboard] Error cargando movimientos:", error);
         }
@@ -240,7 +240,7 @@ export function DashboardProvider({ children }) {
       .select("id, tipo, categoria, nombre, monto, fecha")
       .single();
     if (error) {
-      if (process.env.NODE_ENV !== "production") {
+      if (import.meta.env.DEV) {
         // eslint-disable-next-line no-console
         console.error("[Dashboard] addMovimiento:", error);
       }
@@ -265,7 +265,7 @@ export function DashboardProvider({ children }) {
       .select("id, tipo, categoria, nombre, monto, fecha")
       .single();
     if (error) {
-      if (process.env.NODE_ENV !== "production") {
+      if (import.meta.env.DEV) {
         // eslint-disable-next-line no-console
         console.error("[Dashboard] editMovimiento:", error);
       }
@@ -284,7 +284,7 @@ export function DashboardProvider({ children }) {
       .delete()
       .eq("id", target.id);
     if (error) {
-      if (process.env.NODE_ENV !== "production") {
+      if (import.meta.env.DEV) {
         // eslint-disable-next-line no-console
         console.error("[Dashboard] deleteMovimiento:", error);
       }

@@ -15,10 +15,8 @@ import {
   baseDonutOptions,
 } from "../../../utils/chartColors";
 
-/**
- * Vista genérica para Ingresos o Gastos.
- * Todo el contenido (datasets, totales, colores, textos) se deriva de `type`.
- */
+// Vista compartida por /ingresos y /gastos. El prop `type` conmuta series,
+// colores, totales y textos sin duplicar la página.
 export default function TransactionsView({ type }) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;

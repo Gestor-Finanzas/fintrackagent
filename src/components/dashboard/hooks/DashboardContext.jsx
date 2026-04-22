@@ -8,25 +8,19 @@ const MESES_ES = [
   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
 ];
 
-// ==================================================================
-// Helpers de fechas
-// ==================================================================
-
 /**
- * Parsea una fecha en formato "dd-mm-yyyy" o ISO ("yyyy-mm-dd") a un Date local
- * (sin desfase de zona horaria). Todas las fechas en UI usan dd-mm-yyyy.
+ * Parsea una fecha "dd-mm-yyyy" o ISO "yyyy-mm-dd" a un Date LOCAL.
+ * Usar `new Date("2026-04-22")` directamente la interpretaría como UTC
+ * medianoche, que en zonas con offset negativo baja un día al renderizar.
  */
 export function parseFechaMock(fechaStr) {
   if (!fechaStr) return new Date();
   const parts = fechaStr.split("-");
   if (parts.length === 3) {
-    // dd-mm-yyyy: primer bloque de 1-2 dígitos
     if (parts[0].length <= 2) {
       const d = new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));
       if (!isNaN(d.getTime())) return d;
     }
-    // yyyy-mm-dd (ISO date sin hora) → crear como local, no UTC, para evitar
-    // que "2026-04-22" se interprete como UTC midnight y baje un día al render.
     if (parts[0].length === 4) {
       const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
       if (!isNaN(d.getTime())) return d;
@@ -36,7 +30,6 @@ export function parseFechaMock(fechaStr) {
   return isNaN(fallback.getTime()) ? new Date() : fallback;
 }
 
-/** Formatea un Date a "dd-mm-yyyy" para la UI y el almacenamiento interno. */
 export function formatFechaMock(date) {
   const d = String(date.getDate()).padStart(2, "0");
   const m = String(date.getMonth() + 1).padStart(2, "0");
@@ -44,7 +37,6 @@ export function formatFechaMock(date) {
   return `${d}-${m}-${y}`;
 }
 
-/** Formatea un Date a "2 de marzo de 2026" (para el label de rangos custom). */
 export function formatFechaLarga(date) {
   const d = date.getDate();
   const m = MESES_ES[date.getMonth()];
@@ -52,21 +44,17 @@ export function formatFechaLarga(date) {
   return `${d} de ${m} de ${y}`;
 }
 
-/** Formato corto tipo "2 feb — 8 feb 2026". */
 function formatFechaCorta(date) {
   return `${date.getDate()} ${MESES_ES[date.getMonth()].slice(0, 3)}`;
 }
 
-/**
- * Calcula el rango real (start, end) del periodo seleccionado basado en la fecha
- * actual del usuario. La semana empieza en lunes (ISO), no en domingo.
- */
+// La semana empieza en lunes (ISO 8601), no en domingo.
 function getPeriodRange(periodo, today = new Date()) {
   const base = new Date(today);
   base.setHours(0, 0, 0, 0);
 
   if (periodo === "semana") {
-    const day = base.getDay(); // 0=dom, 1=lun, ..., 6=sáb
+    const day = base.getDay();
     const diffToMonday = day === 0 ? -6 : 1 - day;
     const start = new Date(base);
     start.setDate(base.getDate() + diffToMonday);
@@ -90,16 +78,13 @@ function getPeriodRange(periodo, today = new Date()) {
     return { start, end };
   }
 
-  // Fallback: hoy
   const end = new Date(base);
   end.setHours(23, 59, 59, 999);
   return { start: base, end };
 }
 
-// ==================================================================
-// Normalización de movimientos entre Supabase (ISO + numeric) y UI
-// ==================================================================
-
+// Supabase devuelve fecha ISO y monto numeric; la UI espera dd-mm-yyyy
+// y monto como string con dos decimales.
 function normalizeFromSupabase(row) {
   return {
     id: row.id,
@@ -126,10 +111,6 @@ function toSupabasePayload(mov, userId) {
   };
 }
 
-// ==================================================================
-// Context
-// ==================================================================
-
 const DashboardContext = createContext(null);
 
 export function DashboardProvider({ children }) {
@@ -139,7 +120,6 @@ export function DashboardProvider({ children }) {
   const [customRange, setCustomRange] = useState(null);
   const [loadingMovimientos, setLoadingMovimientos] = useState(false);
 
-  // --- Cargar movimientos del usuario desde Supabase ---
   useEffect(() => {
     if (!authUser) {
       setAllMovimientos([]);
@@ -167,13 +147,11 @@ export function DashboardProvider({ children }) {
     return () => { mounted = false; };
   }, [authUser]);
 
-  // --- Rango activo (custom tiene prioridad sobre periodo) ---
   const activeRange = useMemo(
     () => customRange || getPeriodRange(periodo),
     [customRange, periodo],
   );
 
-  // --- Filtrar movimientos por rango ---
   const movimientos = useMemo(() => {
     return allMovimientos.filter((m) => {
       const d = parseFechaMock(m.fecha);
@@ -205,7 +183,6 @@ export function DashboardProvider({ children }) {
     return `${formatFechaCorta(start)} — ${formatFechaCorta(end)} ${end.getFullYear()}`;
   }, [activeRange]);
 
-  // --- Acciones ---
   const handleSetPeriodo = useCallback((p) => {
     setPeriodo(p);
     setCustomRange(null);
@@ -223,7 +200,6 @@ export function DashboardProvider({ children }) {
     }
   }, []);
 
-  // --- CRUD persistido en Supabase ---
   const addMovimiento = useCallback(async (mov) => {
     if (!authUser) return;
     const { data, error } = await supabase
@@ -242,12 +218,11 @@ export function DashboardProvider({ children }) {
 
   const editMovimiento = useCallback(async (index, updated) => {
     if (!authUser) return;
-    // `index` es el índice dentro del array filtrado que ve el componente.
-    // Usamos el id de ese item para evitar colisiones tras un re-render.
+    // `index` apunta al array filtrado que ve el componente; resolvemos al
+    // id real para que los re-renders no causen colisiones.
     const target = movimientos[index];
     if (!target?.id) return;
     const payload = toSupabasePayload(updated, authUser.id);
-    // user_id no se actualiza
     delete payload.user_id;
     const { data, error } = await supabase
       .from("movimientos")

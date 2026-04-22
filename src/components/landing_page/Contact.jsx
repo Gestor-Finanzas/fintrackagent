@@ -42,8 +42,8 @@ export default function Contact() {
     try {
       const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
       if (!endpoint) {
-        // Sin backend configurado: fallback a mailto: para que el usuario
-        // no pierda su mensaje. Abre el cliente de correo con todo pre-rellenado.
+        // Fallback si aún no hay backend configurado: abre el cliente de
+        // correo del usuario con los campos pre-rellenados.
         const subject = encodeURIComponent(formData.subject || "Contacto FinTrack");
         const body = encodeURIComponent(
           `Nombre: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,

@@ -22,7 +22,6 @@ export default function Facturacion() {
     if (datos.tarifa === "Gratis") navigate("/dashboard/planes", { replace: true });
   }, [datos.tarifa, navigate]);
 
-  // Precios en código como números; el separador decimal se elige según idioma.
   const planPriceNum = datos.tarifa === "Mensual" ? 2.99 : datos.tarifa === "Anual" ? 29.99 : 0;
   const planPrice = formatNumber(planPriceNum, lang);
   const planCycle = datos.tarifa === "Mensual"

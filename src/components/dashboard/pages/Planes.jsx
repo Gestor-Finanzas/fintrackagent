@@ -15,8 +15,8 @@ export default function Planes() {
   const [selected, setSelected] = useState("Anual");
   const [modalConfirm, setModalConfirm] = useState(false);
 
-  // Opciones de facturación. Los textos se traducen en tiempo de render para
-  // respetar el idioma activo — no declararlos como constantes fuera del componente.
+  // Declaradas dentro del componente: las etiquetas traducidas dependen
+  // del idioma activo y deben re-evaluarse en cada render.
   const BILLING_OPTIONS = [
     {
       id: "Mensual",

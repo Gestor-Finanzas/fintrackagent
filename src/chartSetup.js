@@ -11,8 +11,8 @@ import {
   BarElement,
 } from "chart.js";
 
-// Registro ÚNICO de módulos de Chart.js a nivel de aplicación.
-// Evita que se ejecute en cada render de un Provider o componente.
+// Registro global de los módulos de Chart.js usados por la app. Importado
+// desde main.jsx para que corra una sola vez al arrancar.
 Chart.register(
   LineElement,
   PointElement,

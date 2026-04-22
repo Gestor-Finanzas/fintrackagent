@@ -24,13 +24,11 @@ export default function Overview() {
   } = useDashboardData();
   const navigate = useNavigate();
 
-  // Estado local para el toggle de la leyenda (click oculta/muestra la serie).
-  // Replicamos el comportamiento nativo de Chart.js pero en HTML para poder
-  // controlar la separación leyenda ↔ gráfico con Tailwind.
+  // Leyenda nativa de Chart.js desactivada; la pintamos en HTML para
+  // poder controlar la separación con el gráfico vía Tailwind.
   const [hiddenSeries, setHiddenSeries] = useState({ ingresos: false, gastos: false });
   const toggleSeries = (key) => setHiddenSeries((prev) => ({ ...prev, [key]: !prev[key] }));
 
-  // Aggregate by date for line chart
   const lineData = useMemo(() => {
     const dateMap = {};
     ingresos.forEach((i) => {
@@ -75,7 +73,6 @@ export default function Overview() {
     };
   }, [ingresos, gastos, t, hiddenSeries]);
 
-  // Expenses by category for donut
   const donutData = useMemo(() => {
     const map = {};
     gastos.forEach((g) => {
@@ -95,7 +92,6 @@ export default function Overview() {
     };
   }, [gastos, t]);
 
-  // Last 5 transactions
   const recent = useMemo(() => {
     return [...movimientos]
       .sort((a, b) => parseFechaMock(b.fecha).getTime() - parseFechaMock(a.fecha).getTime())
@@ -106,8 +102,6 @@ export default function Overview() {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      // Leyenda nativa desactivada: la pintamos nosotros en HTML arriba del
-      // canvas para poder controlar la separación visual con Tailwind.
       legend: { display: false },
       tooltip: {
         backgroundColor: "#fff",
@@ -157,7 +151,6 @@ export default function Overview() {
     return t("dashboard.greeting.evening");
   };
 
-  // Spanish date: "1 de marzo de 2026"
   const todayLabel = formatFechaLarga(new Date());
 
   return (
@@ -206,7 +199,6 @@ export default function Overview() {
 
       {/* Ingresos vs Gastos — full width */}
       <ChartCard title={t("dashboard.charts.incomeVsExpenses")}>
-        {/* Leyenda personalizada — click para ocultar/mostrar serie. */}
         <div className="flex items-center justify-center gap-6 mb-5">
           {[
             { key: "ingresos", label: t("dashboard.summary.income"), color: "#34D399" },

@@ -12,12 +12,6 @@ import { translateCategory } from "../../../utils/translateCategory";
 
 const POR_PAGINA = 10;
 
-/**
- * Icono de ordenación (flecha arriba/abajo) para las cabeceras clicables.
- * Extraído fuera del componente principal para evitar "Cannot create
- * components during render" — React 19 deja de tolerar componentes
- * declarados dentro del cuerpo de otro componente.
- */
 function SortIcon({ active, direction }) {
   return (
     <svg
@@ -52,9 +46,8 @@ export default function TransactionsTable({
   const [modalDelete, setModalDelete] = useState(null);
   const editable = !!(onAdd || onEdit || onDelete);
 
-  // Mapa estable de color por categoría — derivado de los movimientos en
-  // lugar de refs mutados en render (React 19 desaconseja ese patrón).
-  // Recomputa solo cuando cambian las categorías presentes.
+  // Color estable por categoría: el orden lo marca la primera aparición
+  // en `movimientos`, así la misma categoría siempre sale del mismo color.
   const categoryColors = useMemo(() => {
     const cache = {};
     let idx = 0;
@@ -107,8 +100,6 @@ export default function TransactionsTable({
 
   const originalIndex = (item) => movimientos.indexOf(item);
   const sortDirection = sortDesc ? "desc" : "asc";
-
-  // visible columns: fecha + (tipo?) + descripcion(hidden sm) + categoria + cantidad + (acciones?)
   const colCount = 3 + (showTypeColumn ? 1 : 0) + (editable ? 1 : 0);
 
   return (

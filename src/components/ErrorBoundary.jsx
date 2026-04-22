@@ -1,12 +1,5 @@
 import { Component } from "react";
 
-/**
- * Error Boundary global. Captura cualquier error de render no controlado
- * y muestra una pantalla de recuperación en lugar de dejar la app en blanco.
- *
- * En producción, aquí iría la integración con un servicio de monitoring
- * (Sentry, Datadog, Bugsnag...). De momento loguea por consola.
- */
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +11,7 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // TODO: reportar a servicio de error tracking cuando esté configurado.
+    // TODO: integrar servicio de error tracking (Sentry/Datadog) en prod.
     if (import.meta.env.DEV) {
       console.error("ErrorBoundary capturó un error:", error, errorInfo);
     }

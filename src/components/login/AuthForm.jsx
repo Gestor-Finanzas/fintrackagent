@@ -11,26 +11,20 @@ import {
 } from "react-icons/fa";
 import { useAuth } from "../../contexts/AuthContext";
 
-/**
- * Formulario de autenticación reutilizable (modal + página dedicada).
- * Conectado a Supabase via useAuth().
- */
 export default function AuthForm({ onSuccess }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { signIn, signUp } = useAuth();
 
-  // Si el usuario aterrizó en /login tras ser expulsado de una ruta privada,
-  // ProtectedRoute guardó la URL original en state.from. Lo respetamos tras
-  // el login para que vuelva donde estaba.
+  // `state.from` lo setea ProtectedRoute al echar al usuario a /login:
+  // respetarlo hace que vuelva a la URL original tras autenticar.
   const redirectTo = location.state?.from?.pathname || "/dashboard";
 
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  // Campos del formulario — controlled inputs
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -38,11 +32,10 @@ export default function AuthForm({ onSuccess }) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState("");
-  const [info, setInfo] = useState(""); // mensajes informativos (ej: "revisa tu email")
+  const [info, setInfo] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleWhatsappInput = (e) => {
-    // Solo números, espacios, + y -
     const cleaned = e.target.value.replace(/[^\d\s+-]/g, "");
     setWhatsapp(cleaned);
   };
@@ -52,7 +45,6 @@ export default function AuthForm({ onSuccess }) {
     setError("");
     setInfo("");
 
-    // Validaciones cliente
     if (!isLogin) {
       if (password !== confirmPassword) {
         setError(t("auth.passwordMismatch"));
@@ -85,13 +77,12 @@ export default function AuthForm({ onSuccess }) {
           setError(mapAuthError(signUpError, t));
           return;
         }
-        // Si la confirmación por email está activada en Supabase, no hay
-        // sesión inmediata — avisamos al usuario.
+        // Con confirmación de email activa en Supabase, signUp no abre
+        // sesión; el usuario tiene que confirmar antes.
         if (data?.user && !data.session) {
           setInfo(t("auth.checkEmail"));
           return;
         }
-        // Si no exige confirmación, pasamos directo al dashboard.
         if (onSuccess) onSuccess();
         else navigate(redirectTo, { replace: true });
       }
@@ -284,9 +275,7 @@ export default function AuthForm({ onSuccess }) {
   );
 }
 
-/**
- * Traduce los errores de Supabase Auth a mensajes entendibles.
- */
+// Traduce mensajes crudos del SDK de Supabase Auth a las keys de i18n.
 function mapAuthError(err, t) {
   const msg = (err?.message || "").toLowerCase();
   if (msg.includes("invalid login credentials") || msg.includes("invalid_grant")) {

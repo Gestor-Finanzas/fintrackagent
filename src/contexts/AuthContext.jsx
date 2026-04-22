@@ -3,20 +3,6 @@ import { supabase } from "../lib/supabase";
 
 const AuthContext = createContext(null);
 
-/**
- * Provider global de autenticación.
- * Envolver <App /> con <AuthProvider> para exponer:
- *   - user        → objeto del usuario autenticado (o null)
- *   - session     → sesión activa (o null)
- *   - loading     → true mientras carga la sesión inicial
- *   - signUp({ email, password, fullName, whatsapp })
- *   - signIn({ email, password })
- *   - signOut()
- *
- * La sesión se mantiene automáticamente en localStorage por el SDK de
- * Supabase. Este provider solo se suscribe a los cambios y expone el
- * estado a la app.
- */
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
@@ -25,10 +11,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     let mounted = true;
 
-    // 1. Obtener la sesión actual al montar (puede estar en localStorage).
-    //    Con try-catch defensivo: si Supabase está caído o las env vars
-    //    son inválidas, cerramos el loading y dejamos user=null en lugar
-    //    de dejar la app colgada indefinidamente.
+    // Try-catch defensivo: si Supabase está caído o las env vars son
+    // inválidas, cerramos `loading` en lugar de dejar la app colgada.
     supabase.auth
       .getSession()
       .then(({ data }) => {
@@ -44,7 +28,6 @@ export function AuthProvider({ children }) {
         if (mounted) setLoading(false);
       });
 
-    // 2. Suscribirse a cambios (login, logout, token refresh...).
     const { data: subscription } = supabase.auth.onAuthStateChange(
       (_event, newSession) => {
         if (!mounted) return;
@@ -59,13 +42,12 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
-  // Las funciones se memoizan con useCallback para que useAuth devuelva
-  // referencias estables. Esto evita re-renders en cascada en cualquier
-  // componente que haga `useEffect(() => {...}, [signOut])` o similar.
+  // useCallback mantiene referencias estables; sin él, cualquier useEffect
+  // con `signOut` en sus deps se dispararía en cada render.
   const signUp = useCallback(
     async ({ email, password, fullName, whatsapp }) => {
-      // `data` se guarda en auth.users.raw_user_meta_data y se copia al profile
-      // vía el trigger definido en el schema SQL.
+      // `data` va a auth.users.raw_user_meta_data y el trigger SQL
+      // handle_new_user() lo copia al profile al insertar.
       const { data, error } = await supabase.auth.signUp({
         email,
         password,

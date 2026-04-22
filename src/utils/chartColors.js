@@ -1,19 +1,14 @@
-/**
- * Colores centralizados para gráficos (Chart.js).
- * Derivados del design system — deben mantenerse sincronizados con
- * tailwind.config.js.
- *
- * Para usar colores con transparencia en Chart.js necesitamos el formato
- * `rgba(...)` porque los callbacks no soportan Tailwind classes.
- */
+// Los colores deben mantenerse sincronizados con tailwind.config.js.
+// Chart.js solo admite valores CSS-string en sus callbacks, por eso
+// duplicamos aquí el mismo hex/rgba que Tailwind gestiona por clases.
 const brand = {
-  primary: "#0D9668", // emerald-ish (design system "primary")
-  dark: "#1E3A5F", // navy (design system "dark")
-  danger: "#F87171", // red-400
-  warning: "#FBBF24", // amber-400
-  muted: "#8F9BBA", // slate para textos secundarios de gráfico
-  grid: "#F0F2F8", // rejillas suaves
-  tooltipBorder: "#E2E8F0", // gray-200
+  primary: "#0D9668",
+  dark: "#1E3A5F",
+  danger: "#F87171",
+  warning: "#FBBF24",
+  muted: "#8F9BBA",
+  grid: "#F0F2F8",
+  tooltipBorder: "#E2E8F0",
   tooltipBg: "#FFFFFF",
   tooltipText: "#1E3A5F",
 };
@@ -32,10 +27,6 @@ export const chartColors = {
   tooltipText: brand.tooltipText,
 };
 
-/**
- * Opciones base reutilizables para gráficos de líneas.
- * Se combina con callbacks específicos en cada página.
- */
 export const baseLineOptions = {
   responsive: true,
   maintainAspectRatio: false,

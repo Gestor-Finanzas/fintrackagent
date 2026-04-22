@@ -1,15 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-/**
- * Guard de rutas basado en la sesión real de Supabase.
- *
- * - Si aún estamos cargando la sesión inicial, mostramos un loader
- *   (evita parpadeos de redirección mientras `getSession()` resuelve).
- * - Si no hay sesión → redirect a /login, guardando la ruta de origen
- *   en `state.from` para poder volver tras el login.
- * - Si hay sesión → renderiza children normalmente.
- */
+// Mostrar un loader mientras `loading=true` evita el parpadeo de
+// redirección cuando `getSession()` aún no ha resuelto al montar.
+// `state.from` preserva la URL original para volver tras el login.
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
   const location = useLocation();

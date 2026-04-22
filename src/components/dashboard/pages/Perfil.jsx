@@ -46,7 +46,6 @@ export default function Perfil() {
   const [modalEliminar, setModalEliminar] = useState(false);
   const [confirmText, setConfirmText] = useState("");
 
-  // Sincroniza el formulario con el perfil cuando cambia el estado remoto.
   useEffect(() => {
     if (!profile) return;
     setForm({
@@ -96,8 +95,8 @@ export default function Perfil() {
   const handleGuardar = async (e) => {
     e.preventDefault();
     setSaving(true);
-    // whatsapp se mantiene sincronizado con telefono porque para FinTrack
-    // ambos son el mismo número (el producto opera por WhatsApp).
+    // El producto opera por WhatsApp, así que whatsapp y telefono son el
+    // mismo número para nuestros usuarios.
     const telefono = form.telefono || null;
     const { error } = await updateProfile({
       nombre: form.nombre.trim(),
@@ -164,7 +163,8 @@ export default function Perfil() {
       return;
     }
     setSaving(true);
-    // Verifica la contraseña actual intentando un signIn con ella.
+    // Supabase no tiene un "check password" puro — hacemos un signIn con
+    // la contraseña actual para validarla antes de permitir el cambio.
     const { error: verifyError } = await supabase.auth.signInWithPassword({
       email: form.email,
       password: currentPassword,
@@ -437,7 +437,7 @@ export default function Perfil() {
         </form>
       ) : (
         <>
-          {/* Datos principales — vista lectura */}
+          {/* Datos principales */}
           <section className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
             <div className="px-6 sm:px-8 py-5 border-b border-gray-100">
               <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">
@@ -458,7 +458,7 @@ export default function Perfil() {
             </div>
           </section>
 
-          {/* Más datos — siempre visible, campos vacíos muestran "—" */}
+          {/* Más datos */}
           <section className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
             <div className="px-6 sm:px-8 py-5 border-b border-gray-100">
               <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-primary">

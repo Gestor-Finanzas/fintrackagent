@@ -9,11 +9,8 @@ const capitalize = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
-/**
- * Si la migración de nombre/apellidos aún no se ha ejecutado en Supabase, las
- * columnas `nombre` y `apellidos` no existen. En ese caso derivamos ambos a
- * partir de `full_name` para que la UI funcione igualmente.
- */
+// Fallback para DBs anteriores a la migración que separa full_name:
+// derivamos nombre/apellidos partiendo `full_name` por el primer espacio.
 function deriveNombreApellidos(raw) {
   if (!raw) return { nombre: "", apellidos: "" };
   const nombre = raw.nombre || "";
@@ -28,16 +25,6 @@ function deriveNombreApellidos(raw) {
   };
 }
 
-/**
- * Provider que mantiene el profile del usuario autenticado y lo expone a
- * toda la zona del dashboard (navbar, Perfil, saludos, etc.).
- *
- * - Carga una sola vez por usuario.
- * - Expone `updateProfile(patch)` que persiste en Supabase y refresca el
- *   estado local — así cualquier componente consumidor se re-renderiza
- *   automáticamente cuando el perfil cambia desde Perfil.
- * - Mantiene `full_name` sincronizado con `nombre + apellidos` al guardar.
- */
 export function ProfileProvider({ children }) {
   const { user: authUser } = useAuth();
   const [profile, setProfile] = useState(null);
@@ -50,9 +37,8 @@ export function ProfileProvider({ children }) {
       return;
     }
     setLoading(true);
-    // `select("*")` en vez de lista explícita: si la migración con las nuevas
-    // columnas (nombre, apellidos, direccion, sexo, fecha_nacimiento) aún no
-    // se ha ejecutado, la query sigue funcionando con las columnas que existan.
+    // select("*") tolera que la DB aún no tenga las columnas nuevas
+    // (nombre, apellidos, direccion, sexo, fecha_nacimiento).
     const { data, error } = await supabase
       .from("profiles")
       .select("*")
@@ -64,7 +50,6 @@ export function ProfileProvider({ children }) {
       }
       setProfile(null);
     } else {
-      // Normalizamos: si nombre/apellidos no existen, los derivamos del full_name.
       const { nombre, apellidos } = deriveNombreApellidos(data);
       setProfile({ ...data, nombre, apellidos });
     }
@@ -76,8 +61,8 @@ export function ProfileProvider({ children }) {
   const updateProfile = useCallback(async (patch) => {
     if (!authUser) return { data: null, error: new Error("not authenticated") };
     const payload = { ...patch };
-    // Si el patch toca nombre o apellidos, mantenemos full_name sincronizado
-    // para que el resto de la app (y datos heredados) siga funcionando.
+    // Mantener full_name sincronizado con nombre+apellidos para no romper
+    // consumidores que aún leen el campo legacy.
     if ("nombre" in patch || "apellidos" in patch) {
       const nombre = patch.nombre ?? profile?.nombre ?? "";
       const apellidos = patch.apellidos ?? profile?.apellidos ?? "";
@@ -96,7 +81,6 @@ export function ProfileProvider({ children }) {
     return { data, error };
   }, [authUser, profile]);
 
-  // Nombre mostrable — primera letra de cada palabra en mayúscula.
   const displayName = useMemo(() => {
     if (profile) {
       const nombre = profile.nombre || profile.full_name?.split(" ")?.[0] || "";
@@ -108,7 +92,6 @@ export function ProfileProvider({ children }) {
     return capitalize(authUser?.email?.split("@")[0] || "");
   }, [profile, authUser]);
 
-  // Primer nombre para saludos ("Hola, Demo.")
   const firstName = useMemo(() => {
     if (profile) {
       const nombre = profile.nombre || profile.full_name?.split(" ")?.[0] || "";
@@ -117,7 +100,6 @@ export function ProfileProvider({ children }) {
     return capitalize(authUser?.email?.split("@")[0] || "");
   }, [profile, authUser]);
 
-  // Iniciales para el avatar (2 caracteres como máximo).
   const initials = useMemo(() => {
     const source = displayName || authUser?.email || "U";
     return source

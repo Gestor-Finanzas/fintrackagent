@@ -26,18 +26,15 @@ export default function Categorias() {
   const [deleteIndex, setDeleteIndex] = useState(null);
   const [form, setForm] = useState({ name: "", icon: "Otro", type: "gasto" });
 
-  // Subcategory state
   const [subModalOpen, setSubModalOpen] = useState(false);
   const [subCatParent, setSubCatParent] = useState(null);
   const [subCatName, setSubCatName] = useState("");
-  const [deleteSubInfo, setDeleteSubInfo] = useState(null); // { catIdx, subIdx }
+  const [deleteSubInfo, setDeleteSubInfo] = useState(null);
 
-  // Expanded categories
   const [expanded, setExpanded] = useState({});
 
   const toggleExpand = (idx) => setExpanded((prev) => ({ ...prev, [idx]: !prev[idx] }));
 
-  // Category CRUD
   const openAdd = () => {
     setForm({ name: "", icon: "Otro", type: "gasto" });
     setEditIndex(null);
@@ -68,7 +65,6 @@ export default function Categorias() {
     }
   };
 
-  // Subcategory CRUD
   const openAddSub = (catIdx) => {
     setSubCatParent(catIdx);
     setSubCatName("");

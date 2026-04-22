@@ -33,8 +33,8 @@ export default function PeriodFilter({
 
   const handleApply = () => {
     if (tempStart && tempEnd) {
-      // Orden defensivo: si el usuario seleccionó las fechas al revés las
-      // reordenamos para no devolver un rango vacío al filtro.
+      // Si el usuario invirtió start/end, reordenamos para que el filtro
+      // no devuelva un rango vacío.
       const [start, end] = tempStart <= tempEnd
         ? [tempStart, tempEnd]
         : [tempEnd, tempStart];

@@ -3,11 +3,6 @@ import { useTranslation } from "react-i18next";
 import { FaArrowLeft, FaGlobe } from "react-icons/fa";
 import AuthForm from "./AuthForm";
 
-/**
- * Página dedicada de login con URL propia (/login).
- * Destino al que redirige ProtectedRoute cuando no hay token,
- * y donde cae el usuario al cerrar sesión.
- */
 export default function LoginPage() {
   const { t, i18n } = useTranslation();
 

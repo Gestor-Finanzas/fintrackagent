@@ -19,7 +19,6 @@ export default function Balance() {
     totalIngresos, totalGastos, balance,
   } = useDashboardData();
 
-  // Balance evolution (cumulative)
   const balanceEvolution = useMemo(() => {
     const allDates = new Set();
     ingresos.forEach((i) => allDates.add(i.fecha));
@@ -27,8 +26,6 @@ export default function Balance() {
     const sorted = [...allDates].sort(
       (a, b) => parseFechaMock(a).getTime() - parseFechaMock(b).getTime()
     );
-    // Acumulado día a día con reduce para mantenerlo inmutable
-    // (mutar una variable dentro de map dispara la regla react-hooks/immutability).
     return sorted.reduce((acc, fecha) => {
       const dayInc = ingresos
         .filter((i) => i.fecha === fecha)

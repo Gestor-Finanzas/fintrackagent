@@ -55,8 +55,8 @@ function PageFallback() {
 }
 
 function Landing({ setShowAuth, showAuth }) {
-  // AOS solo se carga dentro de la landing — no infla el bundle del dashboard
-  // ni de las páginas legales donde no se usa.
+  // AOS solo se usa en la landing; lo importamos dinámicamente para no
+  // arrastrarlo al bundle del dashboard ni de las páginas legales.
   useEffect(() => {
     let mounted = true;
     Promise.all([import("aos"), import("aos/dist/aos.css")]).then(([mod]) => {
@@ -81,11 +81,7 @@ function Landing({ setShowAuth, showAuth }) {
   );
 }
 
-/**
- * Sincroniza el atributo `lang` del <html> con el idioma de i18next.
- * Mejora SEO y accesibilidad: los screen readers usan esta propiedad
- * para escoger la pronunciación correcta.
- */
+// Mantiene <html lang> sincronizado con i18next (SEO y screen readers).
 function HtmlLangSync() {
   const { i18n } = useTranslation();
   useEffect(() => {
